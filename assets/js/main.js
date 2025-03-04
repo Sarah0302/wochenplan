@@ -1,8 +1,9 @@
 jQuery(document).ready(function() {
 
+    // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  
     function setList($jobListe, jobName, jobTime) {
         var $job = $(`
-            <div style="border: 1px solid blue; display: flex; flex-direction: row;">
+            <div class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
                 <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
                 <input type="text" value="${jobName}">
                 <input type="text" value="${jobTime}">
@@ -13,7 +14,7 @@ jQuery(document).ready(function() {
         $jobListe.append($job);
     }
 
-    function counterDay($container, jobTime) {
+    function TimeCounter($container, jobTime) {
         // Die aktuelle Spalte und Zeile ermitteln
         var columnIndex = $container.closest("td").index(); // Index der Spalte
         var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
@@ -30,6 +31,24 @@ jQuery(document).ready(function() {
         $counterWeek.text(newValWeek.toFixed(1)); // Zur Wochenübersicht hinzufügen
     }
 
+    function TimeCounterRemove($container, jobTime) {
+        // Die aktuelle Spalte und Zeile ermitteln
+        var columnIndex = $container.closest("td").index(); // Index der Spalte
+        var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
+        var $counter = $rowAbove.find("td").eq(columnIndex).find("div"); // Das Tages-Count-Element
+        var $counterWeek = $rowAbove.find(".personal_week"); // Das Wochen-Count-Element
+
+        var currentVal = parseFloat($counter.text()) || 0;
+        var newVal = currentVal - parseFloat(jobTime);
+
+        var currentValWeek = parseFloat($counterWeek.text()) || 0;
+        var newValWeek = currentValWeek - parseFloat(jobTime);
+
+        $counter.text(newVal.toFixed(1)); // Zur Tagesübersicht hinzufügen
+        $counterWeek.text(newValWeek.toFixed(1)); // Zur Wochenübersicht hinzufügen
+    }
+
+    // KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  
     $(".job_add").click(function() {
         // Werte abrufen
         var $container = $(this).closest(".job_container");
@@ -46,9 +65,18 @@ jQuery(document).ready(function() {
             $(".job_time").val('');
 
             // Zeiten zusammenzählen
-            counterDay($container, jobTime);
+            TimeCounter($container, jobTime);
         };
 
     });
+
+    $(document).on("click", ".job_delete", function() {
+        var jobBox = $(this).closest(".job_box");
+        var jobTime = parseFloat($(this).siblings('input:eq(1)').val()) || 0;
+        var $container = jobBox.closest(".job_container"); // Die umgebende Container-Struktur
+    
+        jobBox.remove(); // Element entfernen
+        TimeCounterRemove($container, jobTime); // Zeit subtrahieren
+    });    
 
 });
