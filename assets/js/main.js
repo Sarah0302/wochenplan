@@ -35,17 +35,20 @@ jQuery(document).ready(function() {
         var $container = $(this).closest(".job_container");
         var $jobListe = $container.find(".job_list");
         var jobName = $container.find(".job_name").val();
-        var jobTime = parseFloat($container.find(".job_time").val());
+        var jobTime = parseFloat($container.find(".job_time").val()) || 0;
 
-        // Job zur Liste hinzufügen
-        setList($jobListe, jobName, jobTime);
+        if (jobName != '') {
+            // Job zur Liste hinzufügen
+            setList($jobListe, jobName, jobTime);
 
-        // Hinzufügen Felder leeren
-        $(".job_name").val('');
-        $(".job_time").val('');
+            // Hinzufügen Felder leeren
+            $(".job_name").val('');
+            $(".job_time").val('');
 
-        // Zeiten zusammenzählen
-        counterDay($container, jobTime);
+            // Zeiten zusammenzählen
+            counterDay($container, jobTime);
+        };
+
     });
 
 });
