@@ -12,7 +12,9 @@
 </head>
 <body class="bg-blue-500 text-white text-center p-10">
     <header>
-        header
+        <button class="open_all">OPEN ALL</button>
+        <button class="close_all">CLOSE ALL</button>
+        <button class="saturday_button">Samstag anzeigen</button>
     </header>
     <main>
         <div style="border: 1px solid red">
@@ -24,7 +26,7 @@
                     <th>Mittwoch</th>
                     <th>Donnerstag</th>
                     <th>Freitag</th>
-                    <th>Samstag</th>
+                    <th class="saturday hide">Samstag</th>
                 </tr>
                 <?php $people = ["Pool", "Alina", "Sarah", "Emily"]; ?>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
@@ -35,12 +37,16 @@
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
-                        <td><div class="week_time">0</div></td>
+                        <td class="saturday hide"><div class="week_time">0</div></td>
                     </tr>
                     <tr class="job_row-list hide">
                         <td></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>
-                            <td>
+                            <?php if($index === 5) : ?>
+                                <td class="saturday hide">
+                            <?php else : ?>
+                                <td>
+                            <?php endif; ?>
                                 <div class="job_container" style="border: 1px solid green; margin: 100px 0;">
                                     <ul class="job_list"></ul>
                                     <div style="border: 1px solid orange; display: flex; flex-direction: row;">

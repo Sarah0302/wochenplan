@@ -138,4 +138,22 @@ jQuery(document).ready(function() {
         $(this).next(".job_row-list").toggleClass("hide");
     });
 
+    $(".open_all").click(function() {
+        $(".job_row-list").removeClass("hide");
+    });
+
+    $(".close_all").click(function() {
+        $(".job_row-list").addClass("hide");
+    });
+
+    $(".saturday_button").click(function() {
+        $(".saturday").toggleClass("hide");
+
+        if( $(".saturday").hasClass("hide") ) {
+            $(this).html('Samstag anzeigen');
+        } else {
+            $(this).html('Samstag ausblenden');
+        }
+    });
+
 });
