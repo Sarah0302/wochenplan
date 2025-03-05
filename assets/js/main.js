@@ -5,13 +5,40 @@ jQuery(document).ready(function() {
         var $job = $(`
             <div class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
                 <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
-                <input type="text" value="${jobName}">
+                <input class="job_name_value" type="text" value="${jobName}">
                 <input class="job_workload" type="text" value="${jobTime}">
                 <div class="job_safe" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
                 <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
             </div>
         `);
         $jobListe.append($job);
+    }
+
+    function workplace($container) {
+        var columnIndex = $container.closest("td").index(); // Index der Spalte
+        var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
+        var $day = $rowAbove.find("td").eq(columnIndex); // Das td über der Liste
+        var bgColor = "transparent"; // Standardfarbe
+
+        // Überprüfe alle Job-Namen im Container
+        $container.find(".job_name_value").each(function() {
+            var jobText = $(this).val().toLowerCase(); // Text im Input-Feld (kleinbuchstaben)
+
+            if (jobText.includes("fahrt")) {
+                bgColor = "lightgreen";
+            } else if (jobText.includes("homeoffice")) {
+                bgColor = "lightblue";
+            } else if (jobText.includes("kurzarbeit")) {
+                bgColor = "yellow";
+            } else if (jobText.includes("halber tag")) {
+                bgColor = "orange";
+            } else if (jobText.includes("abwesend") || jobText.includes("schule")) {
+                bgColor = "red";
+            }
+        });
+
+        // Backgroundcolor setzen
+        $day.css("background", bgColor);
     }
 
     function workload($dayCounter, $weekCounter, newDayVal, newWeekVal) {
@@ -72,6 +99,7 @@ jQuery(document).ready(function() {
             $(".job_time").val('');
 
             TimeCounter($container); // Zeiten zusammenzählen
+            workplace($container); // Anzeige Arbeitsplatz aktualisieren
         };
 
     });
@@ -82,11 +110,13 @@ jQuery(document).ready(function() {
     
         jobBox.remove(); // Element entfernen
         TimeCounter($container); // Zeiten zusammenzählen
+        workplace($container); // Anzeige Arbeitsplatz aktualisieren
     }); 
 
     $(document).on("click", ".job_safe", function() {
         var $container = $(this).closest(".job_container");
         TimeCounter($container); // Zeiten aktualisieren
+        workplace($container); // Anzeige Arbeitsplatz aktualisieren
     });    
 
 });

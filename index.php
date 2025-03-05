@@ -57,7 +57,11 @@
         </div>
     </main>
     <footer>
-        footer
+        <div style="background: lightgreen;">Fahrt</div>
+        <div style="background: lightblue;">Homeoffice</div>
+        <div style="background: yellow;">Kurzarbeit</div>
+        <div style="background: orange;">Halber Tag</div>
+        <div style="background: red;">Abwesend / Schule</div>
     </footer>
 </body>
 </html>
