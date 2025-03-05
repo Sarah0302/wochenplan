@@ -37,7 +37,7 @@
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
                     </tr>
-                    <tr>
+                    <tr class="job_row-list">
                         <td></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>
                             <td>

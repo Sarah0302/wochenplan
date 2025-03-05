@@ -7,6 +7,14 @@
     padding: 0;
 }
 
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
 table {
     border: 1px solid green;
     /* width: 100%; */

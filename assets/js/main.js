@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
                 <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
                 <input class="job_name_value" type="text" value="${jobName}">
                 <input class="job_workload" type="text" value="${jobTime}">
-                <div class="job_safe" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
+                <div class="job_safe hide" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
                 <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
             </div>
         `);
@@ -36,8 +36,6 @@ jQuery(document).ready(function() {
                 bgColor = "red";
             }
         });
-
-        // Backgroundcolor setzen
         $day.css("background", bgColor);
     }
 
@@ -46,16 +44,20 @@ jQuery(document).ready(function() {
             $dayCounter.css({ background: 'red', });
         } else if (newDayVal >= 6) {
             $dayCounter.css({ background: 'yellow', });
-        } else {
+        } else if (newDayVal >=0.1) {
             $dayCounter.css({ background: 'green', });
+        } else {
+            $dayCounter.css({ background: 'transparent', });
         }
 
         if (newWeekVal >= 40) {
             $weekCounter.css({ background: 'red', });
         } else if (newWeekVal >= 32) {
             $weekCounter.css({ background: 'yellow', });
-        } else {
+        } else if (newWeekVal >=0.1) {
             $weekCounter.css({ background: 'green', });
+        } else {
+            $weekCounter.css({ background: 'transparent', });
         }
     }
 
@@ -71,52 +73,65 @@ jQuery(document).ready(function() {
         $container.find(".job_workload").each(function() {
             newDayVal += parseFloat($(this).val()) || 0;
         });
-        $dayCounter.text(newDayVal.toFixed(1)); // Zur Tagesübersicht hinzufügen
+        $dayCounter.text(newDayVal.toFixed(2)); // Zur Tagesübersicht hinzufügen
 
         // Berechne Wochenzeit für alle Tage dieser Person
         $rowAbove.find(".week_time").each(function() {
             newWeekVal += parseFloat($(this).text()) || 0;
         });
-        $weekCounter.text(newWeekVal.toFixed(1)); // Zur Wochenübersicht hinzufügen
+        $weekCounter.text(newWeekVal.toFixed(2)); // Zur Wochenübersicht hinzufügen
 
         workload($dayCounter, $weekCounter, newDayVal, newWeekVal); // Einfärbung
     }
 
+    function reset() {
+        $(".job_name").val('');
+        $(".job_time").val('');
+        $(".job_safe").addClass("hide");
+    }
+
     // KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  
-    $(".job_add").click(function() {
-        // Werte abrufen
+    $(".job_counter").click(function() {
+        $(this).closest(".job_row-list").toggleClass("show");
+    });
+
+    $(".job_add").click(function() { // Job hinzufügen
         var $container = $(this).closest(".job_container");
         var $jobListe = $container.find(".job_list");
         var jobName = $container.find(".job_name").val();
         var jobTime = parseFloat($container.find(".job_time").val()) || 0;
 
         if (jobName != '') {
-            // Job zur Liste hinzufügen
             setList($jobListe, jobName, jobTime);
-
-            // Hinzufügen Felder leeren
-            $(".job_name").val('');
-            $(".job_time").val('');
-
-            TimeCounter($container); // Zeiten zusammenzählen
-            workplace($container); // Anzeige Arbeitsplatz aktualisieren
+            TimeCounter($container);
+            workplace($container);
+            reset();
         };
 
     });
 
-    $(document).on("click", ".job_delete", function() {
+    $(document).on("click", ".job_delete", function() { // Job löschen
         var jobBox = $(this).closest(".job_box");
-        var $container = jobBox.closest(".job_container"); // Die umgebende Container-Struktur
+        var $container = jobBox.closest(".job_container");
     
-        jobBox.remove(); // Element entfernen
-        TimeCounter($container); // Zeiten zusammenzählen
-        workplace($container); // Anzeige Arbeitsplatz aktualisieren
+        jobBox.remove();
+        TimeCounter($container);
+        workplace($container);
     }); 
 
-    $(document).on("click", ".job_safe", function() {
+    $(document).on("input", ".job_name_value", function() {
+        $(this).closest(".job_box").find(".job_safe").removeClass("hide");
+    });
+
+    $(document).on("input", ".job_workload", function() {
+        $(this).closest(".job_box").find(".job_safe").removeClass("hide");
+    });
+
+    $(document).on("click", ".job_safe", function() { // Job Aktualisieren
         var $container = $(this).closest(".job_container");
-        TimeCounter($container); // Zeiten aktualisieren
-        workplace($container); // Anzeige Arbeitsplatz aktualisieren
-    });    
+        TimeCounter($container);
+        workplace($container);
+        reset();
+    });
 
 });
