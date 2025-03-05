@@ -14,6 +14,24 @@ jQuery(document).ready(function() {
         $jobListe.append($job);
     }
 
+    function workload($counter, $counterWeek, newVal, newValWeek) {
+        if (newVal >= 8) {
+            $counter.css({ background: 'red', });
+        } else if (newVal >= 6) {
+            $counter.css({ background: 'yellow', });
+        } else {
+            $counter.css({ background: 'green', });
+        }
+
+        if (newValWeek >= 40) {
+            $counterWeek.css({ background: 'red', });
+        } else if (newValWeek >= 32) {
+            $counterWeek.css({ background: 'yellow', });
+        } else {
+            $counterWeek.css({ background: 'green', });
+        }
+    }
+
     function TimeCounter($container, jobTime) {
         // Die aktuelle Spalte und Zeile ermitteln
         var columnIndex = $container.closest("td").index(); // Index der Spalte
@@ -29,6 +47,8 @@ jQuery(document).ready(function() {
 
         $counter.text(newVal.toFixed(1)); // Zur Tagesübersicht hinzufügen
         $counterWeek.text(newValWeek.toFixed(1)); // Zur Wochenübersicht hinzufügen
+
+        workload($counter, $counterWeek, newVal, newValWeek); // Einfärbung
     }
 
     function TimeCounterRemove($container, jobTime) {
@@ -46,6 +66,8 @@ jQuery(document).ready(function() {
 
         $counter.text(newVal.toFixed(1)); // Zur Tagesübersicht hinzufügen
         $counterWeek.text(newValWeek.toFixed(1)); // Zur Wochenübersicht hinzufügen
+
+        workload($counter, $counterWeek, newVal, newValWeek); // Einfärbung
     }
 
     // KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  KLICK EVENTS  
