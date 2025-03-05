@@ -30,12 +30,12 @@
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
                     <tr class="job_counter_<?php $i; ?>">
                         <td><?= $people[$i]; ?> <div class="personal_week">0</div></td>
-                        <td><div>0</div></td>
-                        <td><div>0</div></td>
-                        <td><div>0</div></td>
-                        <td><div>0</div></td>
-                        <td><div>0</div></td>
-                        <td><div>0</div></td>
+                        <td><div class="week_time">0</div></td>
+                        <td><div class="week_time">0</div></td>
+                        <td><div class="week_time">0</div></td>
+                        <td><div class="week_time">0</div></td>
+                        <td><div class="week_time">0</div></td>
+                        <td><div class="week_time">0</div></td>
                     </tr>
                     <tr>
                         <td></td>
