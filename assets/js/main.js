@@ -1,9 +1,25 @@
 jQuery(document).ready(function() {
 
+    // Drag & Drop Job Boxen
+    let selected = null;
+
+    $(document).on("dragstart", ".job_box", function(e) { // Jobs draggable machen
+        selected = this;
+    });
+
+    $(document).on("dragover", ".job_list", function(e) { // Dragover für alle job_listen aktivieren
+        e.preventDefault();
+    });
+
+    $(document).on("drop", ".job_list", function(e) { // Drop-Event
+        $(this).append(selected);
+        selected = null;
+    });
+
     // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  
     function setList($jobListe, jobName, jobTime) {
         var $job = $(`
-            <div class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
+            <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
                 <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
                 <input class="job_name_value" type="text" value="${jobName}">
                 <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">

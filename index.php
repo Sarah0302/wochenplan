@@ -47,8 +47,8 @@
                             <?php else : ?>
                                 <td>
                             <?php endif; ?>
-                                <div class="job_container" style="border: 1px solid green; margin: 100px 0;">
-                                    <ul class="job_list"></ul>
+                                <div class="job_container" style="border: 1px solid green;">
+                                    <ul class="job_list" style="border: 1px solid blue; min-height: 50px;"></ul>
                                     <div style="border: 1px solid orange; display: flex; flex-direction: row;">
                                         <input class="job_name" type="text" placeholder="Neuer Job">
                                         <input class="job_time" type="number" placeholder="Zeit" min="0" max="24">
