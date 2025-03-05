@@ -28,7 +28,7 @@
                 </tr>
                 <?php $people = ["Pool", "Alina", "Sarah", "Emily"]; ?>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
-                    <tr class="job_counter_<?php $i; ?>">
+                    <tr class="job_counter">
                         <td><?= $people[$i]; ?> <div class="personal_week">0</div></td>
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
@@ -37,7 +37,7 @@
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
                     </tr>
-                    <tr class="job_row-list">
+                    <tr class="job_row-list hide">
                         <td></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>
                             <td>

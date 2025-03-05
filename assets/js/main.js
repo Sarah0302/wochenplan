@@ -134,4 +134,8 @@ jQuery(document).ready(function() {
         reset();
     });
 
+    $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
+        $(this).next(".job_row-list").toggleClass("hide");
+    });
+
 });
