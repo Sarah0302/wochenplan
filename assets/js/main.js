@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
             <div class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
                 <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
                 <input class="job_name_value" type="text" value="${jobName}">
-                <input class="job_workload" type="text" value="${jobTime}">
+                <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
                 <div class="job_safe hide" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
                 <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
             </div>
@@ -119,11 +119,7 @@ jQuery(document).ready(function() {
         workplace($container);
     }); 
 
-    $(document).on("input", ".job_name_value", function() {
-        $(this).closest(".job_box").find(".job_safe").removeClass("hide");
-    });
-
-    $(document).on("input", ".job_workload", function() {
+    $(document).on("input", ".job_name_value, .job_workload", function() {
         $(this).closest(".job_box").find(".job_safe").removeClass("hide");
     });
 
@@ -133,6 +129,19 @@ jQuery(document).ready(function() {
         workplace($container);
         reset();
     });
+
+    $(document).on("click", ".job_done", function() { 
+        var $jobBox = $(this).closest(".job_box"); 
+        var $inputs = $jobBox.find(".job_name_value, .job_workload");
+    
+        if ($inputs.prop("disabled")) { 
+            $jobBox.css({ background: 'transparent' }); 
+            $inputs.prop("disabled", false);
+        } else { 
+            $jobBox.css({ background: 'green' }); 
+            $inputs.prop("disabled", true);
+        }
+    });    
 
     $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
         $(this).next(".job_row-list").toggleClass("hide");
