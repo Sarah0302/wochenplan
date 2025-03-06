@@ -135,6 +135,7 @@ jQuery(document).ready(function() {
         var jobBox = $(this).closest(".job_box");
         var jobName = jobBox.find(".job_name_value").val();
         var jobTime = jobBox.find(".job_workload").val();
+        var $container = jobBox.closest(".job_container");
         var jobList = jobBox.closest(".job_list");
         var $job = $(`
             <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
@@ -147,6 +148,9 @@ jQuery(document).ready(function() {
             </div>
         `);
         jobList.append($job);
+
+        TimeCounter($container);
+        workplace($container);
     }); 
 
     $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
