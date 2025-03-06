@@ -51,50 +51,65 @@ jQuery(document).ready(function() {
         });
     }    
 
-    function workload($dayCounter, $weekCounter, newDayVal, newWeekVal) {
-        if (newDayVal >= 8) {
-            $dayCounter.css({ background: 'red', });
-        } else if (newDayVal >= 6) {
-            $dayCounter.css({ background: 'yellow', });
-        } else if (newDayVal >=0.1) {
-            $dayCounter.css({ background: 'green', });
-        } else {
-            $dayCounter.css({ background: 'transparent', });
-        }
-
-        if (newWeekVal >= 40) {
-            $weekCounter.css({ background: 'red', });
-        } else if (newWeekVal >= 32) {
-            $weekCounter.css({ background: 'yellow', });
-        } else if (newWeekVal >=0.1) {
-            $weekCounter.css({ background: 'green', });
-        } else {
-            $weekCounter.css({ background: 'transparent', });
-        }
-    }
-
-    function TimeCounter($container) {
-        var columnIndex = $container.closest("td").index(); // Index der Spalte
-        var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
-        var $dayCounter = $rowAbove.find("td").eq(columnIndex).find(".week_time"); // Das Tages-Count-Element
-        var $weekCounter = $rowAbove.find(".personal_week"); // Das Wochen-Count-Element
-        var newDayVal = 0;
-        var newWeekVal = 0;
-
-        // Berechne Tageszeit für diese Spalte
-        $container.find(".job_workload").each(function() {
-            newDayVal += parseFloat($(this).val()) || 0;
+    function workload() {
+        $(".week_time").each(function() {
+            var $dayCounter = $(this);
+            var newDayVal = parseFloat($dayCounter.text()) || 0;
+    
+            // Tagesfarbe setzen
+            if (newDayVal >= 8) {
+                $dayCounter.css({ background: 'red' });
+            } else if (newDayVal >= 6) {
+                $dayCounter.css({ background: 'yellow' });
+            } else if (newDayVal >= 0.1) {
+                $dayCounter.css({ background: 'green' });
+            } else {
+                $dayCounter.css({ background: 'transparent' });
+            }
         });
-        $dayCounter.text(newDayVal.toFixed(2)); // Zur Tagesübersicht hinzufügen
-
-        // Berechne Wochenzeit für alle Tage dieser Person
-        $rowAbove.find(".week_time").each(function() {
-            newWeekVal += parseFloat($(this).text()) || 0;
+    
+        $(".personal_week").each(function() {
+            var $weekCounter = $(this);
+            var newWeekVal = parseFloat($weekCounter.text()) || 0;
+    
+            // Wochenfarbe setzen
+            if (newWeekVal >= 40) {
+                $weekCounter.css({ background: 'red' });
+            } else if (newWeekVal >= 32) {
+                $weekCounter.css({ background: 'yellow' });
+            } else if (newWeekVal >= 0.1) {
+                $weekCounter.css({ background: 'green' });
+            } else {
+                $weekCounter.css({ background: 'transparent' });
+            }
         });
-        $weekCounter.text(newWeekVal.toFixed(2)); // Zur Wochenübersicht hinzufügen
+    }    
 
-        workload($dayCounter, $weekCounter, newDayVal, newWeekVal); // Einfärbung
-    }
+    function TimeCounter() {
+        $(".job_container").each(function() {
+            var $container = $(this);
+            var columnIndex = $container.closest("td").index(); // Spalten-Index
+            var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
+            var $dayCounter = $rowAbove.find("td").eq(columnIndex).find(".week_time"); // Tages-Count-Element
+            var $weekCounter = $rowAbove.find(".personal_week"); // Wochen-Count-Element
+            var newDayVal = 0;
+            var newWeekVal = 0;
+    
+            // Berechne Tageszeit für diese Spalte
+            $container.find(".job_workload").each(function() {
+                newDayVal += parseFloat($(this).val()) || 0;
+            });
+            $dayCounter.text(newDayVal.toFixed(2));
+    
+            // Berechne Wochenzeit für alle Tage dieser Person
+            $rowAbove.find(".week_time").each(function() {
+                newWeekVal += parseFloat($(this).text()) || 0;
+            });
+            $weekCounter.text(newWeekVal.toFixed(2));
+    
+            workload(); // Aktualisiere Farben für alle Einträge
+        });
+    }    
 
     function reset() {
         $(".job_name").val('');
@@ -118,6 +133,7 @@ jQuery(document).ready(function() {
         $(this).append(selected);
         selected = null;
         workplace();
+        TimeCounter();
     });
 
     $(".job_add").click(function() { // Job hinzufügen
@@ -128,7 +144,7 @@ jQuery(document).ready(function() {
 
         if (jobName != '') {
             setList($jobListe, jobName, jobTime);
-            TimeCounter($container);
+            TimeCounter();
             workplace();
             reset();
         };
@@ -143,7 +159,7 @@ jQuery(document).ready(function() {
 
             if (jobName != '') {
                 setList($jobListe, jobName, jobTime);
-                TimeCounter($container);
+                TimeCounter();
                 workplace();
                 reset();
             };
@@ -152,10 +168,9 @@ jQuery(document).ready(function() {
 
     $(document).on("click", ".job_delete", function() { // Job löschen
         var jobBox = $(this).closest(".job_box");
-        var $container = jobBox.closest(".job_container");
     
         jobBox.remove();
-        TimeCounter($container);
+        TimeCounter();
         workplace();
     }); 
 
@@ -163,7 +178,6 @@ jQuery(document).ready(function() {
         var jobBox = $(this).closest(".job_box");
         var jobName = jobBox.find(".job_name_value").val();
         var jobTime = jobBox.find(".job_workload").val();
-        var $container = jobBox.closest(".job_container");
         var jobList = jobBox.closest(".job_list");
         var $job = $(`
             <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
@@ -177,7 +191,7 @@ jQuery(document).ready(function() {
         `);
         jobList.append($job);
 
-        TimeCounter($container);
+        TimeCounter();
         workplace();
     }); 
 
@@ -186,16 +200,14 @@ jQuery(document).ready(function() {
     });    
 
     $(document).on("click", ".job_safe", function() { // Job Aktualisieren
-        var $container = $(this).closest(".job_container");
-        TimeCounter($container);
+        TimeCounter();
         workplace();
         reset();
     });
 
     $(document).on("keydown", ".job_name_value, .job_workload", function(event) { // Job Aktualisieren
         if ( event.type === "keydown" && event.key === "Enter" ) {
-            var $container = $(this).closest(".job_container");
-            TimeCounter($container);
+            TimeCounter();
             workplace();
             reset();
         };
