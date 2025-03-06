@@ -1,8 +1,8 @@
 jQuery(document).ready(function() {
 
     // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN
-    function setList($jobListe, jobName, jobTime) {
-        var $job = $(`
+    function jobBox(jobName, jobTime) {
+        return $(`
             <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
                 <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
                 <input class="job_name_value" type="text" value="${jobName}">
@@ -11,8 +11,7 @@ jQuery(document).ready(function() {
                 <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
                 <div class="job_duplicate" style="background: gray; padding: 5px; cursor: pointer;">duplizieren</div>
             </div>
-        `);
-        $jobListe.append($job);
+        `); 
     }
 
     function workplace() {
@@ -143,7 +142,8 @@ jQuery(document).ready(function() {
         var jobTime = parseFloat($container.find(".job_time").val()) || 0;
 
         if (jobName != '') {
-            setList($jobListe, jobName, jobTime);
+            var job = jobBox(jobName, jobTime); // JobBox generiert nun ein Element
+            $jobListe.append(job); // Füge das generierte Element in die Liste ein
             TimeCounter();
             workplace();
             reset();
@@ -151,14 +151,15 @@ jQuery(document).ready(function() {
     });
 
     $(document).on("keydown", ".job_name, .job_time", function(event) { // Job hinzufügen
-        if ( event.type === "keydown" && event.key === "Enter") {
+        if ( event.key === "Enter") {
             var $container = $(this).closest(".job_container");
             var $jobListe = $container.find(".job_list");
             var jobName = $container.find(".job_name").val();
             var jobTime = parseFloat($container.find(".job_time").val()) || 0;
 
             if (jobName != '') {
-                setList($jobListe, jobName, jobTime);
+                var job = jobBox(jobName, jobTime);
+                $jobListe.append(job);
                 TimeCounter();
                 workplace();
                 reset();
@@ -168,28 +169,20 @@ jQuery(document).ready(function() {
 
     $(document).on("click", ".job_delete", function() { // Job löschen
         var jobBox = $(this).closest(".job_box");
-    
+        
         jobBox.remove();
         TimeCounter();
         workplace();
     }); 
 
     $(document).on("click", ".job_duplicate", function() { // Job duplizieren
-        var jobBox = $(this).closest(".job_box");
-        var jobName = jobBox.find(".job_name_value").val();
-        var jobTime = jobBox.find(".job_workload").val();
-        var jobList = jobBox.closest(".job_list");
-        var $job = $(`
-            <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
-                <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
-                <input class="job_name_value" type="text" value="${jobName}">
-                <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
-                <div class="job_safe hide" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
-                <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
-                <div class="job_duplicate" style="background: gray; padding: 5px; cursor: pointer;">duplizieren</div>
-            </div>
-        `);
-        jobList.append($job);
+        var jobContainer = $(this).closest(".job_box");
+        var jobName = jobContainer.find(".job_name_value").val();
+        var jobTime = jobContainer.find(".job_workload").val();
+        var jobList = jobContainer.closest(".job_list");
+
+        var job = jobBox(jobName, jobTime);
+        jobList.append(job);
 
         TimeCounter();
         workplace();
