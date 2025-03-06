@@ -9,6 +9,7 @@ jQuery(document).ready(function() {
                 <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
                 <div class="job_safe hide" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
                 <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
+                <div class="job_duplicate" style="background: gray; padding: 5px; cursor: pointer;">duplizieren</div>
             </div>
         `);
         $jobListe.append($job);
@@ -128,6 +129,24 @@ jQuery(document).ready(function() {
         jobBox.remove();
         TimeCounter($container);
         workplace($container);
+    }); 
+
+    $(document).on("click", ".job_duplicate", function() { // Job duplizieren
+        var jobBox = $(this).closest(".job_box");
+        var jobName = jobBox.find(".job_name_value").val();
+        var jobTime = jobBox.find(".job_workload").val();
+        var jobList = jobBox.closest(".job_list");
+        var $job = $(`
+            <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
+                <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
+                <input class="job_name_value" type="text" value="${jobName}">
+                <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
+                <div class="job_safe hide" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
+                <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
+                <div class="job_duplicate" style="background: gray; padding: 5px; cursor: pointer;">duplizieren</div>
+            </div>
+        `);
+        jobList.append($job);
     }); 
 
     $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
