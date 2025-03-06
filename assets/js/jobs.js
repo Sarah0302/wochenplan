@@ -15,30 +15,41 @@ jQuery(document).ready(function() {
         $jobListe.append($job);
     }
 
-    function workplace($container) {
-        var columnIndex = $container.closest("td").index(); // Index der Spalte
-        var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
-        var $day = $rowAbove.find("td").eq(columnIndex); // Das td über der Liste
-        var bgColor = "transparent"; // Standardfarbe
-
-        // Überprüfe alle Job-Namen im Container
-        $container.find(".job_name_value").each(function() {
-            var jobText = $(this).val().toLowerCase(); // Text im Input-Feld (kleinbuchstaben)
-
-            if (jobText.includes("fahrt")) {
-                bgColor = "lightgreen";
-            } else if (jobText.includes("homeoffice")) {
-                bgColor = "lightblue";
-            } else if (jobText.includes("kurzarbeit")) {
-                bgColor = "yellow";
-            } else if (jobText.includes("halber tag")) {
-                bgColor = "orange";
-            } else if (jobText.includes("abwesend") || jobText.includes("schule")) {
-                bgColor = "red";
+    function workplace() {
+        $(".job_container").each(function() {
+            var $container = $(this);
+            var columnIndex = $container.closest("td").index(); // Index der Spalte
+            var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
+            var $day = $rowAbove.find("td").eq(columnIndex); // Das td über der Liste
+            var bgColor = "transparent"; // Standardfarbe
+    
+            // Falls keine Jobs in dieser Liste vorhanden sind → Setze Standardfarbe
+            if ($container.find(".job_name_value").length === 0) {
+                $day.css("background", bgColor);
+                return; // Nächste Iteration von .each()
             }
+    
+            // Überprüfe alle Job-Namen in dieser Liste
+            $container.find(".job_name_value").each(function() {
+                var jobText = $(this).val().toLowerCase(); // Kleinbuchstaben
+    
+                if (jobText.includes("fahrt")) {
+                    bgColor = "lightgreen";
+                } else if (jobText.includes("homeoffice")) {
+                    bgColor = "lightblue";
+                } else if (jobText.includes("kurzarbeit")) {
+                    bgColor = "yellow";
+                } else if (jobText.includes("halber tag")) {
+                    bgColor = "orange";
+                } else if (jobText.includes("abwesend") || jobText.includes("schule")) {
+                    bgColor = "red";
+                }
+            });
+    
+            // Hintergrundfarbe des Tages setzen
+            $day.css("background", bgColor);
         });
-        $day.css("background", bgColor);
-    }
+    }    
 
     function workload($dayCounter, $weekCounter, newDayVal, newWeekVal) {
         if (newDayVal >= 8) {
@@ -92,6 +103,23 @@ jQuery(document).ready(function() {
     }
 
     // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
+    // Drag & Drop Job Boxen
+    let selected = null;
+
+    $(document).on("dragstart", ".job_box", function(e) { // Jobs draggable machen
+        selected = this;
+    });
+
+    $(document).on("dragover", ".job_list", function(e) { // Dragover für alle job_listen aktivieren
+        e.preventDefault();
+    });
+
+    $(document).on("drop", ".job_list", function(e) { // Drop-Event
+        $(this).append(selected);
+        selected = null;
+        workplace();
+    });
+
     $(".job_add").click(function() { // Job hinzufügen
         var $container = $(this).closest(".job_container");
         var $jobListe = $container.find(".job_list");
@@ -101,7 +129,7 @@ jQuery(document).ready(function() {
         if (jobName != '') {
             setList($jobListe, jobName, jobTime);
             TimeCounter($container);
-            workplace($container);
+            workplace();
             reset();
         };
     });
@@ -116,7 +144,7 @@ jQuery(document).ready(function() {
             if (jobName != '') {
                 setList($jobListe, jobName, jobTime);
                 TimeCounter($container);
-                workplace($container);
+                workplace();
                 reset();
             };
         };
@@ -128,7 +156,7 @@ jQuery(document).ready(function() {
     
         jobBox.remove();
         TimeCounter($container);
-        workplace($container);
+        workplace();
     }); 
 
     $(document).on("click", ".job_duplicate", function() { // Job duplizieren
@@ -150,7 +178,7 @@ jQuery(document).ready(function() {
         jobList.append($job);
 
         TimeCounter($container);
-        workplace($container);
+        workplace();
     }); 
 
     $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
@@ -160,7 +188,7 @@ jQuery(document).ready(function() {
     $(document).on("click", ".job_safe", function() { // Job Aktualisieren
         var $container = $(this).closest(".job_container");
         TimeCounter($container);
-        workplace($container);
+        workplace();
         reset();
     });
 
@@ -168,7 +196,7 @@ jQuery(document).ready(function() {
         if ( event.type === "keydown" && event.key === "Enter" ) {
             var $container = $(this).closest(".job_container");
             TimeCounter($container);
-            workplace($container);
+            workplace();
             reset();
         };
     });

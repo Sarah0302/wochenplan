@@ -1,22 +1,5 @@
 jQuery(document).ready(function() {
 
-    // Drag & Drop Job Boxen
-    let selected = null;
-
-    $(document).on("dragstart", ".job_box", function(e) { // Jobs draggable machen
-        selected = this;
-    });
-
-    $(document).on("dragover", ".job_list", function(e) { // Dragover für alle job_listen aktivieren
-        e.preventDefault();
-    });
-
-    $(document).on("drop", ".job_list", function(e) { // Drop-Event
-        $(this).append(selected);
-        selected = null;
-    });
-
-    // Klick Events
     $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
         $(this).next(".job_row-list").not(".show_pool").toggleClass("hide");
     });
