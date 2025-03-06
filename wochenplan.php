@@ -60,8 +60,10 @@ $people = $_SESSION['people'] ?? ["Pool"];
                         <td><div class="week_time">0</div></td>
                         <td class="saturday hide"><div class="week_time">0</div></td>
                     </tr>
-                    <?php if ($people[$i] === $user) : ?>
+                    <?php if ($people[$i] === $user ) : ?>
                         <tr class="job_row-list">
+                    <?php elseif ($people[$i] === 'Pool') : ?>
+                        <tr class="job_row-list show_pool">
                     <?php else : ?>
                         <tr class="job_row-list hide">
                     <?php endif;  ?>

@@ -18,19 +18,19 @@ jQuery(document).ready(function() {
 
     // Klick Events
     $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
-        $(this).next(".job_row-list").toggleClass("hide");
+        $(this).next(".job_row-list").not(".show_pool").toggleClass("hide");
     });
 
     $(".week").click(function() { // Listen der Person Ein / Ausblenden
-        $(this).closest(".job_row-list").toggleClass("hide");
+        $(this).closest(".job_row-list").not(".show_pool").toggleClass("hide");
     });
 
     $(".open_all").click(function() {
-        $(".job_row-list").removeClass("hide");
+        $(".job_row-list").not(".show_pool").removeClass("hide");
     });
 
     $(".close_all").click(function() {
-        $(".job_row-list").addClass("hide");
+        $(".job_row-list").not(".show_pool").addClass("hide");
     });
 
     $(".saturday_button").click(function() {
