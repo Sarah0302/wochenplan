@@ -10,6 +10,16 @@ endif;
 // Eingeloggten Benutzer und People-Array abrufen
 $user = $_SESSION['user'];
 $people = $_SESSION['people'] ?? ["Pool"];
+
+// Aktuells Datum und aktuelle Kalenderwoche abrufen
+$today = date("d.m.y");
+$week = date("W");
+
+echo '<br><br>';
+echo 'heute: ' . $today;
+echo '<br>';
+echo 'woche: ' . $week;
+echo '<br><br>';
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +28,10 @@ $people = $_SESSION['people'] ?? ["Pool"];
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./assets/js/jquery-3.7.1.min.js"></script>
-    <script src="./assets/js/glide.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/jobs.js"></script>
-    <script src="./assets/js/slider.js"></script>
     <link href="./assets/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/glide.core.min.css">
         <!-- favicon -->
         <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />
@@ -41,25 +48,7 @@ $people = $_SESSION['people'] ?? ["Pool"];
         <a href="logout.php">Logout</a>
     </header>
     <main>
-
-    
-    <!-- slider -->
-    <div class="glide">
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="&lt;">prev</button>
-            <h1 class="text-white bg-blue-500 !important">Willkommen <?= $user; ?></h1>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir="&gt;">next</button>
-        </div>
-        <div class="glide__track" data-glide-el="track">
-            <ul class="glide__slides">
-            <li class="glide__slide" style="border: 1px solid red;">0</li>
-            <li class="glide__slide" style="border: 1px solid red;">1</li>
-            <li class="glide__slide" style="border: 1px solid red;">2</li>
-            </ul>
-        </div>
-    </div>
-
-
+        <h1 class="text-white bg-blue-500 !important">Willkommen <?= $user; ?>, KW <?= $week; ?></h1>
         <div style="border: 1px solid red">
             <table>
                 <tr>
