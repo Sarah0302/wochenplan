@@ -116,8 +116,21 @@ jQuery(document).ready(function() {
         $(".job_safe").addClass("hide");
     }
 
-    // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
-    // Drag & Drop Job Boxen
+    function addJob($container) {
+        var $jobListe = $container.find(".job_list");
+        var jobName = $container.find(".job_name").val();
+        var jobTime = parseFloat($container.find(".job_time").val()) || 0;
+
+        if (jobName != '') {
+            var job = jobBox(jobName, jobTime); // JobBox generiert nun ein Element
+            $jobListe.append(job); // Füge das generierte Element in die Liste ein
+            TimeCounter();
+            workplace();
+            reset();
+        };
+    }
+
+    // Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen
     let selected = null;
 
     $(document).on("dragstart", ".job_box", function(e) { // Jobs draggable machen
@@ -135,57 +148,17 @@ jQuery(document).ready(function() {
         TimeCounter();
     });
 
+    // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
     $(".job_add").click(function() { // Job hinzufügen
         var $container = $(this).closest(".job_container");
-        var $jobListe = $container.find(".job_list");
-        var jobName = $container.find(".job_name").val();
-        var jobTime = parseFloat($container.find(".job_time").val()) || 0;
-
-        if (jobName != '') {
-            var job = jobBox(jobName, jobTime); // JobBox generiert nun ein Element
-            $jobListe.append(job); // Füge das generierte Element in die Liste ein
-            TimeCounter();
-            workplace();
-            reset();
-        };
+        addJob($container);
     });
 
     $(document).on("keydown", ".job_name, .job_time", function(event) { // Job hinzufügen
         if ( event.key === "Enter") {
             var $container = $(this).closest(".job_container");
-            var $jobListe = $container.find(".job_list");
-            var jobName = $container.find(".job_name").val();
-            var jobTime = parseFloat($container.find(".job_time").val()) || 0;
-
-            if (jobName != '') {
-                var job = jobBox(jobName, jobTime);
-                $jobListe.append(job);
-                TimeCounter();
-                workplace();
-                reset();
-            };
+            addJob($container);
         };
-    }); 
-
-    $(document).on("click", ".job_delete", function() { // Job löschen
-        var jobBox = $(this).closest(".job_box");
-        
-        jobBox.remove();
-        TimeCounter();
-        workplace();
-    }); 
-
-    $(document).on("click", ".job_duplicate", function() { // Job duplizieren
-        var jobContainer = $(this).closest(".job_box");
-        var jobName = jobContainer.find(".job_name_value").val();
-        var jobTime = jobContainer.find(".job_workload").val();
-        var jobList = jobContainer.closest(".job_list");
-
-        var job = jobBox(jobName, jobTime);
-        jobList.append(job);
-
-        TimeCounter();
-        workplace();
     }); 
 
     $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
@@ -218,5 +191,26 @@ jQuery(document).ready(function() {
             $inputs.prop("disabled", true);
         }
     });    
+
+    $(document).on("click", ".job_duplicate", function() { // Job duplizieren
+        var jobContainer = $(this).closest(".job_box");
+        var jobName = jobContainer.find(".job_name_value").val();
+        var jobTime = jobContainer.find(".job_workload").val();
+        var jobList = jobContainer.closest(".job_list");
+
+        var job = jobBox(jobName, jobTime);
+        jobList.append(job);
+
+        TimeCounter();
+        workplace();
+    }); 
+
+    $(document).on("click", ".job_delete", function() { // Job löschen
+        var jobBox = $(this).closest(".job_box");
+        
+        jobBox.remove();
+        TimeCounter();
+        workplace();
+    });
 
 });
