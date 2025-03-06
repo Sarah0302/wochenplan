@@ -18,6 +18,7 @@
         <button class="saturday_button">Samstag anzeigen</button>
     </header>
     <main>
+    <h1 class="text-white bg-blue-500 !important">Test</h1>
         <div style="border: 1px solid red">
             <table>
                 <tr>

@@ -1,17 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./assets/css/**/*.css",
-    "./assets/js/**/*.js",
-    "./**/*.php"
+    "./index.php",
+    "./assets/**/*.php",
+    "./assets/**/*.js",
   ],
   safelist: [
-    { pattern: /^bg-/, variants: ['hover', 'focus'] },
-    { pattern: /^text-/, variants: ['hover', 'focus'] }
+    "bg-blue-500",
+    "text-white",
+    "text-center",
+    "border-4"
   ],
   theme: {
     extend: {},
   },
   plugins: [],
 };
+
