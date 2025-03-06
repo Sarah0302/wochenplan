@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
 table {
     border: 1px solid green;
     /* width: 100%; */
