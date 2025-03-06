@@ -90,6 +90,7 @@ jQuery(document).ready(function() {
         $(".job_safe").addClass("hide");
     }
 
+    // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
     $(".job_add").click(function() { // Job hinzufügen
         var $container = $(this).closest(".job_container");
         var $jobListe = $container.find(".job_list");
@@ -102,10 +103,24 @@ jQuery(document).ready(function() {
             workplace($container);
             reset();
         };
-
     });
 
-    // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
+    $(document).on("keydown", ".job_name, .job_time", function(event) { // Job hinzufügen
+        if ( event.type === "keydown" && event.key === "Enter") {
+            var $container = $(this).closest(".job_container");
+            var $jobListe = $container.find(".job_list");
+            var jobName = $container.find(".job_name").val();
+            var jobTime = parseFloat($container.find(".job_time").val()) || 0;
+
+            if (jobName != '') {
+                setList($jobListe, jobName, jobTime);
+                TimeCounter($container);
+                workplace($container);
+                reset();
+            };
+        };
+    }); 
+
     $(document).on("click", ".job_delete", function() { // Job löschen
         var jobBox = $(this).closest(".job_box");
         var $container = jobBox.closest(".job_container");
@@ -115,9 +130,9 @@ jQuery(document).ready(function() {
         workplace($container);
     }); 
 
-    $(document).on("input", ".job_name_value, .job_workload", function() {
+    $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
         $(this).closest(".job_box").find(".job_safe").removeClass("hide");
-    });
+    });    
 
     $(document).on("click", ".job_safe", function() { // Job Aktualisieren
         var $container = $(this).closest(".job_container");
@@ -126,7 +141,16 @@ jQuery(document).ready(function() {
         reset();
     });
 
-    $(document).on("click", ".job_done", function() { 
+    $(document).on("keydown", ".job_name_value, .job_workload", function(event) { // Job Aktualisieren
+        if ( event.type === "keydown" && event.key === "Enter" ) {
+            var $container = $(this).closest(".job_container");
+            TimeCounter($container);
+            workplace($container);
+            reset();
+        };
+    });
+
+    $(document).on("click", ".job_done", function() { // Job als Erledigt kennzeichenn
         var $jobBox = $(this).closest(".job_box"); 
         var $inputs = $jobBox.find(".job_name_value, .job_workload");
     
