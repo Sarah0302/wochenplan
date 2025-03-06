@@ -47,7 +47,7 @@ $people = $_SESSION['people'] ?? ["Pool"];
                 </tr>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
                     <tr class="job_counter">
-                        <td><?= $people[$i]; ?> <div class="personal_week">0</div></td>
+                        <td class="week"><?= $people[$i]; ?> <div class="personal_week">0</div></td>
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
@@ -55,8 +55,12 @@ $people = $_SESSION['people'] ?? ["Pool"];
                         <td><div class="week_time">0</div></td>
                         <td class="saturday hide"><div class="week_time">0</div></td>
                     </tr>
-                    <tr class="job_row-list hide">
-                        <td></td>
+                    <?php if ($people[$i] === $user) : ?>
+                        <tr class="job_row-list">
+                    <?php else : ?>
+                        <tr class="job_row-list hide">
+                    <?php endif;  ?>
+                        <td class="week"></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>
                             <?php if($index === 5) : ?>
                                 <td class="saturday hide">
