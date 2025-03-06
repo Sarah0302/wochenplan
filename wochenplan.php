@@ -23,6 +23,11 @@ $people = $_SESSION['people'] ?? ["Pool"];
     <link href="./assets/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/main.css">
         <!-- favicon -->
+        <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />
+        <link rel="shortcut icon" href="./assets/images/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <title>Wochenplan</title>
 </head>
 <body class="bg-blue-500 text-white text-center p-10">
