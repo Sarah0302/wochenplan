@@ -34,10 +34,6 @@ $people = $_SESSION['people'] ?? ["Pool"];
     </header>
     <main>
     <h1 class="text-white bg-blue-500 !important">Willkommen <?= $user; ?></h1>
-    <div>
-        <input type="text" placeholder="Name der Person">
-        <button class="add_person">Person hinzufügen</button>
-    </div>
         <div style="border: 1px solid red">
             <table>
                 <tr>

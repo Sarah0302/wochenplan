@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Weiterleiten falls der Nutzer bereits eingeloggt ist
+if (isset($_SESSION['user'])) {
+    header("Location: wochenplan.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
