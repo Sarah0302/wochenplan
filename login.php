@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Aktuelle Kalenderwoche abrufen
+$week = date("W");
+
 // Daten aus .env abrufen
 require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
@@ -34,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['people'] = $people; // Personenliste speichern
 
         // Erfolgreiche Anmeldung -> Weiterleitung
-        header("Location: wochenplan.php");
+        header("Location: wochenplan.php?week=" . $week);
         exit;
     } else { // Login fehlgeschlagen 
         echo "<script>alert('Anmeldung fehlgeschlagen! Bitte versuche es erneut.'); window.location.href='./index.php';</script>";

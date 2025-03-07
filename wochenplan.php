@@ -11,9 +11,9 @@ endif;
 $user = $_SESSION['user'];
 $people = $_SESSION['people'] ?? ["Pool"];
 
-// Aktuells Datum und aktuelle Kalenderwoche abrufen
+// Aktuells Datum und aus URL Kalenderwoche abrufen
 $today = date("d.m.y");
-$week = date("W");
+$week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
 
 echo '<br><br>';
 echo 'heute: ' . $today;
@@ -48,7 +48,11 @@ echo '<br><br>';
         <a href="logout.php">Logout</a>
     </header>
     <main>
-        <h1 class="text-white bg-blue-500 !important">Willkommen <?= $user; ?>, KW <?= $week; ?></h1>
+        <div>
+            <button class="week_before">vorher</button>
+            <h1 class="text-white bg-blue-500 !important">Willkommen <?= $user; ?>, KW <?= $week; ?></h1>
+            <button class="week_after">später</button>
+        </div>
         <div style="border: 1px solid red">
             <table>
                 <tr>

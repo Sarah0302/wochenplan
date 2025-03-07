@@ -1,9 +1,12 @@
 <?php
 session_start();
 
+// Aktuelle Kalenderwoche abrufen
+$week = date("W");
+
 // Weiterleiten falls der Nutzer bereits eingeloggt ist
 if (isset($_SESSION['user'])) {
-    header("Location: wochenplan.php");
+    header("Location: wochenplan.php?week=" . $week);
     exit;
 }
 ?>
