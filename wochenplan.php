@@ -30,8 +30,8 @@ echo '<br><br>';
     <script src="./assets/js/jquery-3.7.1.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/jobs.js"></script>
-    <link href="./assets/css/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/custom.css">
         <!-- favicon -->
         <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />
