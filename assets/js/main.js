@@ -14,25 +14,25 @@ jQuery(document).ready(function() {
 
     // JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  
     $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
-        $(this).next(".job_row-list").not(".show_pool").toggleClass("hide");
+        $(this).next(".job_row-list").not(".show_pool").toggleClass("hidden");
     });
 
     $(".week").click(function() { // Listen der Person Ein / Ausblenden
-        $(this).closest(".job_row-list").not(".show_pool").toggleClass("hide");
+        $(this).closest(".job_row-list").not(".show_pool").toggleClass("hidden");
     });
 
     $(".open_all").click(function() {
-        $(".job_row-list").not(".show_pool").removeClass("hide");
+        $(".job_row-list").not(".show_pool").removeClass("hidden");
     });
 
     $(".close_all").click(function() {
-        $(".job_row-list").not(".show_pool").addClass("hide");
+        $(".job_row-list").not(".show_pool").addClass("hidden");
     });
 
     $(".saturday_button").click(function() {
-        $(".saturday").toggleClass("hide");
+        $(".saturday").toggleClass("hidden");
 
-        if( $(".saturday").hasClass("hide") ) {
+        if( $(".saturday").hasClass("hidden") ) {
             $(this).html('Samstag anzeigen');
         } else {
             $(this).html('Samstag ausblenden');

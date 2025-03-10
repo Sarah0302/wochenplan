@@ -32,7 +32,6 @@ echo '<br><br>';
     <script src="./assets/js/jobs.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/custom.css">
         <!-- favicon -->
         <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />
@@ -62,7 +61,7 @@ echo '<br><br>';
                     <th>Mittwoch</th>
                     <th>Donnerstag</th>
                     <th>Freitag</th>
-                    <th class="saturday hide">Samstag</th>
+                    <th class="saturday hidden">Samstag</th>
                 </tr>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
                     <tr class="job_counter">
@@ -72,19 +71,19 @@ echo '<br><br>';
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
                         <td><div class="week_time">0</div></td>
-                        <td class="saturday hide"><div class="week_time">0</div></td>
+                        <td class="saturday hidden"><div class="week_time">0</div></td>
                     </tr>
                     <?php if ($people[$i] === $user ) : ?>
                         <tr class="job_row-list">
                     <?php elseif ($people[$i] === 'Pool') : ?>
                         <tr class="job_row-list show_pool">
                     <?php else : ?>
-                        <tr class="job_row-list hide">
+                        <tr class="job_row-list hidden">
                     <?php endif;  ?>
                         <td class="week"></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>
                             <?php if($index === 5) : ?>
-                                <td class="saturday hide">
+                                <td class="saturday hidden">
                             <?php else : ?>
                                 <td>
                             <?php endif; ?>

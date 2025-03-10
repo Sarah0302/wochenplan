@@ -21,7 +21,6 @@ if (isset($_SESSION['user'])) {
     <script src="./assets/js/jobs.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
-    <link rel="stylesheet" href="./assets/css/custom.css">
         <!-- favicon -->
         <link rel="icon" type="image/png" href="./assets/images/favicon/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="./assets/images/favicon/favicon.svg" />

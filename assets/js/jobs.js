@@ -7,7 +7,7 @@ jQuery(document).ready(function() {
                 <div class="job_done">erledigt</div>
                 <input class="job_name_value" type="text" value="${jobName}">
                 <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
-                <div class="job_safe hide">aktualisieren</div>
+                <div class="job_safe hidden">aktualisieren</div>
                 <div class="job_delete">löschen</div>
                 <div class="job_duplicate">duplizieren</div>
             </div>
@@ -113,7 +113,7 @@ jQuery(document).ready(function() {
     function reset() {
         $(".job_name").val('');
         $(".job_time").val('');
-        $(".job_safe").addClass("hide");
+        $(".job_safe").addClass("hidden");
     }
 
     function addJob($container) {
@@ -162,7 +162,7 @@ jQuery(document).ready(function() {
     }); 
 
     $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
-        $(this).closest(".job_box").find(".job_safe").removeClass("hide");
+        $(this).closest(".job_box").find(".job_safe").removeClass("hidden");
     });    
 
     $(document).on("click", ".job_safe", function() { // Job Aktualisieren
