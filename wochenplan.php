@@ -13,13 +13,14 @@ $people = $_SESSION['people'] ?? ["Pool"];
 
 // Aktuells Datum und aus URL Kalenderwoche abrufen
 $today = date("d.m.y");
+$thisWeek = date("W"); // Aktuelle Kalenderwoche
 $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
 
-echo '<br><br>';
-echo 'heute: ' . $today;
-echo '<br>';
-echo 'woche: ' . $week;
-echo '<br><br>';
+// echo '<br><br>';
+// echo 'heute: ' . $today;
+// echo '<br>';
+// echo 'woche: ' . $week;
+// echo '<br><br>';
 ?>
 
 <!DOCTYPE html>
@@ -40,12 +41,15 @@ echo '<br><br>';
         <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <title>Wochenplan</title>
 </head>
-<body class="p-4">
-    <header class="bg-stone-200 p-4">
-        <button class="open_all">OPEN ALL</button>
-        <button class="close_all">CLOSE ALL</button>
-        <button class="saturday_button">Samstag anzeigen</button>
-        <a href="logout.php">Logout</a>
+<body class="min-h-screen flex flex-col justify-between gap-10">
+    <header class="bg-stone-200 p-4 flex flex-row justify-between items-center">
+        <a class="cursor-pointer" href="./wochenplan.php?week=<?= $thisWeek; ?>">
+            <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
+        </a>
+        <button class="open_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle öffnen</button>
+        <button class="close_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle schließen</button>
+        <button class="saturday_button bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">Samstag anzeigen</button>
+        <a href="logout.php">Abmelden</a>
     </header>
     <main class="p-4">
         <div class="border-2 border-red-400">
@@ -101,12 +105,17 @@ echo '<br><br>';
                 <?php endfor; ?>
         </table>
     </main>
-    <footer class="columns-5">
-        <div class="bg-lime-300 p-4 text-center">Fahrt</div>
-        <div class="bg-cyan-300 p-4 text-center">Homeoffice</div>
-        <div class="bg-amber-300 p-4 text-center">Kurzarbeit</div>
-        <div class="bg-orange-300 p-4 text-center">Halber Tag</div>
-        <div class="bg-rose-300 p-4 text-center">Abwesend / Schule</div>
+    <footer class="p-4">
+        <div class="columns-5">
+            <div class="bg-lime-300 p-4 text-center">Fahrt</div>
+            <div class="bg-cyan-300 p-4 text-center">Homeoffice</div>
+            <div class="bg-amber-300 p-4 text-center">Kurzarbeit</div>
+            <div class="bg-orange-300 p-4 text-center">Halber Tag</div>
+            <div class="bg-rose-300 p-4 text-center">Abwesend / Schule</div>
+        </div>
+        <div class="text-center mt-2">
+            <p>SDV STUDIOS <?= date("Y"); ?></p>
+        </div>
     </footer>
 </body>
 </html>

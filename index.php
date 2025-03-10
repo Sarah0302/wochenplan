@@ -29,9 +29,9 @@ if (isset($_SESSION['user'])) {
         <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <title>Wochenplan Login</title>
 </head>
-<body class="min-h-screen p-4 flex flex-col justify-between items center gap-10">
-    <header class="">
-        <a class="cursor-pointer" href="./wochenplan.php">
+<body class="min-h-screen p-4 flex flex-col justify-between gap-10">
+    <header>
+        <a class="cursor-pointer" href="./wochenplan.php?week=<?= $week; ?>">
             <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
         </a>
     </header>
