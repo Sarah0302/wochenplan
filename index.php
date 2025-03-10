@@ -30,22 +30,24 @@ if (isset($_SESSION['user'])) {
         <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <title>Wochenplan Login</title>
 </head>
-<body>
-    <header>
-        header
+<body class="min-h-screen p-4 flex flex-col justify-between items center gap-10">
+    <header class="">
+        <a class="cursor-pointer" href="./wochenplan.php">
+            <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
+        </a>
     </header>
-    <main>
-        <div>
-            <h2>Login</h2>
+    <main class="flex justify-center items-center">
+        <div class="flex flex-col max-w-80">
+            <h2 class="text-3xl pb-4 text-center">Login Wochenplan SDV</h2>
             <form method="POST" action="login.php">
-                <input type="text" name="username" id="username" placeholder="dein Benutzername">
-                <input type="password" name="password" id="password" placeholder="dein Password">
-                <input type="submit" value="anmelden">
+                <input class="w-full p-2 mt-2 border border-slate-300" type="text" name="username" id="username" placeholder="dein Benutzername">
+                <input class="w-full p-2 mt-2 border border-slate-300" type="password" name="password" id="password" placeholder="dein Password">
+                <input class="w-full p-2 mt-2 border border-slate-300 bg-slate-300 cursor-pointer duration-300 ease-in-out hover:bg-slate-500 hover:text-white" type="submit" value="anmelden">
             </form>
         </div>
     </main>
-    <footer>
-        footer
+    <footer class="text-center">
+        <p>SDV STUDIOS <?= date("Y"); ?></p>
     </footer>
 </body>
 </html>
