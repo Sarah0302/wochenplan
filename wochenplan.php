@@ -41,7 +41,7 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
         <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <title>Wochenplan</title>
 </head>
-<body class="min-h-screen flex flex-col justify-between gap-10">
+<body class="min-h-screen flex flex-col justify-between gap-5">
     <header class="bg-stone-200 p-4 flex flex-row justify-between items-center">
         <a class="cursor-pointer" href="./wochenplan.php?week=<?= $thisWeek; ?>">
             <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
@@ -52,12 +52,16 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
         <a href="logout.php">Abmelden</a>
     </header>
     <main class="p-4">
-        <div class="border-2 border-red-400">
-            <button class="week_before">vorher</button>
-            <h1>Willkommen <?= $user; ?>, KW <?= $week; ?></h1>
-            <button class="week_after">später</button>
+        <div class="flex justify-center items-center">
+            <button class="week_before">
+                <img class="object-contain h-7" src="./assets/images/arrow-left.png" alt="arrow-left">
+            </button>
+            <h1 class="pl-6 pr-6 text-5xl">Willkommen in KW <?= $week; ?> <?= $user; ?></h1>
+            <button class="week_after">
+                <img class="object-contain h-7" src="./assets/images/arrow-right.png" alt="arrow-right">
+            </button>
         </div>
-        <table>
+        <table class="border border-green-600 mt-5">
                 <tr>
                     <th>Mitarbeiter</th>
                     <th>Montag<br><?= date("d.m") ?></th>
