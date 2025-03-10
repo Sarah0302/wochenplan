@@ -61,53 +61,59 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                 <img class="object-contain h-7" src="./assets/images/arrow-right.png" alt="arrow-right">
             </button>
         </div>
-        <table class="border border-green-600 mt-5">
-                <tr>
-                    <th>Mitarbeiter</th>
-                    <th>Montag<br><?= date("d.m") ?></th>
-                    <th>Dienstag</th>
-                    <th>Mittwoch</th>
-                    <th>Donnerstag</th>
-                    <th>Freitag</th>
-                    <th class="saturday hidden">Samstag</th>
-                </tr>
-                <?php for ($i = 0; $i < count($people); $i++) : ?>
-                    <tr class="job_counter">
-                        <td class="week"><?= $people[$i]; ?> <div class="personal_week">0</div></td>
-                        <td><div class="week_time">0</div></td>
-                        <td><div class="week_time">0</div></td>
-                        <td><div class="week_time">0</div></td>
-                        <td><div class="week_time">0</div></td>
-                        <td><div class="week_time">0</div></td>
-                        <td class="saturday hidden"><div class="week_time">0</div></td>
+        <div class="border border-slate-600 mt-6">
+            <table class="width-full mt-1">
+                    <tr class="bg-slate-600 text-white">
+                        <th class="p-2">Mitarbeiter</th>
+                        <th class="p-2">Montag<br><span class="font-light"><?= date("d.m") ?></span></th>
+                        <th class="p-2">Dienstag<br><span class="font-light"><?= date("d.m") ?></span></th>
+                        <th class="p-2">Mittwoch<br><span class="font-light"><?= date("d.m") ?></span></th>
+                        <th class="p-2">Donnerstag<br><span class="font-light"><?= date("d.m") ?></span></th>
+                        <th class="p-2">Freitag<br><span class="font-light"><?= date("d.m") ?></span></th>
+                        <th class="p-2 saturday hidden">Samstag<br><span class="font-light"><?= date("d.m") ?></span></th>
                     </tr>
-                    <?php if ($people[$i] === $user ) : ?>
-                        <tr class="job_row-list">
-                    <?php elseif ($people[$i] === 'Pool') : ?>
-                        <tr class="job_row-list show_pool">
-                    <?php else : ?>
-                        <tr class="job_row-list hidden">
-                    <?php endif;  ?>
-                        <td class="week"></td>
-                        <?php for ($index = 0; $index < 6; $index++) : ?>
-                            <?php if($index === 5) : ?>
-                                <td class="saturday hidden">
-                            <?php else : ?>
-                                <td>
-                            <?php endif; ?>
-                                <div class="job_container">
-                                    <ul class="job_list"></ul>
-                                    <div>
-                                        <input class="job_name" type="text" placeholder="Neuer Job">
-                                        <input class="job_time" type="number" placeholder="Zeit" min="0" max="24">
-                                        <input class="job_add" type="submit" value="+">
+                    <?php for ($i = 0; $i < count($people); $i++) : ?>
+                        <?php if ($i % 2 === 0) : ?>
+                            <tr class="job_counter job_counter bg-zinc-100 border-8 border-white">
+                        <?php else : ?>
+                            <tr class="job_counter job_counter bg-zinc-100 border-8 border-white">
+                        <?php endif; ?>
+                            <td class="week p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2">0</div></td>
+                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                            <td class="saturday hidden p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                        </tr>
+                        <?php if ($people[$i] === $user ) : ?>
+                            <tr class="job_row-list">
+                        <?php elseif ($people[$i] === 'Pool') : ?>
+                            <tr class="job_row-list show_pool">
+                        <?php else : ?>
+                            <tr class="job_row-list hidden">
+                        <?php endif;  ?>
+                            <td class="week pb-4"></td>
+                            <?php for ($index = 0; $index < 6; $index++) : ?>
+                                <?php if($index === 5) : ?>
+                                    <td class="saturday hidden pb-4">
+                                <?php else : ?>
+                                    <td class="pb-4">
+                                <?php endif; ?>
+                                    <div class="job_container">
+                                        <ul class="job_list"></ul>
+                                        <div>
+                                            <input class="job_name" type="text" placeholder="Neuer Job">
+                                            <input class="job_time" type="number" placeholder="Zeit" min="0" max="24">
+                                            <input class="job_add" type="submit" value="+">
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        <?php endfor; ?>
-                    </tr>
-                <?php endfor; ?>
-        </table>
+                                </td>
+                            <?php endfor; ?>
+                        </tr>
+                    <?php endfor; ?>
+            </table>
+        </div>
     </main>
     <footer class="p-4">
         <div class="columns-5">
