@@ -3,13 +3,13 @@ jQuery(document).ready(function() {
     // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN
     function jobBox(jobName, jobTime) {
         return $(`
-            <div draggable="true" class="job_box" style="border: 1px solid blue; display: flex; flex-direction: row;">
-                <div class="job_done" style="background: green; padding: 5px; cursor: pointer;">erledigt</div>
+            <div draggable="true" class="job_box">
+                <div class="job_done">erledigt</div>
                 <input class="job_name_value" type="text" value="${jobName}">
                 <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
-                <div class="job_safe hide" style="background: lightblue; padding: 5px; cursor: pointer;">aktualisieren</div>
-                <div class="job_delete" style="background: red; padding: 5px; cursor: pointer;">löschen</div>
-                <div class="job_duplicate" style="background: gray; padding: 5px; cursor: pointer;">duplizieren</div>
+                <div class="job_safe hide">aktualisieren</div>
+                <div class="job_delete">löschen</div>
+                <div class="job_duplicate">duplizieren</div>
             </div>
         `); 
     }

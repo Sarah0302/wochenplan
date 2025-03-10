@@ -30,6 +30,7 @@ echo '<br><br>';
     <script src="./assets/js/jquery-3.7.1.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/jobs.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/custom.css">
         <!-- favicon -->
@@ -40,21 +41,20 @@ echo '<br><br>';
         <link rel="manifest" href="./assets/images/favicon/site.webmanifest" />
     <title>Wochenplan</title>
 </head>
-<body class="bg-blue-500 text-white text-center p-10">
-    <header>
+<body class="p-4">
+    <header class="bg-stone-200 p-4">
         <button class="open_all">OPEN ALL</button>
         <button class="close_all">CLOSE ALL</button>
         <button class="saturday_button">Samstag anzeigen</button>
         <a href="logout.php">Logout</a>
     </header>
-    <main>
-        <div>
+    <main class="p-4">
+        <div class="border-2 border-red-400">
             <button class="week_before">vorher</button>
-            <h1 class="text-white bg-blue-500 !important">Willkommen <?= $user; ?>, KW <?= $week; ?></h1>
+            <h1>Willkommen <?= $user; ?>, KW <?= $week; ?></h1>
             <button class="week_after">später</button>
         </div>
-        <div style="border: 1px solid red">
-            <table>
+        <table>
                 <tr>
                     <th>Mitarbeiter</th>
                     <th>Montag<br><?= date("d.m") ?></th>
@@ -88,9 +88,9 @@ echo '<br><br>';
                             <?php else : ?>
                                 <td>
                             <?php endif; ?>
-                                <div class="job_container" style="border: 1px solid green;">
-                                    <ul class="job_list" style="border: 1px solid blue; min-height: 50px;"></ul>
-                                    <div style="border: 1px solid orange; display: flex; flex-direction: row;">
+                                <div class="job_container">
+                                    <ul class="job_list"></ul>
+                                    <div>
                                         <input class="job_name" type="text" placeholder="Neuer Job">
                                         <input class="job_time" type="number" placeholder="Zeit" min="0" max="24">
                                         <input class="job_add" type="submit" value="+">
@@ -100,15 +100,14 @@ echo '<br><br>';
                         <?php endfor; ?>
                     </tr>
                 <?php endfor; ?>
-            </table>
-        </div>
+        </table>
     </main>
-    <footer>
-        <div style="background: lightgreen;">Fahrt</div>
-        <div style="background: lightblue;">Homeoffice</div>
-        <div style="background: yellow;">Kurzarbeit</div>
-        <div style="background: orange;">Halber Tag</div>
-        <div style="background: red;">Abwesend / Schule</div>
+    <footer class="columns-5">
+        <div class="bg-lime-300 p-4 text-center">Fahrt</div>
+        <div class="bg-cyan-300 p-4 text-center">Homeoffice</div>
+        <div class="bg-amber-300 p-4 text-center">Kurzarbeit</div>
+        <div class="bg-orange-300 p-4 text-center">Halber Tag</div>
+        <div class="bg-rose-300 p-4 text-center">Abwesend / Schule</div>
     </footer>
 </body>
 </html>

@@ -19,6 +19,7 @@ if (isset($_SESSION['user'])) {
     <script src="./assets/js/jquery-3.7.1.min.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/jobs.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/custom.css">
         <!-- favicon -->

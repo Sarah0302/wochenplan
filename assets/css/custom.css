@@ -5,20 +5,3 @@
 .show {
     display: block;
 }
-
-table {
-    border: 1px solid green;
-    /* width: 100%; */
-}
-
-th {
-    background-color: gray;
-}
-
-tr {
-    border: 1px solid orange;
-}
-
-td {
-    border: 1px solid pink;
-}
