@@ -62,7 +62,7 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
             </button>
         </div>
         <div class="border border-slate-600 mt-6">
-            <table class="width-full mt-1">
+            <table class="w-full mt-1 table-fixed">
                     <tr class="bg-slate-600 text-white">
                         <th class="p-2">Mitarbeiter</th>
                         <th class="p-2">Montag<br><span class="font-light"><?= date("d.m") ?></span></th>
@@ -78,13 +78,13 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                         <?php else : ?>
                             <tr class="job_counter job_counter bg-zinc-100 border-8 border-white">
                         <?php endif; ?>
-                            <td class="week p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2">0</div></td>
-                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
-                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
-                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
-                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
-                            <td class="p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
-                            <td class="saturday hidden p-2"><div class="week_time text-end p-2 border border-slate-400">0</div></td>
+                            <td class="week p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>
+                            <td class="p-2 relative"><div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div></td>
+                            <td class="p-2 relative"><div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div></td>
+                            <td class="p-2 relative"><div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div></td>
+                            <td class="p-2 relative"><div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div></td>
+                            <td class="p-2 relative"><div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div></td>
+                            <td class="saturday hidden p-2 relative"><div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div></td>
                         </tr>
                         <?php if ($people[$i] === $user ) : ?>
                             <tr class="job_row-list">
@@ -98,14 +98,14 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                                 <?php if($index === 5) : ?>
                                     <td class="saturday hidden pb-4">
                                 <?php else : ?>
-                                    <td class="pb-4">
+                                    <td class="pb-4 w-full">
                                 <?php endif; ?>
-                                    <div class="job_container">
-                                        <ul class="job_list"></ul>
-                                        <div>
-                                            <input class="job_name" type="text" placeholder="Neuer Job">
-                                            <input class="job_time" type="number" placeholder="Zeit" min="0" max="24">
-                                            <input class="job_add" type="submit" value="+">
+                                    <div class="job_container p-2 ml-2 border border-stone-300">
+                                        <div class="job_list"></div>
+                                        <div class="mt-6 flex flex-row justify-between items-center gap-2">
+                                            <input class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">
+                                            <input class="job_time p-2 border border-slate-200 w-2/6" type="number" placeholder="Zeit" min="0" max="24">
+                                            <input class="job_add p-2 w-1/6" type="submit" value="+">
                                         </div>
                                     </div>
                                 </td>

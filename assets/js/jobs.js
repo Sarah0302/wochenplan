@@ -3,16 +3,20 @@ jQuery(document).ready(function() {
     // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN
     function jobBox(jobName, jobTime) {
         return $(`
-            <div draggable="true" class="job_box">
-                <div class="job_done">erledigt</div>
-                <input class="job_name_value" type="text" value="${jobName}">
-                <input class="job_workload" type="number" min="0" max="24" value="${jobTime}">
-                <div class="job_safe hidden">aktualisieren</div>
-                <div class="job_delete">löschen</div>
-                <div class="job_duplicate">duplizieren</div>
+            <div draggable="true" class="job_box mt-1 p-2 border border-slate-400">
+                <div class="flex flex-row gap-1">
+                    <input class="job_name_value border border-slate-200 p-2 w-full" type="text" value="${jobName}">
+                    <input class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="${jobTime}">
+                    <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
+                </div>
+                <div class="flex flex-row gap-1 mt-1">
+                    <div class="job_done p-2 w-1/3"><img src="assets/images/done.svg" alt="Job done"></div>
+                    <div class="job_delete p-2 w-1/3"><img src="assets/images/delete.svg" alt="Job delete"></div>
+                    <div class="job_duplicate p-2 w-1/3"><img src="assets/images/duplicate.svg" alt="Job duplizieren"></div>
+                </div>
             </div>
         `); 
-    }
+    }    
 
     function workplace() {
         $(".job_container").each(function() {
@@ -20,11 +24,11 @@ jQuery(document).ready(function() {
             var columnIndex = $container.closest("td").index(); // Index der Spalte
             var $rowAbove = $container.closest("tr").prev(); // Die Zeile über der Job-Liste
             var $day = $rowAbove.find("td").eq(columnIndex); // Das td über der Liste
-            var bgColor = "transparent"; // Standardfarbe
+            var bgColor = "";
     
             // Falls keine Jobs in dieser Liste vorhanden sind → Setze Standardfarbe
             if ($container.find(".job_name_value").length === 0) {
-                $day.css("background", bgColor);
+                $day.removeClass("bg-lime-300 bg-cyan-300 bg-amber-300 bg-orange-300 bg-rose-300");
                 return; // Nächste Iteration von .each()
             }
     
@@ -33,22 +37,23 @@ jQuery(document).ready(function() {
                 var jobText = $(this).val().toLowerCase(); // Kleinbuchstaben
     
                 if (jobText.includes("fahrt")) {
-                    bgColor = "lightgreen";
+                    bgColor = "bg-lime-300";
                 } else if (jobText.includes("homeoffice")) {
-                    bgColor = "lightblue";
+                    bgColor = "bg-cyan-300";
                 } else if (jobText.includes("kurzarbeit")) {
-                    bgColor = "yellow";
+                    bgColor = "bg-amber-300";
                 } else if (jobText.includes("halber tag")) {
-                    bgColor = "orange";
+                    bgColor = "bg-orange-300";
                 } else if (jobText.includes("abwesend") || jobText.includes("schule")) {
-                    bgColor = "red";
+                    bgColor = "bg-rose-300";
                 }
             });
     
             // Hintergrundfarbe des Tages setzen
-            $day.css("background", bgColor);
+            $day.removeClass("bg-lime-300 bg-cyan-300 bg-amber-300 bg-orange-300 bg-rose-300");
+            $day.addClass(bgColor);
         });
-    }    
+    }
 
     function workload() {
         $(".week_time").each(function() {
@@ -56,14 +61,15 @@ jQuery(document).ready(function() {
             var newDayVal = parseFloat($dayCounter.text()) || 0;
     
             // Tagesfarbe setzen
+            $dayCounter.removeClass('bg-red-700 bg-yellow-700 bg-lime-700');
             if (newDayVal >= 8) {
-                $dayCounter.css({ background: 'red' });
+                $dayCounter.addClass('bg-red-700');
             } else if (newDayVal >= 6) {
-                $dayCounter.css({ background: 'yellow' });
+                $dayCounter.addClass('bg-yellow-500');
             } else if (newDayVal >= 0.1) {
-                $dayCounter.css({ background: 'green' });
+                $dayCounter.addClass('bg-lime-700');
             } else {
-                $dayCounter.css({ background: 'transparent' });
+                $dayCounter.removeClass('bg-red-700 bg-yellow-700 bg-lime-700');
             }
         });
     
@@ -72,14 +78,15 @@ jQuery(document).ready(function() {
             var newWeekVal = parseFloat($weekCounter.text()) || 0;
     
             // Wochenfarbe setzen
+            $weekCounter.removeClass('bg-red-700 bg-yellow-700 bg-lime-700');
             if (newWeekVal >= 40) {
-                $weekCounter.css({ background: 'red' });
+                $weekCounter.addClass('bg-red-700');
             } else if (newWeekVal >= 32) {
-                $weekCounter.css({ background: 'yellow' });
+                $weekCounter.addClass('bg-yellow-500');
             } else if (newWeekVal >= 0.1) {
-                $weekCounter.css({ background: 'green' });
+                $weekCounter.addClass('bg-lime-700');
             } else {
-                $weekCounter.css({ background: 'transparent' });
+                $weekCounter.removeClass('bg-red-700 bg-yellow-700 bg-lime-700');
             }
         });
     }    
