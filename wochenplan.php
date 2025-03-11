@@ -73,8 +73,8 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                     <th class="p-2 saturday hidden">Samstag<br><span class="font-light"><?= date("d.m") ?></span></th>
                 </tr>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
-                    <tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
-                        <td class="week p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>
+                    <tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">
+                        <td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>
                         <?php for ($index = 0; $index <= 4; $index++) : ?>
                             <td class="p-2 relative flex h-full">
                                 <div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div>
@@ -91,7 +91,7 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                     <?php else : ?>
                         <tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch hidden">
                     <?php endif;  ?>
-                        <td class="week pb-4"></td>
+                        <td class="week cursor-pointer pb-4"></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>
                             <?php if($index === 5) : ?>
                                 <td class="saturday hidden pb-4 flex h-full">
@@ -99,11 +99,11 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                                 <td class="pb-4 flex h-full">
                             <?php endif; ?>
                                 <div class="job_container p-2 ml-2 border border-stone-300 flex flex-col justify-between h-full">
-                                    <div class="job_list h-full"></div>
-                                    <div class="mt-6 flex flex-row justify-between items-center gap-2">
+                                    <div class="job_list h-full min-h-6 pb-6"></div>
+                                    <div class="flex flex-row justify-between items-center gap-2">
                                         <input class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">
                                         <input class="job_time p-2 border border-slate-200 w-2/6" type="number" placeholder="Zeit" min="0" max="24">
-                                        <input class="job_add p-2 w-1/6" type="submit" value="+">
+                                        <input class="job_add p-2 w-1/6 text-lg border border-slate-200 bg-lime-200 cursor-pointer" type="submit" value="+">
                                     </div>
                                 </div>
                             </td>

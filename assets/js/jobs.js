@@ -10,9 +10,15 @@ jQuery(document).ready(function() {
                     <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
                 </div>
                 <div class="flex flex-row gap-1 mt-1">
-                    <div class="job_done p-2 w-1/3"><img src="assets/images/done.svg" alt="Job done"></div>
-                    <div class="job_delete p-2 w-1/3"><img src="assets/images/delete.svg" alt="Job delete"></div>
-                    <div class="job_duplicate p-2 w-1/3"><img src="assets/images/duplicate.svg" alt="Job duplizieren"></div>
+                    <div class="job_done p-2 w-1/3">
+                        <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/done.svg" alt="Job done">
+                    </div>
+                    <div class="job_delete p-2 w-1/3">
+                        <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/delete.svg" alt="Job delete">
+                    </div>
+                    <div class="job_duplicate p-2 w-1/3">
+                        <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/duplicate.svg" alt="Job duplizieren">
+                    </div>
                 </div>
             </div>
         `);
