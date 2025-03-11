@@ -13,6 +13,7 @@ $people = $_SESSION['people'] ?? ["Pool"];
 
 // Aktuelles Datum und Kalenderwoche abrufen
 $today = new DateTime(); // Datum als Objekt
+$thisDay = date('d.m.');
 $weekdayEnglish = date('l'); // Englischer Wochentag
 $thisWeek = date("W"); // Aktuelle Kalenderwoche
 $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
@@ -32,45 +33,20 @@ $weekdays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag
 // Aktuellen Wochentag in Deutsch abrufen
 $weekday = $weekdayGerman[$weekdayEnglish];
 
-// Aktuelles Datum für jeden Wochentag berechnen
+// Datum für jeden Tag der Woche berechnen
+$start = new DateTime();
+$start->setISODate($year, $week, 1); // Setzt Montag der angegebenen Woche
 $weekDates = [];
-$todayIndex = array_search($weekday, $weekdays); // Index des aktuellen Tages
 
-foreach ($weekdays as $index => $day) {
-    $diff = $index - $todayIndex;
-    $date = clone $today;
-    $date->modify("$diff days"); // Datum anpassen
-    $weekDates[$day] = $date->format("d.m"); // Speichern im Format "TT.MM"
+foreach ($weekdays as $day) {
+    $weekDates[$day] = $start->format('d.m.'); // Format für Tabelle
+    $start->modify('+1 day'); // Nächsten Tag berechnen
 }
 
 // Markierungen
 $classToday = ' bg-amber-500'; // Heute
 // $holiday = ' bg-rose-900'; // Feiertag
 ?>
-
-
-
-<?php
-// Datum für jeden Tag der Woche berechnen
-function getDatesOfWeek($year, $week) {
-    $start = new DateTime();
-    $start->setISODate($year, $week, 1); // Montag der KW setzen
-    $dates = [];
-
-    for ($i = 0; $i < 7; $i++) {
-        $dates[] = $start->format('Y-m-d'); // Datum speichern
-        $start->modify('+1 day'); // Zum nächsten Tag gehen
-    }
-
-    return $dates;
-}
-
-$dates = getDatesOfWeek($year, $week);
-
-print_r($dates);
-?>
-
-
 
 <!DOCTYPE html>
 <html lang="de">
@@ -117,7 +93,7 @@ print_r($dates);
                     <?php foreach ($weekdays as $day) : ?>
                         <?php 
                             $class = '';
-                            if ($day === $weekday) {
+                            if ($day === $weekday && $weekDates[$day] === $thisDay) {
                                 $class = $classToday; 
                             }
                             if ($day === 'Samstag') {
