@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
                     <div class="job_duplicate p-2 w-1/3"><img src="assets/images/duplicate.svg" alt="Job duplizieren"></div>
                 </div>
             </div>
-        `); 
+        `);
     }    
 
     function workplace() {
@@ -134,7 +134,7 @@ jQuery(document).ready(function() {
             TimeCounter();
             workplace();
             reset();
-        };
+        }
     }
 
     // Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen  Drag & Drop Job Boxen
