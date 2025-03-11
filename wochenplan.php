@@ -16,6 +16,7 @@ $today = new DateTime(); // Datum als Objekt
 $weekdayEnglish = date('l'); // Englischer Wochentag
 $thisWeek = date("W"); // Aktuelle Kalenderwoche
 $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
+$year = date("Y"); // aktuelles Jahr
 
 // Englische Wochentage zu deutschen Wochentagen mappen
 $weekdayGerman = [
@@ -46,6 +47,30 @@ foreach ($weekdays as $index => $day) {
 $classToday = ' bg-amber-500'; // Heute
 // $holiday = ' bg-rose-900'; // Feiertag
 ?>
+
+
+
+<?php
+// Datum für jeden Tag der Woche berechnen
+function getDatesOfWeek($year, $week) {
+    $start = new DateTime();
+    $start->setISODate($year, $week, 1); // Montag der KW setzen
+    $dates = [];
+
+    for ($i = 0; $i < 7; $i++) {
+        $dates[] = $start->format('Y-m-d'); // Datum speichern
+        $start->modify('+1 day'); // Zum nächsten Tag gehen
+    }
+
+    return $dates;
+}
+
+$dates = getDatesOfWeek($year, $week);
+
+print_r($dates);
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="de">
