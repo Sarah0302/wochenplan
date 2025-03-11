@@ -13,14 +13,36 @@ $people = $_SESSION['people'] ?? ["Pool"];
 
 // Aktuells Datum und aus URL Kalenderwoche abrufen
 $today = date("d.m.y");
+$weekdayEnglish = date('l'); // Gibt z. B. "Monday" aus
 $thisWeek = date("W"); // Aktuelle Kalenderwoche
 $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
 
-// echo '<br><br>';
-// echo 'heute: ' . $today;
-// echo '<br>';
-// echo 'woche: ' . $week;
-// echo '<br><br>';
+// Englische Wochentage zu deutschen Wochentagen mappen
+$weekdayGerman = [
+    'Monday'    => 'Montag',
+    'Tuesday'   => 'Dienstag',
+    'Wednesday' => 'Mittwoch',
+    'Thursday'  => 'Donnerstag',
+    'Friday'    => 'Freitag',
+    'Saturday'  => 'Samstag',
+];
+
+// Aktuellen Wochentag in Deutsch abrufen
+$weekday = $weekdayGerman[$weekdayEnglish];
+
+$weekdays = [
+    'Montag',
+    'Dienstag',
+    'Mittwoch',
+    'Donnerstag',
+    'Freitag',
+    'Samstag',
+];
+
+// Markierungen
+$classToday = ' bg-amber-500'; // Heute
+// $holiday = ' bg-rose-900'; // Feiertag
+
 ?>
 
 <!DOCTYPE html>
@@ -65,12 +87,25 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
             <table class="w-full mt-1 table-fixed">
                 <tr class="saturday-col bg-slate-600 text-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
                     <th class="p-2">Mitarbeiter</th>
-                    <th class="p-2">Montag<br><span class="font-light"><?= date("d.m") ?></span></th>
-                    <th class="p-2">Dienstag<br><span class="font-light"><?= date("d.m") ?></span></th>
-                    <th class="p-2">Mittwoch<br><span class="font-light"><?= date("d.m") ?></span></th>
-                    <th class="p-2">Donnerstag<br><span class="font-light"><?= date("d.m") ?></span></th>
-                    <th class="p-2">Freitag<br><span class="font-light"><?= date("d.m") ?></span></th>
-                    <th class="p-2 saturday hidden">Samstag<br><span class="font-light"><?= date("d.m") ?></span></th>
+                    <?php for ($integer = 0; $integer < count($weekdays); $integer++) : ?>
+                        <?php 
+                            $class = ''; 
+                            $date = '';
+
+                            if ($weekdays[$integer] === $weekday) : // Wenn aktueller Wochentag
+                                $class = $classToday; 
+                                $date = date("d.m");
+                            endif;
+
+                            if ($weekdays[$integer] === 'Samstag') : // Wenn Samstag
+                                $class .= ' saturday hidden'; // Klassenerweiterung
+                                if ($weekdays[$integer] === $weekday) { 
+                                    $date = date("d.m"); // Falls heute Samstag ist, trotzdem das Datum anzeigen
+                                }
+                            endif;
+                        ?>
+                        <th class="p-2<?= $class; ?>"><?= $weekdays[$integer]; ?><br><span class="font-light"><?= $date; ?></span></th>
+                    <?php endfor; ?>
                 </tr>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
                     <tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">
