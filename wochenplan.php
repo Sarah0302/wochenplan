@@ -63,7 +63,7 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
         </div>
         <div class="border border-slate-600 mt-6">
             <table class="w-full mt-1 table-fixed">
-                <tr class="bg-slate-600 text-white grid grid-cols-[200px_repeat(6,1fr)] items-stretch">
+                <tr class="saturday-col bg-slate-600 text-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
                     <th class="p-2">Mitarbeiter</th>
                     <th class="p-2">Montag<br><span class="font-light"><?= date("d.m") ?></span></th>
                     <th class="p-2">Dienstag<br><span class="font-light"><?= date("d.m") ?></span></th>
@@ -73,23 +73,23 @@ $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in UR
                     <th class="p-2 saturday hidden">Samstag<br><span class="font-light"><?= date("d.m") ?></span></th>
                 </tr>
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
-                    <tr class="job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(6,1fr)] items-stretch">
+                    <tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
                         <td class="week p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>
                         <?php for ($index = 0; $index <= 4; $index++) : ?>
                             <td class="p-2 relative flex h-full">
                                 <div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div>
                             </td>
                         <?php endfor; ?>
-                        <td class="p-2 relative flex h-full">
-                            <div class="saturday hidden week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div>
+                        <td class="saturday hidden p-2 relative flex h-full">
+                            <div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div>
                         </td>
                     </tr>
                     <?php if ($people[$i] === $user ) : ?>
-                        <tr class="job_row-list grid grid-cols-[200px_repeat(6,1fr)] items-stretch">
+                        <tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
                     <?php elseif ($people[$i] === 'Pool') : ?>
-                        <tr class="job_row-list grid grid-cols-[200px_repeat(6,1fr)] items-stretch show_pool">
+                        <tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">
                     <?php else : ?>
-                        <tr class="job_row-list grid grid-cols-[200px_repeat(6,1fr)] items-stretch hidden">
+                        <tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch hidden">
                     <?php endif;  ?>
                         <td class="week pb-4"></td>
                         <?php for ($index = 0; $index < 6; $index++) : ?>

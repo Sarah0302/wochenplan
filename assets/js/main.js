@@ -34,8 +34,12 @@ jQuery(document).ready(function() {
 
         if( $(".saturday").hasClass("hidden") ) {
             $(this).html('Samstag anzeigen');
+            $(".saturday-col").removeClass("grid-cols-[200px_repeat(6,1fr)]");
+            $(".saturday-col").addClass("grid-cols-[200px_repeat(5,1fr)]");
         } else {
             $(this).html('Samstag ausblenden');
+            $(".saturday-col").removeClass("grid-cols-[200px_repeat(5,1fr)]");
+            $(".saturday-col").addClass("grid-cols-[200px_repeat(6,1fr)]");
         }
     });
 
