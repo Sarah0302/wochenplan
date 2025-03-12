@@ -55,7 +55,8 @@ $classToday = ' bg-amber-500'; // Heute
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./assets/js/jquery-3.7.1.min.js"></script>
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/jobs.js"></script>
+    <script src="./assets/js/add-job.js"></script>
+    <!-- <script src="./assets/js/jobs.js"></script> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
         <!-- favicon -->
@@ -88,6 +89,7 @@ $classToday = ' bg-amber-500'; // Heute
         </div>
         <div class="border border-slate-600 mt-6">
             <table class="w-full mt-1 table-fixed">
+                <!-- Tabellenkopf -->
                 <tr class="saturday-col bg-slate-600 text-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
                     <th class="p-2">Mitarbeiter</th>
                     <?php foreach ($weekdays as $day) : ?>
@@ -103,9 +105,11 @@ $classToday = ' bg-amber-500'; // Heute
                         <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="font-light"><?= $weekDates[$day]; ?></span></th>
                     <?php endforeach; ?>
                 </tr>
+                <!-- Spalte für jede Person -->
                 <?php for ($i = 0; $i < count($people); $i++) : ?>
                     <tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">
                         <td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><?= $people[$i]; ?> <div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>
+                        <!-- Zelle für jeden Tag -->
                         <?php for ($index = 0; $index <= 4; $index++) : ?>
                             <td class="p-2 relative flex h-full">
                                 <div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div>
@@ -115,6 +119,7 @@ $classToday = ' bg-amber-500'; // Heute
                             <div class="week_time text-end p-2 w-fit absolute right-2 top-2 bottom-2 shadow-md shadow-gray-400/50">0</div>
                         </td>
                     </tr>
+                    <!-- Spalte für jeden Tag -->
                     <?php if ($people[$i] === $user ) : ?>
                         <tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
                     <?php elseif ($people[$i] === 'Pool') : ?>
@@ -130,12 +135,19 @@ $classToday = ' bg-amber-500'; // Heute
                                 <td class="pb-4 flex h-full">
                             <?php endif; ?>
                                 <div class="job_container p-2 ml-2 border border-stone-300 flex flex-col justify-between h-full">
+                                    <!-- Job Liste -->
                                     <div class="job_list h-full min-h-6 pb-6"></div>
-                                    <div class="flex flex-row justify-between items-center gap-2">
-                                        <input class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">
-                                        <input class="job_time p-2 border border-slate-200 w-2/6" type="number" placeholder="Zeit" min="0" max="24">
+                                    <!-- Job hinzufügen -->
+                                     <?php $status = 'test'; ?>
+                                    <form action="create.php" method="post" class="flex flex-row justify-between items-center gap-2">
+                                        <input id="person" name="person" type="text" value="<?= $people[$i]; ?>" hidden>
+                                        <input id="day" name="day" type="text" value="<?= date("d.m.y H:s:ms") ?>" hidden>
+                                        <input id="jobs_data" name="jobs_data" type="hidden">
+                                        <input id="status" name="status" type="text" value="<?= $status; ?>" hidden>
+                                        <input id="job" name="job" class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">
+                                        <input id="time" name="time" class="job_time p-2 border border-slate-200 w-2/6" type="number" placeholder="Zeit" min="0" max="24">
                                         <input class="job_add p-2 w-1/6 text-lg border border-slate-200 bg-lime-200 cursor-pointer" type="submit" value="+">
-                                    </div>
+                                    </form>
                                 </div>
                             </td>
                         <?php endfor; ?>
