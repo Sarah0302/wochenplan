@@ -1,6 +1,11 @@
 jQuery(document).ready(function() {
 
     // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN
+    window.getWeekFromUrl = function() {
+        $week = parseInt(new URLSearchParams(window.location.search).get("week")) || new Date().getWeek();
+        return $week;
+    }
+
     window.jobBox = function(jobName, jobTime) {
         return $(`
             <div draggable="true" class="job_box mt-1 p-2 border border-slate-400">
@@ -134,6 +139,7 @@ jQuery(document).ready(function() {
 
         if (jobName != '') {
             // Werte aus den Input-Feldern extrahieren
+            $week = window.getWeekFromUrl();
             var person = $container.find("input[name='person']").val();
             var day = $container.find("input[name='day']").val();
             var job = $container.find("input[name='job']").val();
@@ -152,7 +158,7 @@ jQuery(document).ready(function() {
                     status: status
                 },
                 success: function(response) {
-                    window.location.href = "wochenplan.php";
+                    window.location.href = "wochenplan.php?week=" + $week;
                 },
                 error: function(xhr, status, error) {
                     alert("Fehler beim Hinzufügen: " + error); // Zeigt den Fehler an

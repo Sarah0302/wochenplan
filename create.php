@@ -1,4 +1,6 @@
 <?php
+require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
+
 try {
     require_once "write.php"; // Daten aus write.php werden eingebunden
 
@@ -19,7 +21,7 @@ try {
     $stmt->execute([$person, $day, $job, $time, $status]);
 
     // man wird auf die Startseite zurück geleitet
-    header("Location: wochenplan.php");
+    header("Location: wochenplan.php?week=" . $week);
     exit;
 
 } catch (PDOException $e) {
@@ -28,7 +30,7 @@ try {
         $e->getMessage() . 
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php";
+                 window.location.href = "wochenplan.php?week=' . $week . '";
             }, 3000);
         </script>';
 }

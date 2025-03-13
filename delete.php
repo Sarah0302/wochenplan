@@ -1,4 +1,5 @@
 <?php
+require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
 
 $deleteid = $_POST["deleteid"];
 
@@ -11,13 +12,13 @@ try {
     $rowCount = $stmt->rowCount(); // Anzahl der gelöschten Datensätze abrufen
 
     if ($rowCount > 0) { 
-        echo '<script>window.location.href = "wochenplan.php";</script>';
+        echo '<script>window.location.href = "wochenplan.php?week=' . $week . '";</script>';
     } else {
         echo 'Fehler' . 
             $e->getMessage() . 
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php";
+                    window.location.href = "wochenplan.php?week=' . $week . '";
                 }, 3000);
             </script>';
     }
@@ -26,7 +27,7 @@ try {
             $e->getMessage() . 
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php";
+                    window.location.href = "wochenplan.php?week=' . $week . '";
                 }, 3000);
             </script>';
 }

@@ -1,5 +1,4 @@
 <?php
-
 require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
 
 try {
@@ -112,7 +111,7 @@ try {
         $e->getMessage() . 
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php";
+                 window.location.href = "wochenplan.php?week=' . $week . '";
             }, 3000);
         </script>';
 }

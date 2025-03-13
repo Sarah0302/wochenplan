@@ -1,6 +1,7 @@
 jQuery(document).ready(function() {
 
     $(document).on("click", ".job_delete", function() { // Job löschen
+        $week = window.getWeekFromUrl();
         window.TimeCounter();
         window.workplace();
 
@@ -13,7 +14,7 @@ jQuery(document).ready(function() {
             method: "POST",
             data: { deleteid: id }, // ID als POST-Daten senden
             success: function(response) {
-                window.location.href = "wochenplan.php";
+                window.location.href = "wochenplan.php?week=" + $week;
             },
             error: function(xhr, status, error) {
                 alert("Fehler beim Löschen: " + error); // Zeigt den Fehler an
