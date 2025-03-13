@@ -19,24 +19,6 @@ jQuery(document).ready(function() {
     });
 
     // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
-    $(document).on("input", ".job_name_value, .job_workload", function() { // Aktualisier Button anzeigen
-        $(this).closest(".job_box").find(".job_safe").removeClass("hidden");
-    });    
-
-    $(document).on("click", ".job_safe", function() { // Job Aktualisieren
-        window.TimeCounter();
-        window.workplace();
-        window.reset();
-    });
-
-    $(document).on("keydown", ".job_name_value, .job_workload", function(event) { // Job Aktualisieren
-        if ( event.type === "keydown" && event.key === "Enter" ) {
-            window.TimeCounter();
-            window.workplace();
-            window.reset();
-        };
-    });
-
     $(document).on("click", ".job_done", function() { // Job als Erledigt kennzeichenn
         var $jobBox = $(this).closest(".job_box"); 
         var $inputs = $jobBox.find(".job_name_value, .job_workload");
@@ -62,13 +44,5 @@ jQuery(document).ready(function() {
         window.TimeCounter();
         window.workplace();
     }); 
-
-    $(document).on("click", ".job_delete", function() { // Job löschen
-        var jobBox = $(this).closest(".job_box");
-        
-        jobBox.remove();
-        window.TimeCounter();
-        window.workplace();
-    });
 
 });
