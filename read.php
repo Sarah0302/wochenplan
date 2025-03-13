@@ -19,9 +19,9 @@ foreach ($weekdays as $day) {
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
 
-    $query = "SELECT person, day, job, time, status FROM jobs";
+    $query = "SELECT id, person, day, job, time, status FROM jobs";
     $stmt = $pdo->query($query);
-    $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC); // 🔥 Alle Datensätze einmal abrufen und als Array speichern
+    $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze einmal abrufen und als Array speichern
 
     // Spalte für jede Person
     for ($i = 0; $i < count($people); $i++) : 
@@ -61,8 +61,8 @@ try {
                     echo '<div class="job_container p-2 ml-2 border border-stone-300 flex flex-col justify-between h-full">';
                         echo '<div class="job_list h-full min-h-6 pb-6">'; // Job Liste
                             foreach ($jobs as $row) : // Daten abrufen
-                                $query = "SELECT person, day, job, time, status FROM jobs";
 
+                                $updateid = $row['id'];
                                 $person = $row['person'];
                                 $job_day = $row['day'];
                                 $job = $row['job'];
@@ -70,15 +70,16 @@ try {
                                 $status = $row['status'];
 
                                 // echo '<br><br>';
-                                // echo 'person: ' . $person;
-                                // echo '<br>day: ' . $job_day;
-                                // echo '<br>job: ' . $job;
-                                // echo '<br>time: ' . $time;
-                                // echo '<br>status: ' . $status;
+                                // echo 'updateid: ' . $updateid;
+                                // // echo 'person: ' . $person;
+                                // // echo '<br>day: ' . $job_day;
+                                // // echo '<br>job: ' . $job;
+                                // // echo '<br>time: ' . $time;
+                                // // echo '<br>status: ' . $status;
                                 // echo '<br><br>';
 
                                 if ($person === $people[$i] && $weekDates[$day] === $job_day) :
-                                    echo '<div draggable="true" class="job_box mt-1 p-2 border border-slate-400">
+                                    echo '<div draggable="true" class="job_box mt-1 p-2 border border-slate-400" id="' . $updateid . '">
                                         <div class="flex flex-row gap-1">
                                             <input class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
                                             <input class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
@@ -103,6 +104,7 @@ try {
                         // Job hinzufügen
                         $status = 'test';
                         echo '<form action="create.php" method="post" class="flex flex-row justify-between items-center gap-2">';
+                            // echo '<input id="updateid" name="updateid" type="text" value="'. $updateid .'" hidden>';
                             echo '<input id="person" name="person" type="text" value="'. $people[$i] .'" hidden>';
                             echo '<input id="day" name="day" type="text" value="'. $weekDates[$day] .'" hidden>';
                             echo '<input id="status" name="status" type="text" value="'. $status .'" hidden>';
