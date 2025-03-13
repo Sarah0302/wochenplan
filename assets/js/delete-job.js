@@ -13,13 +13,12 @@ jQuery(document).ready(function() {
             method: "POST",
             data: { deleteid: id }, // ID als POST-Daten senden
             success: function(response) {
-                alert(response); // Zeigt die Rückgabemeldung von delete.php an
+                window.location.href = "wochenplan.php";
             },
             error: function(xhr, status, error) {
                 alert("Fehler beim Löschen: " + error); // Zeigt den Fehler an
             }
         });
-        window.location.href = "wochenplan.php";
     });
-
+    
 });

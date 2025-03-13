@@ -130,17 +130,40 @@ jQuery(document).ready(function() {
     }
 
     window.addJob = function($container) {
-        var $jobListe = $container.find(".job_list");
         var jobName = $container.find(".job_name").val();
-        var jobTime = parseFloat($container.find(".job_time").val()) || 0;
 
         if (jobName != '') {
-            var job = jobBox(jobName, jobTime); // JobBox generiert nun ein Element
-            $jobListe.append(job); // Füge das generierte Element in die Liste ein
-            TimeCounter();
-            workplace();
-            reset();
+            // Werte aus den Input-Feldern extrahieren
+            var person = $container.find("input[name='person']").val();
+            var day = $container.find("input[name='day']").val();
+            var job = $container.find("input[name='job']").val();
+            var time = $container.find("input[name='time']").val();
+            var status = $container.find("input[name='status']").val();
+
+            // AJAX-Aufruf durchführen, um delete.php mit der ID zu verwenden
+            $.ajax({
+                url: "create.php",
+                method: "POST",
+                data: {
+                    person: person,
+                    day: day,
+                    job: job,
+                    time: time,
+                    status: status
+                },
+                success: function(response) {
+                    window.location.href = "wochenplan.php";
+                },
+                error: function(xhr, status, error) {
+                    alert("Fehler beim Hinzufügen: " + error); // Zeigt den Fehler an
+                }
+            });
         }
     }
 
+    // Diese Funktionen werden direkt nach dem Laden der Seite ausgeführt
+    reset();
+    TimeCounter();
+    workplace();
+    workload();
 });

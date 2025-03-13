@@ -103,7 +103,7 @@ try {
 
                         // Job hinzufügen
                         $status = 'test';
-                        echo '<form action="create.php" method="post" class="flex flex-row justify-between items-center gap-2">';
+                        echo '<form method="post" class="flex flex-row justify-between items-center gap-2">';
                             // echo '<input id="updateid" name="updateid" type="text" value="'. $updateid .'" hidden>';
                             echo '<input id="person" name="person" type="text" value="'. $people[$i] .'" hidden>';
                             echo '<input id="day" name="day" type="text" value="'. $weekDates[$day] .'" hidden>';
