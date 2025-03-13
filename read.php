@@ -1,20 +1,6 @@
 <?php
-// Eingeloggten Benutzer und People-Array abrufen
-$user = $_SESSION['user'];
-// $people = $_SESSION['people'] ?? ["Pool"];
-$people = ["Pool", "Alina", "Sarah", "Test 1"];
 
-$weekdays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
-
-// Datum für jeden Tag der Woche berechnen
-$start = new DateTime();
-$start->setISODate($year, $week, 1); // Setzt Montag der angegebenen Woche
-$weekDates = [];
-
-foreach ($weekdays as $day) {
-    $weekDates[$day] = $start->format('d.m.'); // Format für Tabelle
-    $start->modify('+1 day'); // Nächsten Tag berechnen
-}
+require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
 
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
