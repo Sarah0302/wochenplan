@@ -4,16 +4,14 @@ $(document).on("input", ".job_name_value, .job_workload", function() { // Aktual
 });    
 
 $(document).on("click", ".job_safe", function() { // Job Aktualisieren
-    window.TimeCounter();
-    window.workplace();
-    window.reset();
+    $box = $(this).closest(".job_box");
+    window.updateJob($box);
 });
 
 $(document).on("keydown", ".job_name_value, .job_workload", function(event) { // Job Aktualisieren
     if ( event.type === "keydown" && event.key === "Enter" ) {
-        window.TimeCounter();
-        window.workplace();
-        window.reset();
+        $box = $(this).closest(".job_box");
+        window.updateJob($box);
     };
 });
 

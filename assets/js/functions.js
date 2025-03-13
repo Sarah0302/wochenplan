@@ -10,8 +10,11 @@ jQuery(document).ready(function() {
         return $(`
             <div draggable="true" class="job_box mt-1 p-2 border border-slate-400">
                 <div class="flex flex-row gap-1">
-                    <input class="job_name_value border border-slate-200 p-2 w-full" type="text" value="${jobName}">
-                    <input class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="${jobTime}">
+                    <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="${jobName}">
+                    <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="${jobTime}">
+                    <input id="updatePerson" name="updatePerson" type="text" hidden>
+                    <input id="updateDay" name="updateDay" type="text" hidden>
+                    <input id="updateStatus" name="updateStatus" type="text" hidden>
                     <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
                 </div>
                 <div class="flex flex-row gap-1 mt-1">
@@ -146,7 +149,7 @@ jQuery(document).ready(function() {
             var time = $container.find("input[name='time']").val();
             var status = $container.find("input[name='status']").val();
 
-            // AJAX-Aufruf durchführen, um delete.php mit der ID zu verwenden
+            // AJAX-Aufruf durchführen, um create.php mit der ID zu verwenden
             $.ajax({
                 url: "create.php",
                 method: "POST",
@@ -165,6 +168,40 @@ jQuery(document).ready(function() {
                 }
             });
         }
+    }
+
+    window.updateJob = function($box) {
+        $week = window.getWeekFromUrl();
+        let updateId = $box.attr("id");
+        let updatePerson = $box.find("input[name='updatePerson']").val();
+        let updateDay = $box.find("input[name='updateDay']").val();
+        let updateJob = $box.find("input[name='updateJob']").val();
+        let updateTime = $box.find("input[name='updateTime']").val();
+        let updateStatus = $box.find("input[name='updateStatus']").val();
+
+        console.log("Updating Job ID:", updateId); // Debugging
+
+        // AJAX-Aufruf durchführen, um update.php mit der ID zu verwenden
+        $.ajax({
+            url: "update.php",
+            method: "POST",
+            data: {
+                updateid: updateId,
+                updatePerson: updatePerson,
+                updateDay: updateDay,
+                updateJob: updateJob,
+                updateTime: updateTime,
+                updateStatus: updateStatus
+            },
+            success: function(response) {
+                console.log("Update Response:", response);
+                window.location.href = "wochenplan.php?week=" + $week;
+            },
+            error: function(xhr, status, error) {
+                console.error("Fehler beim Aktualisieren:", error);
+                alert("Fehler beim Aktualisieren: " + error); // Zeigt den Fehler an
+            }
+        });
     }
 
     // Diese Funktionen werden direkt nach dem Laden der Seite ausgeführt

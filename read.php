@@ -54,20 +54,14 @@ try {
                                 $time = $row['time'];
                                 $status = $row['status'];
 
-                                // echo '<br><br>';
-                                // echo 'updateid: ' . $updateid;
-                                // // echo 'person: ' . $person;
-                                // // echo '<br>day: ' . $job_day;
-                                // // echo '<br>job: ' . $job;
-                                // // echo '<br>time: ' . $time;
-                                // // echo '<br>status: ' . $status;
-                                // echo '<br><br>';
-
                                 if ($person === $people[$i] && $weekDates[$day] === $job_day) :
                                     echo '<div draggable="true" class="job_box mt-1 p-2 border border-slate-400" id="' . $updateid . '">
                                         <div class="flex flex-row gap-1">
-                                            <input class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
-                                            <input class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
+                                            <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
+                                            <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
+                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" hidden>
+                                            <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" hidden>
+                                            <input id="updateStatus" name="updateStatus" type="text" value="' . $status . '" hidden>
                                             <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
                                         </div>
                                         <div class="flex flex-row gap-1 mt-1">
@@ -89,7 +83,6 @@ try {
                         // Job hinzufügen
                         $status = 'test';
                         echo '<form method="post" class="flex flex-row justify-between items-center gap-2">';
-                            // echo '<input id="updateid" name="updateid" type="text" value="'. $updateid .'" hidden>';
                             echo '<input id="person" name="person" type="text" value="'. $people[$i] .'" hidden>';
                             echo '<input id="day" name="day" type="text" value="'. $weekDates[$day] .'" hidden>';
                             echo '<input id="status" name="status" type="text" value="'. $status .'" hidden>';
@@ -98,7 +91,7 @@ try {
                             echo '<input class="job_add p-2 w-1/6 text-lg border border-slate-200 bg-lime-200 cursor-pointer" type="submit" value="+">';
                         echo '</form>';
 
-                    echo '</div>'; // job_container
+                    echo '</div>';
                 echo '</td>';
             endforeach;
 

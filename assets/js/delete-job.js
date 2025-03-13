@@ -12,7 +12,9 @@ jQuery(document).ready(function() {
         $.ajax({
             url: "delete.php",
             method: "POST",
-            data: { deleteid: id }, // ID als POST-Daten senden
+            data: { // ID als POST-Daten senden
+                deleteid: id 
+            },
             success: function(response) {
                 window.location.href = "wochenplan.php?week=" + $week;
             },
