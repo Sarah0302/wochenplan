@@ -11,7 +11,7 @@ try {
     $rowCount = $stmt->rowCount(); // Anzahl der gelöschten Datensätze abrufen
 
     if ($rowCount > 0) { 
-        // echo '<script>window.location.href = "index.php";</script>';
+        echo '<script>window.location.href = "wochenplan.php";</script>';
     } else {
         echo 'Fehler' . 
             $e->getMessage() . 
