@@ -8,7 +8,7 @@ if(!isset($_SESSION['user'])) :
 endif;
 
 require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
-require_once "holiday.php"
+require_once "holiday.php";
 
 ?>
 
@@ -62,14 +62,19 @@ require_once "holiday.php"
                     <?php foreach ($weekdays as $day) : ?>
                         <?php 
                             $class = '';
-                            if ($day === $weekday && $weekDates[$day] === $thisDay) {
+                            $date = '';
+                            if ($day === $weekday && $weekDates[$day] === $thisDay) :
                                 $class = $classToday; 
-                            }
-                            if ($day === 'Samstag') {
+                            endif;
+                            if ($day === 'Samstag') :
                                 $class .= ' saturday hidden'; 
-                            }
+                            endif;
+                            if (isset($feiertage[$weekDates[$day]])) :
+                                $class .= $classHoliday;
+                                $date .= $feiertage[$weekDates[$day]];
+                            endif;
                         ?>
-                        <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="font-light"><?= $weekDates[$day]; ?></span></th>
+                        <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="font-light"><?= $weekDates[$day]; ?></span><br><span class="font-extralight"><?= $date; ?></span></th>
                     <?php endforeach; ?>
                 </tr>
                 <!-- Spalte für jede Person -->

@@ -43,13 +43,10 @@ foreach ($holidays as $holiday) {
 
     // Datum formatieren
     $date = strtotime($holiday['startDate']); // In Unix-Timestamp umwandeln
-    $holidayDate = date("d.m", $date); // Format: Tag.Monat
+    $holidayDate = date("d.m.", $date); // Format: Tag.Monat
 
     // Feiertag ins Array speichern (Datum => Feiertagsname)
     $feiertage[$holidayDate] = $holidayName;
 }
 
-// Debugging: Feiertage ausgeben
-echo 'Feiertage:<br>';
-print_r($feiertage);
 ?>

@@ -38,4 +38,4 @@ foreach ($weekdays as $day) {
 
 // Markierungen
 $classToday = ' bg-amber-500'; // Heute
-// $holiday = ' bg-rose-900'; // Feiertag
+$classHoliday = ' bg-rose-900'; // Feiertag
