@@ -8,6 +8,7 @@ if(!isset($_SESSION['user'])) :
 endif;
 
 require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
+require_once "holiday.php"
 
 ?>
 
