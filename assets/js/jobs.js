@@ -19,19 +19,6 @@ jQuery(document).ready(function() {
     });
 
     // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
-    $(document).on("click", ".job_done", function() { // Job als Erledigt kennzeichenn
-        var $jobBox = $(this).closest(".job_box"); 
-        var $inputs = $jobBox.find(".job_name_value, .job_workload");
-    
-        if ($inputs.prop("disabled")) { 
-            $jobBox.css({ background: 'transparent' }); 
-            $inputs.prop("disabled", false);
-        } else { 
-            $jobBox.css({ background: 'green' }); 
-            $inputs.prop("disabled", true);
-        }
-    });    
-
     $(document).on("click", ".job_duplicate", function() { // Job duplizieren
         var jobContainer = $(this).closest(".job_box");
         var jobName = jobContainer.find(".job_name_value").val();

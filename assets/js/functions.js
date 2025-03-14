@@ -137,6 +137,22 @@ jQuery(document).ready(function() {
         $(".job_safe").addClass("hidden");
     }
 
+    window.jobDone = function() {
+        $(".job_box").each(function() {
+            let $box = $(this);
+            let $inputs = $box.find(".job_name_value, .job_workload");
+            let $statusInput = $box.find("input[name='updateStatus']");
+    
+            if ($statusInput.val() === 'done') {
+                $box.addClass("bg-lime-100");
+                $inputs.prop("disabled", true);
+            } else {
+                $box.removeClass("bg-lime-100");
+                $inputs.prop("disabled", false);
+            }
+        });
+    };    
+
     window.addJob = function($container) {
         var jobName = $container.find(".job_name").val();
 
@@ -179,8 +195,6 @@ jQuery(document).ready(function() {
         let updateTime = $box.find("input[name='updateTime']").val();
         let updateStatus = $box.find("input[name='updateStatus']").val();
 
-        console.log("Updating Job ID:", updateId); // Debugging
-
         // AJAX-Aufruf durchführen, um update.php mit der ID zu verwenden
         $.ajax({
             url: "update.php",
@@ -209,4 +223,5 @@ jQuery(document).ready(function() {
     TimeCounter();
     workplace();
     workload();
+    jobDone();
 });
