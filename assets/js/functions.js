@@ -1,6 +1,5 @@
 jQuery(document).ready(function() {
 
-    // FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN  FUNKTIONEN
     window.getWeekFromUrl = function() {
         $week = parseInt(new URLSearchParams(window.location.search).get("week")) || new Date().getWeek();
         return $week;
@@ -12,9 +11,9 @@ jQuery(document).ready(function() {
                 <div class="job_inputs flex flex-row gap-1">
                     <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="${jobName}">
                     <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="${jobTime}">
-                    <input id="updatePerson" name="updatePerson" type="text" value="${jobPerson}" >
-                    <input id="updateDay" name="updateDay" type="text" value="${jobDay}" >
-                    <input id="updateStatus" name="updateStatus" type="text" value="${jobStatus}" >
+                    <input id="updatePerson" name="updatePerson" type="text" value="${jobPerson}" hidden>
+                    <input id="updateDay" name="updateDay" type="text" value="${jobDay}" hidden>
+                    <input id="updateStatus" name="updateStatus" type="text" value="${jobStatus}" hidden>
                     <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
                 </div>
                 <div class="flex flex-row gap-1 mt-1">

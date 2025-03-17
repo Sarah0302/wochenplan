@@ -14,5 +14,17 @@ jQuery(document).ready(function() {
             window.addJob($container);
         }
     });
+
+    $(document).on("click", ".job_duplicate", function() { // Job duplizieren
+        $box = $(this).closest(".job_box");
+        var jobContainer = $box
+        var jobName = jobContainer.find("#updateJob").val();
+        var jobTime = jobContainer.find("#updateTime").val();
+        var jobPerson = jobContainer.find("#updatePerson").val();
+        var jobDay = jobContainer.find("#updateDay").val();
+        var jobStatus = 'open';
+
+        window.duplicateJob(jobName, jobTime, jobPerson, jobDay, jobStatus);
+    }); 
     
 });

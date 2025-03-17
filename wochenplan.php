@@ -23,7 +23,6 @@ require_once "holiday.php";
     <script src="./assets/js/add-job.js"></script>
     <script src="./assets/js/update-job.js"></script>
     <script src="./assets/js/delete-job.js"></script>
-    <script src="./assets/js/jobs.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/main.css">
         <!-- favicon -->

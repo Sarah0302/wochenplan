@@ -59,8 +59,8 @@ try {
                                         <div class="job_inputs flex flex-row gap-1">
                                             <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
                                             <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
-                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" >
-                                            <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" >
+                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" hidden>
+                                            <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" hidden>
                                             <input id="updateStatus" name="updateStatus" type="text" value="' . $status . '" hidden>
                                             <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
                                         </div>
