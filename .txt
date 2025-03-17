@@ -1,0 +1,10 @@
+Änderungen am Code:
+
+.env Nutzung
+    -> Composer installieren
+
+Datenbank Zugangsdaten Änderungen
+    --> in der .env
+
+Feiertage anpassen
+    --> holiday.php line 24 / 25
