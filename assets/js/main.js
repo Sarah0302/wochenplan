@@ -1,14 +1,16 @@
 jQuery(document).ready(function() {
 
     $(".week_before").click(function() {
-        $week = window.getWeekFromUrl();
-        $week = ($week - 1 < 1) ? 53 : $week - 1; // wenn kleiner 1 dann 53 sonst -1
+        $maxWeek = window.getMaxWeeks();
+        $thisWeek = window.getWeekFromUrl();
+        $week = ($thisWeek - 1 < 1) ? $maxWeek : $thisWeek - 1; // wenn kleiner 1 dann maxWochen sonst -1
         window.location.href = "wochenplan.php?week=" + $week;
     });
 
     $(".week_after").click(function() {
-        $week = window.getWeekFromUrl();
-        $week = ($week + 1 > 53) ? 1 : $week + 1; // wenn größer 53 dann 1 sonst +1
+        $maxWeek = window.getMaxWeeks();
+        $thisWeek = window.getWeekFromUrl();
+        $week = ($thisWeek + 1 > $maxWeek) ? 1 : $thisWeek + 1; // wenn größer maxWochen dann 1 sonst +1
         window.location.href = "wochenplan.php?week=" + $week;
     });
 

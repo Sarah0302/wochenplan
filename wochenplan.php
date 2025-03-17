@@ -41,6 +41,18 @@ require_once "holiday.php";
         <button class="open_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle öffnen</button>
         <button class="close_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle schließen</button>
         <button class="saturday_button bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">Samstag anzeigen</button>
+        <div>
+            <label class="pr-2" for="selectKW">Kalenderwoche:</label>
+            <select id="selectKW" name="selectKW" class="bg-zinc-300 p-2 shadow-md shadow-gray-400/50">
+                <?php for($kw = 1; $kw <= $maxWeeks; $kw++) : ?>
+                    <?php if($kw === $week) : ?>
+                        <option selected value="<?= $kw; ?>"><?= $kw; ?></option>
+                    <?php else : ?>
+                        <option value="<?= $kw; ?>"><?= $kw; ?></option>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </select>
+        </div>
         <a href="logout.php">Abmelden</a>
     </header>
     <main class="p-4">

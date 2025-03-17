@@ -1,9 +1,34 @@
 jQuery(document).ready(function() {
 
+    function getISOWeek(date) {
+        let tempDate = new Date(date);
+        tempDate.setHours(0, 0, 0, 0);
+        tempDate.setDate(tempDate.getDate() + 3 - (tempDate.getDay() + 6) % 7);
+        let week1 = new Date(tempDate.getFullYear(), 0, 4);
+        return 1 + Math.round(((tempDate - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    }
+
     window.getWeekFromUrl = function() {
-        $week = parseInt(new URLSearchParams(window.location.search).get("week")) || new Date().getWeek();
+        var year = new Date().getFullYear();
+        var month = new Date().getMonth();
+        var day = new Date().getDate();
+        var date = new Date(year, month, day); // Aktuelles Datum
+        $thisWeek = getISOWeek(date);
+        $weekURL = parseInt(new URLSearchParams(window.location.search).get("week"));
+        $week = $weekURL || $thisWeek;
+
         return $week;
-    }   
+    }
+
+    getWeekFromUrl();
+
+    window.getMaxWeeks = function() {
+        $year = new Date().getFullYear() // Aktuelles Jahr
+        var date = new Date($year, 11, 28); // 28.12. liegt immer in der letzten KW
+
+        $maxWeek = getISOWeek(date);
+        return $maxWeek; // Rückgabewert
+    }
 
     window.workplace = function() {
         $(".job_container").each(function() {
