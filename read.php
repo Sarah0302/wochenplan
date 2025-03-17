@@ -62,16 +62,18 @@ try {
                                             <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" hidden>
                                             <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" hidden>
                                             <input id="updateStatus" name="updateStatus" type="text" value="' . $status . '" hidden>
-                                            <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
+                                            <div class="job_safe hidden p-2 w-full flex align-center justify-center">
+                                                <img class="cursor-pointer w-[25px] h-auto cursor-pointer" src="assets/images/update.svg" alt="update Job">
+                                            </div>
                                         </div>
                                         <div class="flex flex-row gap-1 mt-1">
-                                            <div class="job_done p-2 w-1/3">
+                                            <div class="job_done p-2 w-1/3 flex align-center justify-start">
                                                 <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/done.svg" alt="Job done">
                                             </div>
-                                            <div class="job_delete p-2 w-1/3">
+                                            <div class="job_delete p-2 w-1/3 flex align-center justify-center">
                                                 <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/delete.svg" alt="Job delete">
                                             </div>
-                                            <div class="job_duplicate p-2 w-1/3">
+                                            <div class="job_duplicate p-2 w-1/3 flex align-center justify-end">
                                                 <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/duplicate.svg" alt="Job duplizieren">
                                             </div>
                                         </div>
