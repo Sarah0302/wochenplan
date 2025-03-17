@@ -2,8 +2,6 @@ jQuery(document).ready(function() {
 
     $(document).on("click", ".job_delete", function() { // Job löschen
         $week = window.getWeekFromUrl();
-        window.TimeCounter();
-        window.workplace();
 
         // ID des zu löschenden Datensatzes aus dem Datensatz extrahieren
         var id = $(this).closest(".job_box").attr("id");

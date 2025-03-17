@@ -1,8 +1,7 @@
 <?php
 // Eingeloggten Benutzer und People-Array abrufen
 $user = $_SESSION['user'];
-// $people = $_SESSION['people'] ?? ["Pool"];
-$people = ["Pool", "Alina", "Sarah", "Test 1"];
+$people = $_SESSION['people'] ?? ["Pool"];
 
 // Aktuelles Datum und Kalenderwoche abrufen
 $today = new DateTime(); // Datum als Objekt

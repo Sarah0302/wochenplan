@@ -3,33 +3,7 @@ jQuery(document).ready(function() {
     window.getWeekFromUrl = function() {
         $week = parseInt(new URLSearchParams(window.location.search).get("week")) || new Date().getWeek();
         return $week;
-    }
-
-    window.jobBox = function(jobId, jobName, jobTime, jobPerson, jobDay, jobStatus) {
-        return $(`
-            <div draggable="true" class="job_box cursor-grab mt-1 p-2 border border-slate-400" id="${jobId}">
-                <div class="job_inputs flex flex-row gap-1">
-                    <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="${jobName}">
-                    <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="${jobTime}">
-                    <input id="updatePerson" name="updatePerson" type="text" value="${jobPerson}" hidden>
-                    <input id="updateDay" name="updateDay" type="text" value="${jobDay}" hidden>
-                    <input id="updateStatus" name="updateStatus" type="text" value="${jobStatus}" hidden>
-                    <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
-                </div>
-                <div class="flex flex-row gap-1 mt-1">
-                    <div class="job_done p-2 w-1/3">
-                        <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/done.svg" alt="Job done">
-                    </div>
-                    <div class="job_delete p-2 w-1/3">
-                        <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/delete.svg" alt="Job delete">
-                    </div>
-                    <div class="job_duplicate p-2 w-1/3">
-                        <img class="cursor-pointer w-[30px] h-auto cursor-pointer" src="assets/images/duplicate.svg" alt="Job duplizieren">
-                    </div>
-                </div>
-            </div>
-        `);
-    }    
+    }   
 
     window.workplace = function() {
         $(".job_container").each(function() {
