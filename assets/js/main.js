@@ -14,6 +14,11 @@ jQuery(document).ready(function() {
         window.location.href = "wochenplan.php?week=" + $week;
     });
 
+    $("#selectKW").on("change", function() {
+        var week = $(this).val();
+        window.location.href = "wochenplan.php?week=" + week;
+    });    
+
     // JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  
     $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
         $(this).next(".job_row-list").not(".show_pool").toggleClass("hidden");
