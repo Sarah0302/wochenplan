@@ -55,8 +55,8 @@ try {
                                 $status = $row['status'];
 
                                 if ($person === $people[$i] && $weekDates[$day] === $job_day) :
-                                    echo '<div draggable="true" class="job_box mt-1 p-2 border border-slate-400" id="' . $updateid . '">
-                                        <div class="flex flex-row gap-1">
+                                    echo '<div draggable="true" class="job_box cursor-grab mt-1 p-2 border border-slate-400" id="' . $updateid . '">
+                                        <div class="job_inputs flex flex-row gap-1">
                                             <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
                                             <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
                                             <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" hidden>

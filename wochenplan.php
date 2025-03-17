@@ -74,7 +74,7 @@ require_once "holiday.php";
                                 $date .= $feiertage[$weekDates[$day]];
                             endif;
                         ?>
-                        <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="font-light"><?= $weekDates[$day]; ?></span><br><span class="font-extralight"><?= $date; ?></span></th>
+                        <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="date font-light"><?= $weekDates[$day]; ?></span><br><span class="font-extralight"><?= $date; ?></span></th>
                     <?php endforeach; ?>
                 </tr>
                 <!-- Spalte für jede Person -->
