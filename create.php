@@ -4,10 +4,14 @@ require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
 try {
     require_once "write.php"; // Daten aus write.php werden eingebunden
 
-    if (!isset($_POST["person"], $_POST["day"], $_POST["job"], $_POST["time"], $_POST["status"])) {
+    if ($_POST["time"] === '') :
+        $_POST["time"] = 0;
+    endif;
+
+    if (!isset($_POST["person"], $_POST["day"], $_POST["job"], $_POST["time"], $_POST["status"])) :
         echo "Fehlende Formulardaten!";
         exit;
-    }
+    endif;
 
     $person = $_POST["person"];
     $day = $_POST["day"];

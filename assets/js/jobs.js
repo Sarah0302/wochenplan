@@ -42,8 +42,9 @@ jQuery(document).ready(function() {
         var job = jobBox(jobName, jobTime);
         jobList.append(job);
 
-        window.TimeCounter();
-        window.workplace();
+        // window.TimeCounter();
+        // window.workplace();
+        window.updateJob($box);
     }); 
 
 });
