@@ -158,11 +158,11 @@ jQuery(document).ready(function() {
         if (jobName != '') {
             // Werte aus den Input-Feldern extrahieren
             $week = window.getWeekFromUrl();
-            var person = $container.find("input[name='updatePerson']").val();
-            var day = $container.find("input[name='updateDay']").val();
-            var job = $container.find("input[name='updateJob']").val();
-            var time = $container.find("input[name='updateTime']").val();
-            var status = $container.find("input[name='updateStatus']").val();
+            var person = $container.find("input[name='addPerson']").val();
+            var day = $container.find("input[name='addDay']").val();
+            var job = $container.find("input[name='addJob']").val();
+            var time = $container.find("input[name='addTime']").val();
+            var status = $container.find("input[name='addStatus']").val();
 
             // AJAX-Aufruf durchführen, um create.php mit der ID zu verwenden
             $.ajax({
