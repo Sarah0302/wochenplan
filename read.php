@@ -59,8 +59,8 @@ try {
                                         <div class="job_inputs flex flex-row gap-1">
                                             <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
                                             <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
-                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" hidden>
-                                            <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" hidden>
+                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" >
+                                            <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" >
                                             <input id="updateStatus" name="updateStatus" type="text" value="' . $status . '" hidden>
                                             <div class="job_safe hidden p-2 w-full"><img src="assets/images/update.svg" alt="update Job"></div>
                                         </div>
@@ -83,11 +83,11 @@ try {
                         // Job hinzufügen
                         $status = 'open';
                         echo '<form method="post" class="flex flex-row justify-between items-center gap-2">';
-                            echo '<input id="person" name="person" type="text" value="'. $people[$i] .'" hidden>';
-                            echo '<input id="day" name="day" type="text" value="'. $weekDates[$day] .'" hidden>';
-                            echo '<input id="status" name="status" type="text" value="'. $status .'" hidden>';
-                            echo '<input id="job" name="job" class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">';
-                            echo '<input id="time" name="time" class="job_time p-2 border border-slate-200 w-2/6" type="number" placeholder="Zeit" min="0" max="24">';
+                            echo '<input id="updatePerson" name="updatePerson" type="text" value="'. $people[$i] .'" hidden>';
+                            echo '<input id="updateDay" name="updateDay" type="text" value="'. $weekDates[$day] .'" hidden>';
+                            echo '<input id="updateStatus" name="updateStatus" type="text" value="'. $status .'" hidden>';
+                            echo '<input id="updateJob" name="updateJob" class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">';
+                            echo '<input id="updateTime" name="updateTime" class="job_time p-2 border border-slate-200 w-2/6" type="number" placeholder="Zeit" min="0" max="24">';
                             echo '<input class="job_add p-2 w-1/6 text-lg border border-slate-200 bg-lime-200 cursor-pointer" type="submit" value="+">';
                         echo '</form>';
 

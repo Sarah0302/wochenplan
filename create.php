@@ -4,7 +4,7 @@ require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
 try {
     require_once "write.php"; // Daten aus write.php werden eingebunden
 
-    if ($_POST["time"] === '') :
+    if (empty($_POST["time"])) :
         $_POST["time"] = 0;
     endif;
 

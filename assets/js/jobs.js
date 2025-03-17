@@ -34,17 +34,35 @@ jQuery(document).ready(function() {
 
     // KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK  KLICK
     $(document).on("click", ".job_duplicate", function() { // Job duplizieren
-        var jobContainer = $(this).closest(".job_box");
-        var jobName = jobContainer.find(".job_name_value").val();
-        var jobTime = jobContainer.find(".job_workload").val();
-        var jobList = jobContainer.closest(".job_list");
+        $box = $(this).closest(".job_box");
+        var jobContainer = $box
+        var jobId = '';
+        var jobName = jobContainer.find("#updateJob").val();
+        var jobTime = jobContainer.find("#updateTime").val();
+        var jobPerson = jobContainer.find("#updatePerson").val();
+        var jobDay = jobContainer.find("#updateDay").val();
+        var jobStatus = 'open';
+        // var jobList = jobContainer.closest(".job_list");
 
-        var job = jobBox(jobName, jobTime);
-        jobList.append(job);
+        console.log('jobId: ' + jobId);
+        console.log('jobName: ' + jobName);
+        console.log('jobTime: ' + jobTime);
+        console.log('jobPerson: ' + jobPerson);
+        console.log('jobDay: ' + jobDay);
+        console.log('jobStatus: ' + jobStatus);
+
+        // var job = jobBox(jobId, jobName, jobTime, jobPerson, jobDay, jobStatus);
+
+        // jobList.append(job);
+
+        // $container = jobList.find(".job_box").last();
+        // console.log('Neue job_box gefunden:', $container.html());
+
+        window.duplicateJob(jobName, jobTime, jobPerson, jobDay, jobStatus);
 
         // window.TimeCounter();
         // window.workplace();
-        window.updateJob($box);
+        // window.updateJob($box);
     }); 
 
 });
