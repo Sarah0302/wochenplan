@@ -11,8 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         require_once "write.php"; // Daten aus write.php werden eingebunden
 
         if (empty($newUsername) || empty($newPassword)) :
-            echo "Fehlende Formulardaten!";
-            exit;
+            echo 'Fehlende Formulardaten: ' . 
+            '<script>
+                setTimeout(function() {
+                    window.location.href = "wochenplan.php?week=' . $week . '";
+                }, 3000);
+            </script>';
         endif;
 
         $hash = password_hash($newPassword, PASSWORD_DEFAULT); // Passwort gehased in Datenbank schreiben

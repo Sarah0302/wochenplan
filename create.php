@@ -9,8 +9,12 @@ try {
     endif;
 
     if (!isset($_POST["person"], $_POST["day"], $_POST["job"], $_POST["time"], $_POST["status"])) :
-        echo "Fehlende Formulardaten!";
-        exit;
+        echo 'Fehlende Formulardaten: ' . 
+        '<script>
+            setTimeout(function() {
+                 window.location.href = "wochenplan.php?week=' . $week . '";
+            }, 3000);
+        </script>';
     endif;
 
     $person = $_POST["person"];

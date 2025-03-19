@@ -56,15 +56,16 @@ require_once "holiday.php";
         <a href="logout.php">Abmelden</a>
     </header>
     <main class="p-4">
-        <!-- Filter für Admin einbauen -->
-        <div class="border border-green-400 mr-2 mt-2 mb-6">
-            <h2 class="pb-2">Person hinzufügen</h2>
-            <form class="border border-red-300" method="POST" action="add-person.php">
-                <input type="text" id="addName" name="addName" placeholder="Namen der Person">
-                <input type="password" id="passwordPerson" name="passwordPerson" placeholder="Passwort der Person">
-                <input type="submit" id="submitPerson" value="Person hinzufügen">
-            </form>
-        </div>
+        <?php if($user === 'Admin') : ?> <!-- Nur für Admin sichtbar -->
+            <div class="border border-slate-400 p-2 mb-10 w-[50vw] m-auto">
+                <h2 class="text-3xl pb-2 text-center">Person hinzufügen</h2>
+                <form method="POST" action="add-person.php">
+                    <input class="w-full p-2 mt-2 border border-slate-300" type="text" id="addName" name="addName" placeholder="Namen der Person">
+                    <input class="w-full p-2 mt-2 border border-slate-300" type="password" id="passwordPerson" name="passwordPerson" placeholder="Passwort der Person">
+                    <input class="w-full p-2 mt-2 border border-slate-300 bg-slate-300 cursor-pointer duration-300 ease-in-out hover:bg-slate-500 hover:text-white" type="submit" id="submitPerson" value="Person hinzufügen">
+                </form>
+            </div>
+        <?php endif; ?>
         <div class="flex justify-center items-center">
             <button class="week_before">
                 <img class="object-contain h-7" src="./assets/images/arrow-left.png" alt="arrow-left">

@@ -15,6 +15,17 @@ try {
     $stmt = $pdo->query($query);
     $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
 
+    // Admin aus dem Array löschen, da er keine Zeile benötigt
+    $people = array_filter($people, function($person) {
+        return $person['name'] !== 'Admin';
+    });
+    $people = array_values($people); // Neu indexieren um Lücken zu vermeiden
+
+    // Nutzer alphabetisch nach name sortieren
+    usort($people, function ($a, $b) {
+        return strcmp(strtolower($a['name']), strtolower($b['name']));
+    });
+
     // Spalte für jede Person
     for ($i = 0; $i < count($people); $i++) : 
         echo '<tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">';
