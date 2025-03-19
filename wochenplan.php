@@ -57,13 +57,34 @@ require_once "holiday.php";
     </header>
     <main class="p-4">
         <?php if($user === 'Admin') : ?> <!-- Nur für Admin sichtbar -->
-            <div class="border border-slate-400 p-2 mb-10 w-[50vw] m-auto">
-                <h2 class="text-3xl pb-2 text-center">Person hinzufügen</h2>
-                <form method="POST" action="add-person.php">
-                    <input class="w-full p-2 mt-2 border border-slate-300" type="text" id="addName" name="addName" placeholder="Namen der Person">
-                    <input class="w-full p-2 mt-2 border border-slate-300" type="password" id="passwordPerson" name="passwordPerson" placeholder="Passwort der Person">
-                    <input class="w-full p-2 mt-2 border border-slate-300 bg-slate-300 cursor-pointer duration-300 ease-in-out hover:bg-slate-500 hover:text-white" type="submit" id="submitPerson" value="Person hinzufügen">
-                </form>
+            <div class="flex flex-row justify-evenly items-start gap-4 w-[50vw] m-auto">
+                <div class="border border-slate-400 p-2 mb-10 w-full">
+                    <h2 class="text-3xl pb-2 text-center">Person hinzufügen</h2>
+                    <form method="POST" action="add-person.php">
+                        <input class="w-full p-2 mt-2 border border-slate-300" type="text" id="addName" name="addName" placeholder="Namen der Person">
+                        <input class="w-full p-2 mt-2 border border-slate-300" type="password" id="passwordPerson" name="passwordPerson" placeholder="Passwort der Person">
+                        <input class="w-full p-2 mt-2 border border-slate-300 bg-slate-300 cursor-pointer duration-300 ease-in-out hover:bg-slate-500 hover:text-white" type="submit" id="submitPerson" value="Person hinzufügen">
+                    </form>
+                </div>
+                <div class="border border-slate-400 p-2 mb-10 w-full">
+                    <?php require_once "user.php"; 
+                        // Admin aus dem Array löschen, da er nicht gelöscht werden darf
+                        $people = array_filter($people, function($person) {
+                            return $person['name'] !== 'Admin';
+                        });
+                        $people = array_values($people); // Neu indexieren um Lücken zu vermeiden
+                    ?>
+                    <h2 class="text-3xl pb-2 text-center">Person(en) löschen</h2>
+                    <form method="POST" action="delete-person.php" class="flex flex-col justify-center">
+                        <?php foreach($people as $person) : ?>
+                            <div class="flex flex-row gap-2">
+                                <input type="checkbox" name="persons[]" value="<?= $person['id']; ?>" id="person_<?= $person['id']; ?>">
+                                <label for="person_<?= $person['id']; ?>"><?= $person['name']; ?></label>
+                            </div>
+                        <?php endforeach; ?>
+                        <input type="submit" value="Person(en) aus Datenbank löschen" class="w-full p-2 mt-2 border border-slate-300 bg-slate-300 cursor-pointer duration-300 ease-in-out hover:bg-slate-500 hover:text-white">
+                    </form>
+                </div>
             </div>
         <?php endif; ?>
         <div class="flex justify-center items-center">

@@ -8,6 +8,11 @@ try {
     $stmt = $pdo->query($query);
     $people = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
 
+    // Nutzer alphabetisch nach name sortieren
+    usort($people, function ($a, $b) {
+        return strcmp(strtolower($a['name']), strtolower($b['name']));
+    });
+
 } catch (PDOException $e) {
     // Fehlermeldung wird ausgegeben & nach 3 Sekunden (3000 Millisekunden) wird man auf die Startseite zurück geleitet
     echo 'Fehler beim Laden der Personen: ' . 
