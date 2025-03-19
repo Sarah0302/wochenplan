@@ -32,7 +32,9 @@ try {
         echo '</tr>';
 
         // Spalte für jeden Tag
-        if ( $people[$i] === $user || in_array($people[$i], $openUsers) ) : // Wenn angemeldeter User ODER User in Array zuvor geöffneter User enthalten
+        if ($people[$i] === $user) : // Wenn angemeldeter User
+            echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch" id="user">';
+        elseif (in_array($people[$i], $openUsers)) : // Wenn User in Array zuvor geöffneter User enthalten
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
         elseif ($people[$i] === 'Pool') :
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">';
