@@ -1,4 +1,6 @@
 <?php
+require_once 'helpers.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['persons'])) :
     $personIds = $_POST['persons']; // Array mit IDs der ausgewählten Personen
 
@@ -28,16 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['persons'])) :
         exit;
 
     } catch (PDOException $e) {
-            echo 'Fehler beim Löschen der Daten: ' . 
-                $e->getMessage();
-                // '<script>
-                //     setTimeout(function() {
-                //         window.location.href = "wochenplan.php?week=' . $week . '";
-                //     }, 3000);
-                // </script>';
+            echo 'Fehler beim Löschen der Daten: ' .
+                '<script>
+                    setTimeout(function() {
+                        window.location.href = "wochenplan.php?week=' . $week . '";
+                    }, 3000);
+                </script>';
     }
 
 else :
-    echo "Kein Name zum löschenausgewählt!";
+    echo 'Kein Name zum löschen ausgewählt! ' .
+        '<script>
+            setTimeout(function() {
+                 window.location.href = "wochenplan.php?week=' . $week . '";
+            }, 3000);
+        </script>';
 endif;
 ?>
