@@ -1,5 +1,5 @@
 <?php
-require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
+$week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
 
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden

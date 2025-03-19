@@ -1,47 +1,31 @@
 <?php
+require_once "user.php";
+
 session_start();
 
 // Aktuelle Kalenderwoche abrufen
 $week = date("W");
 
-// Daten aus .env abrufen
-require __DIR__ . '/vendor/autoload.php';
-use Dotenv\Dotenv;
-
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-// Anzahl der Benutzer auslesen
-$userCount = intval($_ENV['USER_COUNT']);
-$people = ["Pool"]; // Standard-Eintrag
-$users = [];
-
-// Nutzer aus .env auslesen
-for ($i = 1; $i <= $userCount; $i++) {
-    $usernameKey = "USER_{$i}_USERNAME";
-    $passwordKey = "USER_{$i}_PASSWORD";
-
-    if (isset($_ENV[$usernameKey]) && !empty($_ENV[$usernameKey])) {
-        $people[] = $_ENV[$usernameKey]; // Mitarbeiter in Liste hinzufügen
-        $users[$_ENV[$usernameKey]] = $_ENV[$passwordKey] ?? ''; // Nutzer+Passwort speichern
-    }
-}
-
 // Login-Überprüfung
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    if (isset($users[$username]) && $users[$username] === $password) {
-        $_SESSION['user'] = $username; // Eingeloggten Benutzer speichern
-        $_SESSION['people'] = $people; // Personenliste speichern
+    $userIndex = array_search($username, array_column($people, 'name')); // Prüfen ob es den Benutzernamen in der Datenbank gibt
+
+    if( $userIndex !== false ) :
+        $hashedPassword = $people[$userIndex]['passwort']; // Das passende Passwort aus der Datenbank abrufen
+
+        if( password_verify($password, $hashedPassword) ) : // Prüfen ob Passwort stimmt
+            $_SESSION['user'] = $username; // Eingeloggten Benutzer speichern
+        endif;
 
         // Erfolgreiche Anmeldung -> Weiterleitung
         header("Location: wochenplan.php?week=" . $week);
-        exit;
-    } else { // Login fehlgeschlagen 
+        
+    else : // Login fehlgeschlagen
         echo "<script>alert('Anmeldung fehlgeschlagen! Bitte versuche es erneut.'); window.location.href='./index.php';</script>";
         exit;
-    }
-}
+    endif;
+endif;
 ?>
