@@ -3,9 +3,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Eingeloggten Benutzer und People-Array abrufen
+// Eingeloggten Benutzer abrufen
 $user = $_SESSION['user'];
-$people = $_SESSION['people'] ?? ["Pool"];
+
+// People-Array abrufen
+require_once "user.php";
 
 // Aktuelles Datum und Kalenderwoche abrufen
 $today = new DateTime(); // Datum als Objekt

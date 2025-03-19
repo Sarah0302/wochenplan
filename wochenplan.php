@@ -56,6 +56,15 @@ require_once "holiday.php";
         <a href="logout.php">Abmelden</a>
     </header>
     <main class="p-4">
+        <!-- Filter für Admin einbauen -->
+        <div class="border border-green-400 mr-2 mt-2 mb-6">
+            <h2 class="pb-2">Person hinzufügen</h2>
+            <form class="border border-red-300" method="POST" action="add-person.php">
+                <input type="text" id="addName" name="addName" placeholder="Namen der Person">
+                <input type="password" id="passwordPerson" name="passwordPerson" placeholder="Passwort der Person">
+                <input type="submit" id="submitPerson" value="Person hinzufügen">
+            </form>
+        </div>
         <div class="flex justify-center items-center">
             <button class="week_before">
                 <img class="object-contain h-7" src="./assets/images/arrow-left.png" alt="arrow-left">

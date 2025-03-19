@@ -1,10 +1,26 @@
 Änderungen am Code:
 
-.env Nutzung
-    -> Composer installieren
+Datenbank:
+    name: wochenplan
+    tabelle 1: personen
+        id als int & primary
+        name als text
+    tabelle 2: jobs
+        id als int & primary
+        person als text
+        day als text
+        job als text
+        time als text
+        status als text
 
 Datenbank Zugangsdaten Änderungen
     --> in der .env
+
+Person hinzufügen / löschen
+    in der Datenbank Tabelle personen hinzufügen / löschen
+
+.env Nutzung
+    -> Composer installieren
 
 Feiertage anpassen
     --> holiday.php line 24 / 25
