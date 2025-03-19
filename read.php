@@ -1,6 +1,12 @@
 <?php
 require_once "helpers.php"; // Daten aus helpers.php werden eingebunden
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); // Nur starten, wenn keine Session aktiv ist
+}
+
+$openUsers = isset($_SESSION['people_list']) ? $_SESSION['people_list'] : []; // Alle geöffneten User aus der open-user.php
+
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
 
@@ -11,7 +17,7 @@ try {
     // Spalte für jede Person
     for ($i = 0; $i < count($people); $i++) : 
         echo '<tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">';
-            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2">'. $people[$i] .'<div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
+            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
 
         // Zellen für jeden Tag
         for ($index = 0; $index <= 4; $index++) : 
@@ -26,12 +32,12 @@ try {
         echo '</tr>';
 
         // Spalte für jeden Tag
-        if ($people[$i] === $user) :
-            echo '<tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
+        if ( $people[$i] === $user || in_array($people[$i], $openUsers) ) : // Wenn angemeldeter User ODER User in Array zuvor geöffneter User enthalten
+            echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
         elseif ($people[$i] === 'Pool') :
-            echo '<tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">';
+            echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">';
         else :
-            echo '<tr class="saturday-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch hidden">';
+            echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch hidden">';
         endif;
 
             echo '<td class="week cursor-pointer pb-4"></td>';

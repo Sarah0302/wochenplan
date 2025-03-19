@@ -1,5 +1,26 @@
 jQuery(document).ready(function() {
 
+    window.openLists = function() {
+        var openUser = []; // Array für geöffnete Benutzer
+    
+        $(".list-col").not(".show_pool").each(function() {
+            var $container = $(this);
+            var $rowAbove = $container.closest("tr").prev(); // Die Zeile über dem Container
+            var user = $rowAbove.find(".person_name").text().trim(); // Name extrahieren & Leerzeichen entfernen
+    
+            if (!$container.hasClass("hidden")) {
+                openUser.push(user); // Name zum Array hinzufügen
+            }
+        });
+    
+        // AJAX-Aufruf nach der Schleife
+        $.ajax({
+            url: "open-user.php",
+            method: "POST",
+            data: { openUser: openUser }, // Array wird korrekt gesendet
+        });
+    }
+
     function getISOWeek(date) {
         let tempDate = new Date(date);
         tempDate.setHours(0, 0, 0, 0);
@@ -19,8 +40,6 @@ jQuery(document).ready(function() {
 
         return $week;
     }
-
-    getWeekFromUrl();
 
     window.getMaxWeeks = function() {
         $year = new Date().getFullYear() // Aktuelles Jahr

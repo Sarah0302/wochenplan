@@ -22,18 +22,22 @@ jQuery(document).ready(function() {
     // JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  
     $(".job_counter").click(function() { // Listen der Person Ein / Ausblenden
         $(this).next(".job_row-list").not(".show_pool").toggleClass("hidden");
+        window.openLists();
     });
 
     $(".week").click(function() { // Listen der Person Ein / Ausblenden
         $(this).closest(".job_row-list").not(".show_pool").toggleClass("hidden");
+        window.openLists();
     });
 
     $(".open_all").click(function() {
         $(".job_row-list").not(".show_pool").removeClass("hidden");
+        window.openLists();
     });
 
     $(".close_all").click(function() {
         $(".job_row-list").not(".show_pool").addClass("hidden");
+        window.openLists();
     });
 
     $(".saturday_button").click(function() {

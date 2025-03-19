@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Eingeloggten Benutzer und People-Array abrufen
 $user = $_SESSION['user'];
 $people = $_SESSION['people'] ?? ["Pool"];
