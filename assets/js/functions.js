@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
         var date = new Date($year, 11, 28); // 28.12. liegt immer in der letzten KW
 
         $maxWeek = getISOWeek(date);
-        return $maxWeek; // Rückgabewert
+        return $maxWeek + 1; // Rückgabewert
     }
 
     window.workplace = function() {

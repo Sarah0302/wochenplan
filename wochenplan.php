@@ -113,10 +113,10 @@ require_once "holiday.php";
                             endif;
                             if (isset($feiertage[$weekDates[$day]])) :
                                 $class .= $classHoliday;
-                                $date .= $feiertage[$weekDates[$day]];
+                                $date .= '<br><span class="font-extralight">' . $feiertage[$weekDates[$day]] . '</span>';
                             endif;
                         ?>
-                        <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="date font-light"><?= $weekDates[$day]; ?></span><br><span class="font-extralight"><?= $date; ?></span></th>
+                        <th class="p-2<?= $class; ?>"><?= $day; ?><br><span class="date font-light"><?= $weekDates[$day]; ?></span><?= $date; ?></th>
                     <?php endforeach; ?>
                 </tr>
                 <!-- Spalte für jede Person -->
