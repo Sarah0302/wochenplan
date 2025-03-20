@@ -3,10 +3,12 @@
 Datenbank:
     name: wochenplan
     tabelle 1: personen
-        id als int & primary
+        id als int & primary & auto increase
         name als text
+        -> Admin anlegen!!
+        -> Pool anlegen!!
     tabelle 2: jobs
-        id als int & primary
+        id als int & primary & auto increase
         person als text
         day als text
         job als text
@@ -17,7 +19,7 @@ Datenbank Zugangsdaten Änderungen
     --> in der .env
 
 Person hinzufügen / löschen
-    in der Datenbank Tabelle personen hinzufügen / löschen
+    Formular Admin
 
 .env Nutzung
     -> Composer installieren

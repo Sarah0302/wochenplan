@@ -6,12 +6,27 @@ try {
 
     $query = "SELECT id, name, passwort FROM personen";
     $stmt = $pdo->query($query);
-    $people = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
+    $userDB = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
+
+    // Pool an den Anfang des Arrays setzen
+    $poolArray = null;
+    $peopleArray = [];
+
+    foreach($userDB as $person) :
+        if ($person['name'] === 'Pool') :
+            $poolArray = $person; // Speichert Pool separat
+        else :
+            $peopleArray[] = $person;  // Alle anderen Nutzer
+        endif;
+    endforeach;
 
     // Nutzer alphabetisch nach name sortieren
-    usort($people, function ($a, $b) {
+    usort($peopleArray, function ($a, $b) {
         return strcmp(strtolower($a['name']), strtolower($b['name']));
     });
+    
+    // Array zur Weiterverarbeitung speichern
+    $people = $poolArray ? array_merge([$poolArray], $peopleArray) : $peopleArray;
 
 } catch (PDOException $e) {
     // Fehlermeldung wird ausgegeben & nach 3 Sekunden (3000 Millisekunden) wird man auf die Startseite zurück geleitet

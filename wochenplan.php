@@ -68,15 +68,15 @@ require_once "holiday.php";
                 </div>
                 <div class="border border-slate-400 p-2 mb-10 w-full">
                     <?php require_once "user.php"; 
-                        // Admin aus dem Array löschen, da er nicht gelöscht werden darf
-                        $people = array_filter($people, function($person) {
-                            return $person['name'] !== 'Admin';
+                        // Admin und Pool aus dem Array löschen, da sie nicht gelöscht werden dürfen
+                        $filteredPeople = array_filter($people, function($person) {
+                            return $person['name'] !== 'Admin' && $person['name'] !== 'Pool';
                         });
-                        $people = array_values($people); // Neu indexieren um Lücken zu vermeiden
+                        $filteredPeople = array_values($filteredPeople); // Neu indexieren um Lücken zu vermeiden
                     ?>
                     <h2 class="text-3xl pb-2 text-center">Person(en) löschen</h2>
                     <form method="POST" action="delete-person.php" class="flex flex-col justify-center">
-                        <?php foreach($people as $person) : ?>
+                        <?php foreach($filteredPeople as $person) : ?>
                             <div class="flex flex-row gap-2">
                                 <input type="checkbox" name="persons[]" value="<?= $person['id']; ?>" id="person_<?= $person['id']; ?>">
                                 <label for="person_<?= $person['id']; ?>"><?= $person['name']; ?></label>
