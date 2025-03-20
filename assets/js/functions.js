@@ -261,6 +261,11 @@ jQuery(document).ready(function() {
         });
     }
 
+    setInterval(function() {
+        $week = window.getWeekFromUrl();
+        window.location.href = "wochenplan.php?week=" + $week;
+    }, 60000); // Jede Minute (60.000 ms)
+
     // Diese Funktionen werden direkt nach dem Laden der Seite ausgeführt
     reset();
     TimeCounter();
