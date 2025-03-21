@@ -6,6 +6,9 @@ if (session_status() === PHP_SESSION_NONE) {
 // Eingeloggten Benutzer abrufen
 $user = $_SESSION['user'];
 
+// Admin Status abrufen
+$admin = $_SESSION['is_admin'];
+
 // People-Array abrufen
 require_once "user.php";
 

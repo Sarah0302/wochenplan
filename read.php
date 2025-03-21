@@ -17,8 +17,8 @@ try {
 
     // Admin aus dem Array löschen, da er keine Zeile benötigt
     $people = array_filter($people, function($person) {
-        return $person['name'] !== 'Admin';
-    });
+        return intval($person['is_admin']) !== 1;
+    });    
     $people = array_values($people); // Neu indexieren um Lücken zu vermeiden
 
     // Spalte für jede Person

@@ -7,7 +7,7 @@ $url .= "#user";
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
 
-    $query = "SELECT id, name, passwort FROM personen";
+    $query = "SELECT id, name, passwort, is_admin FROM personen";
     $stmt = $pdo->query($query);
     $userDB = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
 

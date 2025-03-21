@@ -18,9 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
 
     if( $userIndex !== false ) :
         $hashedPassword = $people[$userIndex]['passwort']; // Das passende Passwort aus der Datenbank abrufen
+        $admin = $people[$userIndex]['is_admin'];
 
         if( password_verify($password, $hashedPassword) ) : // Prüfen ob Passwort stimmt
             $_SESSION['user'] = $username; // Eingeloggten Benutzer speichern
+            $_SESSION['is_admin'] = $admin; // Speichern ob Admin
         endif;
 
         // Erfolgreiche Anmeldung -> Weiterleitung
