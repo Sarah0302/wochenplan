@@ -6,7 +6,6 @@ jQuery(document).ready(function() {
         $week = ($thisWeek - 1 < 1) ? $maxWeek : $thisWeek - 1; // wenn kleiner 1 dann maxWochen sonst -1
         $url = "./wochenplan.php?week=";
         $url += $week;
-        $url += "#user";
         window.location.href = $url;
     });
 
@@ -14,11 +13,16 @@ jQuery(document).ready(function() {
         $maxWeek = window.getMaxWeeks();
         $thisWeek = window.getWeekFromUrl();
         $week = ($thisWeek + 1 > $maxWeek) ? 1 : $thisWeek + 1; // wenn größer maxWochen dann 1 sonst +1
+        $url = "./wochenplan.php?week=";
+        $url += $week;
         window.location.href = $url;
     });
 
     $("#selectKW").on("change", function() {
-        var week = $(this).val();
+        $week = $(this).val();
+        $url = "./wochenplan.php?week=";
+        $url += $week;
+        $url += "#user";
         window.location.href = $url;
     });    
 

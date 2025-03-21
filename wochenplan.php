@@ -35,7 +35,7 @@ require_once "holiday.php";
 </head>
 <body class="min-h-screen flex flex-col justify-between gap-5">
     <header class="bg-stone-200 p-4 flex flex-row justify-between items-center">
-        <a class="cursor-pointer" href="<?= $url; ?>">
+        <a class="cursor-pointer" href="./wochenplan.php?week=<?= date("W"); ?>#user">
             <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
         </a>
         <button class="open_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle öffnen</button>
