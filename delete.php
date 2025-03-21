@@ -12,13 +12,13 @@ try {
     $rowCount = $stmt->rowCount(); // Anzahl der gelöschten Datensätze abrufen
 
     if ($rowCount > 0) { 
-        echo '<script>window.location.href = "wochenplan.php?week=' . $week . '";</script>';
+        echo '<script>window.location.href = "' . $url . '";</script>';
     } else {
         echo 'Fehler' . 
             $e->getMessage() . 
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php?week=' . $week . '";
+                    window.location.href = "' . $url . '";
                 }, 3000);
             </script>';
     }
@@ -27,7 +27,7 @@ try {
             $e->getMessage() . 
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php?week=' . $week . '";
+                    window.location.href = "' . $url . '";
                 }, 3000);
             </script>';
 }

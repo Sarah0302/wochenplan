@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
             echo 'Fehlende Formulardaten: ' . 
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php?week=' . $week . '";
+                    window.location.href = "' . $url . '";
                 }, 3000);
             </script>';
         endif;
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         $stmt->execute([$newUsername, $hash]);
 
         // man wird auf die Startseite zurück geleitet
-        header("Location: wochenplan.php?week=" . $week);
+        header("Location: " . $url);
         exit;
 
     } catch (PDOException $e) {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
             $e->getMessage();
             '<script>
                 setTimeout(function() {
-                     window.location.href = "wochenplan.php?week=' . $week . '";
+                    window.location.href = "' . $url . '";
                 }, 3000);
             </script>';
     }    

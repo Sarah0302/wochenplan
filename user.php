@@ -1,5 +1,8 @@
 <?php
 $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
+$url = "./wochenplan.php?week=";
+$url .= $week;
+$url .= "#user";
 
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
@@ -34,7 +37,7 @@ try {
         $e->getMessage() . 
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php?week=' . $week . '";
+                 window.location.href = "' . $url . '";
             }, 3000);
         </script>';
 }

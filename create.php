@@ -12,7 +12,7 @@ try {
         echo 'Fehlende Formulardaten: ' . 
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php?week=' . $week . '";
+                 window.location.href = "' . $url . '";
             }, 3000);
         </script>';
     endif;
@@ -29,7 +29,7 @@ try {
     $stmt->execute([$person, $day, $job, $time, $status]);
 
     // man wird auf die Startseite zurück geleitet
-    header("Location: wochenplan.php?week=" . $week);
+    header("Location: " . $url);
     exit;
 
 } catch (PDOException $e) {
@@ -38,7 +38,7 @@ try {
         $e->getMessage() . 
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php?week=' . $week . '";
+                 window.location.href = "' . $url . '";
             }, 3000);
         </script>';
 }

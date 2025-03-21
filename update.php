@@ -17,13 +17,13 @@ try {
     $rowCount = $stmt->rowCount();
 
     if ($rowCount > 0) { 
-        header("Location: wochenplan.php?week=" . $week);
+        header("Location: " . $url);
         exit;
     } else {
         echo 'Kein Datensatz mit diesem Namen gefunden' .
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php?week=' . $week . '";
+                    window.location.href = "' . $url . '";
                 }, 3000);
             </script>';
     }
@@ -32,7 +32,7 @@ try {
             $e->getMessage() . 
             '<script>
                 setTimeout(function() {
-                    window.location.href = "wochenplan.php?week=' . $week . '";
+                    window.location.href = "' . $url . '";
                 }, 3000);
             </script>';
 }

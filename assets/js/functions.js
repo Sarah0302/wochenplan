@@ -176,6 +176,9 @@ jQuery(document).ready(function() {
         if (jobName != '') {
             // Werte aus den Input-Feldern extrahieren
             $week = window.getWeekFromUrl();
+            $url = "./wochenplan.php?week=";
+            $url += $week;
+            $url += "#user";
             var person = $container.find("input[name='addPerson']").val();
             var day = $container.find("input[name='addDay']").val();
             var job = $container.find("input[name='addJob']").val();
@@ -194,7 +197,7 @@ jQuery(document).ready(function() {
                     status: status
                 },
                 success: function(response) {
-                    window.location.href = "wochenplan.php?week=" + $week;
+                    window.location.href = $url;
                 },
                 error: function(xhr, status, error) {
                     alert("Fehler beim Hinzufügen: " + error); // Zeigt den Fehler an
@@ -207,6 +210,9 @@ jQuery(document).ready(function() {
 
         if (jobName != '') {
             $week = window.getWeekFromUrl();
+            $url = "./wochenplan.php?week=";
+            $url += $week;
+            $url += "#user";
 
             // AJAX-Aufruf durchführen, um create.php mit der ID zu verwenden
             $.ajax({
@@ -220,7 +226,7 @@ jQuery(document).ready(function() {
                     status: jobStatus
                 },
                 success: function(response) {
-                    window.location.href = "wochenplan.php?week=" + $week;
+                    window.location.href = $url;
                 },
                 error: function(xhr, status, error) {
                     alert("Fehler beim Hinzufügen: " + error); // Zeigt den Fehler an
@@ -231,12 +237,21 @@ jQuery(document).ready(function() {
 
     window.updateJob = function($box) {
         $week = window.getWeekFromUrl();
+        $url = "./wochenplan.php?week=";
+        $url += $week;
+        $url += "#user";
         let updateId = $box.attr("id");
         let updatePerson = $box.find("input[name='updatePerson']").val();
         let updateDay = $box.find("input[name='updateDay']").val();
         let updateJob = $box.find("input[name='updateJob']").val();
         let updateTime = $box.find("input[name='updateTime']").val();
         let updateStatus = $box.find("input[name='updateStatus']").val();
+
+        reset();
+        TimeCounter();
+        workplace();
+        workload();
+        jobDone();
 
         // AJAX-Aufruf durchführen, um update.php mit der ID zu verwenden
         $.ajax({
@@ -252,7 +267,7 @@ jQuery(document).ready(function() {
             },
             success: function(response) {
                 console.log("Update Response:", response);
-                window.location.href = "wochenplan.php?week=" + $week;
+                window.location.href = $url;
             },
             error: function(xhr, status, error) {
                 console.error("Fehler beim Aktualisieren:", error);
@@ -263,7 +278,7 @@ jQuery(document).ready(function() {
 
     setInterval(function() {
         $week = window.getWeekFromUrl();
-        window.location.href = "wochenplan.php?week=" + $week;
+        window.location.href = $url;
     }, 60000); // Jede Minute (60.000 ms)
 
     // Diese Funktionen werden direkt nach dem Laden der Seite ausgeführt

@@ -26,14 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['persons'])) :
         $pdo->commit();
 
         // Erfolgreiche Weiterleitung
-        header("Location: wochenplan.php?week=" . $week);
+        header("Location: " . $url);
         exit;
 
     } catch (PDOException $e) {
             echo 'Fehler beim Löschen der Daten: ' .
                 '<script>
                     setTimeout(function() {
-                        window.location.href = "wochenplan.php?week=' . $week . '";
+                        window.location.href = "' . $url . '";
                     }, 3000);
                 </script>';
     }
@@ -42,7 +42,7 @@ else :
     echo 'Kein Name zum löschen ausgewählt! ' .
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php?week=' . $week . '";
+                 window.location.href = "' . $url . '";
             }, 3000);
         </script>';
 endif;

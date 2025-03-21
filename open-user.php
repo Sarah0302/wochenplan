@@ -10,10 +10,10 @@ if (isset($_POST['openUser']) && is_array($_POST['openUser'])) {
     $_SESSION['people_list'] = $_POST['openUser']; // Session-Variable setzen
 
     // Zurück zur Wochenplan-Seite
-    header("Location: wochenplan.php?week=" . $week);
+    header("Location: " . $url);
     exit;
 } else {
-    echo "<script>alert('Keine Daten gefunden! Bitte versuche es erneut.'); window.location.href = 'wochenplan.php?week=" . $week . "';</script>";
+    echo "<script>alert('Keine Daten gefunden! Bitte versuche es erneut.'); window.location.href = '" . $url . "';</script>";
     exit;
 }
 ?>

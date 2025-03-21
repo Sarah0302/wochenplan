@@ -5,6 +5,9 @@ session_start();
 
 // Aktuelle Kalenderwoche abrufen
 $week = date("W");
+$url = "./wochenplan.php?week=";
+$url .= $week;
+$url .= "#user";
 
 // Login-Überprüfung
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
@@ -21,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         endif;
 
         // Erfolgreiche Anmeldung -> Weiterleitung
-        header("Location: wochenplan.php?week=" . $week);
+        header("Location: " . $url);
         
     else : // Login fehlgeschlagen
         echo "<script>alert('Anmeldung fehlgeschlagen! Bitte versuche es erneut.'); window.location.href='./index.php';</script>";

@@ -4,19 +4,22 @@ jQuery(document).ready(function() {
         $maxWeek = window.getMaxWeeks();
         $thisWeek = window.getWeekFromUrl();
         $week = ($thisWeek - 1 < 1) ? $maxWeek : $thisWeek - 1; // wenn kleiner 1 dann maxWochen sonst -1
-        window.location.href = "wochenplan.php?week=" + $week;
+        $url = "./wochenplan.php?week=";
+        $url += $week;
+        $url += "#user";
+        window.location.href = $url;
     });
 
     $(".week_after").click(function() {
         $maxWeek = window.getMaxWeeks();
         $thisWeek = window.getWeekFromUrl();
         $week = ($thisWeek + 1 > $maxWeek) ? 1 : $thisWeek + 1; // wenn größer maxWochen dann 1 sonst +1
-        window.location.href = "wochenplan.php?week=" + $week;
+        window.location.href = $url;
     });
 
     $("#selectKW").on("change", function() {
         var week = $(this).val();
-        window.location.href = "wochenplan.php?week=" + week;
+        window.location.href = $url;
     });    
 
     // JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  JOBS  

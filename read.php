@@ -121,7 +121,7 @@ try {
         $e->getMessage() . 
         '<script>
             setTimeout(function() {
-                 window.location.href = "wochenplan.php?week=' . $week . '";
+                 window.location.href = "' . $url . '";
             }, 3000);
         </script>';
 }

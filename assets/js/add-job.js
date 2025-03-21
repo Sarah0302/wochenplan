@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
 
         var $container = $(this).closest(".job_container");
         window.addJob($container); // Greift auf die globale Funktion aus functions.js zu
+        location.reload();
     });
 
     $(document).on("keydown", ".job_name, .job_time", function(event) { // Job hinzufügen
@@ -12,6 +13,7 @@ jQuery(document).ready(function() {
             event.preventDefault(); // Standard-Formularverhalten verhindern
             var $container = $(this).closest(".job_container");
             window.addJob($container);
+            location.reload();
         }
     });
 
@@ -25,6 +27,7 @@ jQuery(document).ready(function() {
         var jobStatus = 'open';
 
         window.duplicateJob(jobName, jobTime, jobPerson, jobDay, jobStatus);
+        location.reload();
     }); 
     
 });

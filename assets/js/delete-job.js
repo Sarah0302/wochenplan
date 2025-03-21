@@ -2,6 +2,16 @@ jQuery(document).ready(function() {
 
     $(document).on("click", ".job_delete", function() { // Job löschen
         $week = window.getWeekFromUrl();
+        $url = "./wochenplan.php?week=";
+        $url += $week;
+        $url += "#user";
+
+        $(this).closest(".job_box").remove();
+        reset();
+        TimeCounter();
+        workplace();
+        workload();
+        jobDone();
 
         // ID des zu löschenden Datensatzes aus dem Datensatz extrahieren
         var id = $(this).closest(".job_box").attr("id");
@@ -14,7 +24,7 @@ jQuery(document).ready(function() {
                 deleteid: id 
             },
             success: function(response) {
-                window.location.href = "wochenplan.php?week=" + $week;
+                window.location.href = "" + $url;
             },
             error: function(xhr, status, error) {
                 alert("Fehler beim Löschen: " + error); // Zeigt den Fehler an

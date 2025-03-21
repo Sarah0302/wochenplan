@@ -17,6 +17,11 @@ $thisWeek = date("W"); // Aktuelle Kalenderwoche
 $week = isset($_GET['week']) ? intval($_GET['week']) : date("W");  // week in URL vorhanden? -> Wenn ja Wert abrufen -> Wenn nein aktuelle Woche 
 $year = date("Y"); // aktuelles Jahr
 
+// Neue URL generieren
+$url = "./wochenplan.php?week=";
+$url .= $week;
+$url .= "#user";
+
 // Maximale Anzahl der Kalenderwochen des aktuellen Jahres
 $lastDay = new DateTime("$year-12-28"); // 28.12. liegt immer in der letzten KW
 $maxWeeks = $lastDay->format("W"); // Anzahl der Kalenderwochen dieses Jahres

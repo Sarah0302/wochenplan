@@ -3,10 +3,13 @@ session_start();
 
 // Aktuelle Kalenderwoche abrufen
 $week = date("W");
+$url = "./wochenplan.php?week=";
+$url .= $week;
+$url .= "#user";
 
 // Weiterleiten falls der Nutzer bereits eingeloggt ist
 if (isset($_SESSION['user'])) {
-    header("Location: wochenplan.php?week=" . $week);
+    header("Location: " . $url);
     exit;
 }
 ?>
@@ -28,7 +31,7 @@ if (isset($_SESSION['user'])) {
 </head>
 <body class="min-h-screen p-4 flex flex-col justify-between gap-10">
     <header>
-        <a class="cursor-pointer" href="./wochenplan.php?week=<?= $week; ?>">
+        <a class="cursor-pointer" href="<?= $url; ?>">
             <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
         </a>
     </header>
