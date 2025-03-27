@@ -5,3 +5,6 @@ dist/
 # Composer
 vendor/
 dist/
+
+# .env
+.env
