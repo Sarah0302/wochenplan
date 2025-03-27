@@ -38,22 +38,25 @@ require_once "holiday.php";
         <a class="cursor-pointer" href="./wochenplan.php?week=<?= date("W"); ?>#user">
             <img class="h-10 object-contain cursor-pointer" src="./assets/images/logo.png" alt="Logo SDV">
         </a>
-        <button class="open_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle öffnen</button>
-        <button class="close_all bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle schließen</button>
-        <button class="saturday_button bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">Samstag anzeigen</button>
-        <div>
-            <label class="pr-2" for="selectKW">Kalenderwoche:</label>
-            <select id="selectKW" name="selectKW" class="bg-zinc-300 p-2 shadow-md shadow-gray-400/50">
-                <?php for($kw = 1; $kw <= $maxWeeks; $kw++) : ?>
-                    <?php if($kw === $week) : ?>
-                        <option selected value="<?= $kw; ?>"><?= $kw; ?></option>
-                    <?php else : ?>
-                        <option value="<?= $kw; ?>"><?= $kw; ?></option>
-                    <?php endif; ?>
-                <?php endfor; ?>
-            </select>
+        <div class="flex flex-row items-center gap-4">
+            <button class="open_all text-xs bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle öffnen</button>
+            <button class="close_all text-xs bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">alle schließen</button>
+            <button class="saturday_button text-xs bg-zinc-300 pt-2 pr-4 pb-2 pl-4 shadow-md shadow-gray-400/50">Samstag anzeigen</button>
+            <div>
+                <label class="pr-2 text-xs" for="selectKW">Kalenderwoche:</label>
+                <select id="selectKW" name="selectKW" class="bg-zinc-300 p-2 shadow-md shadow-gray-400/50 text-xs">
+                    <?php for($kw = 1; $kw <= $maxWeeks; $kw++) : ?>
+                        <?php if($kw === $week) : ?>
+                            <option selected value="<?= $kw; ?>"><?= $kw; ?></option>
+                        <?php else : ?>
+                            <option value="<?= $kw; ?>"><?= $kw; ?></option>
+                        <?php endif; ?>
+                    <?php endfor; ?>
+                </select>
+            </div>
+            <p class="text-amber-500 uppercase font-bold"><?= $user; ?></p>
+            <a class="text-xs underline" href="logout.php">Abmelden</a>
         </div>
-        <a href="logout.php">Abmelden</a>
     </header>
     <main class="p-4">
         <?php if(intval($person['is_admin']) !== 1) : ?> <!-- Nur für Admin sichtbar -->
@@ -91,7 +94,7 @@ require_once "holiday.php";
             <button class="week_before">
                 <img class="object-contain h-7" src="./assets/images/arrow-left.png" alt="arrow-left">
             </button>
-            <h1 class="pl-6 pr-6 text-5xl">Willkommen in KW <?= $week; ?> <?= $user; ?></h1>
+            <h1 class="pl-6 pr-6 text-5xl">Willkommen in KW <?= $week; ?></h1>
             <button class="week_after">
                 <img class="object-contain h-7" src="./assets/images/arrow-right.png" alt="arrow-right">
             </button>
