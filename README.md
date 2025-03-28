@@ -3,13 +3,13 @@
 Datenbank:
     name: wochenplan
     tabelle 1: personen
-        id als int & primary & auto increase
+        personen_id als int & primary & auto increase
         name als text
         passwort als text
         is_admin als boolean
     tabelle 2: jobs
-        id als int & primary & auto increase
-        person als text
+        job_id als int & primary & auto increase
+        personen_id als int & fremdschlüssel
         day als text
         job als text
         time als text

@@ -81,8 +81,8 @@ require_once "holiday.php";
                     <form method="POST" action="delete-person.php" class="flex flex-col justify-center">
                         <?php foreach($filteredPeople as $person) : ?>
                             <div class="flex flex-row gap-2">
-                                <input type="checkbox" name="persons[]" value="<?= $person['id']; ?>" id="person_<?= $person['id']; ?>">
-                                <label for="person_<?= $person['id']; ?>"><?= $person['name']; ?></label>
+                                <input type="checkbox" name="persons[]" value="<?= $person['personen_id']; ?>" id="person_<?= $person['personen_id']; ?>">
+                                <label for="person_<?= $person['personen_id']; ?>"><?= $person['name']; ?></label>
                             </div>
                         <?php endforeach; ?>
                         <input type="submit" value="Person(en) aus Datenbank löschen" class="w-full p-2 mt-2 border border-slate-300 bg-slate-300 cursor-pointer duration-300 ease-in-out hover:bg-slate-500 hover:text-white">

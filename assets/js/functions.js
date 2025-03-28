@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
         $(".list-col").not(".show_pool").each(function() {
             var $container = $(this);
             var $rowAbove = $container.closest("tr").prev(); // Die Zeile über dem Container
-            var user = $rowAbove.find(".person_name").text().trim(); // Name extrahieren & Leerzeichen entfernen
+            var user = $rowAbove.find(".personen_id").text(); // ID extrahieren
     
             if (!$container.hasClass("hidden")) {
                 openUser.push(user); // Name zum Array hinzufügen
@@ -179,7 +179,7 @@ jQuery(document).ready(function() {
             $url = "./wochenplan.php?week=";
             $url += $week;
             $url += "#user";
-            var person = $container.find("input[name='addPerson']").val();
+            var personen_id = $container.find("input[name='addPersonenId']").val();
             var day = $container.find("input[name='addDay']").val();
             var job = $container.find("input[name='addJob']").val();
             var time = $container.find("input[name='addTime']").val();
@@ -190,7 +190,7 @@ jQuery(document).ready(function() {
                 url: "create.php",
                 method: "POST",
                 data: {
-                    person: person,
+                    personen_id: personen_id,
                     day: day,
                     job: job,
                     time: time,
@@ -219,7 +219,7 @@ jQuery(document).ready(function() {
                 url: "create.php",
                 method: "POST",
                 data: {
-                    person: jobPerson,
+                    personen_id: jobPerson,
                     day: jobDay,
                     job: jobName,
                     time: jobTime,

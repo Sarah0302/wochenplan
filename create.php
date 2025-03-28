@@ -8,7 +8,7 @@ try {
         $_POST["time"] = 0;
     endif;
 
-    if (!isset($_POST["person"], $_POST["day"], $_POST["job"], $_POST["time"], $_POST["status"])) :
+    if (!isset($_POST["personen_id"], $_POST["day"], $_POST["job"], $_POST["time"], $_POST["status"])) :
         echo 'Fehlende Formulardaten: ' . 
         '<script>
             setTimeout(function() {
@@ -17,16 +17,16 @@ try {
         </script>';
     endif;
 
-    $person = $_POST["person"];
+    $personen_id = $_POST["personen_id"];
     $day = $_POST["day"];
     $job = $_POST["job"];
     $time = $_POST["time"];
     $status = $_POST["status"];
 
     // SQL-Query vorbereiten und ausführen
-    $query = "INSERT INTO jobs (person, day, job, time, status) VALUES (?, ?, ?, ?, ?)"; // jobs = Tabelle in welche die Daten geschrieben werden sollen & Werte müssen so heißen wie Spalten
+    $query = "INSERT INTO jobs (personen_id, day, job, time, status) VALUES (?, ?, ?, ?, ?)"; // jobs = Tabelle in welche die Daten geschrieben werden sollen & Werte müssen so heißen wie Spalten
     $stmt = $pdo->prepare($query); // stmt = statement
-    $stmt->execute([$person, $day, $job, $time, $status]);
+    $stmt->execute([$personen_id, $day, $job, $time, $status]); // stmt = statement
 
     // man wird auf die Startseite zurück geleitet
     header("Location: " . $url);

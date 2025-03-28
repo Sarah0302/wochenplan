@@ -50,11 +50,11 @@ jQuery(document).ready(function() {
         var columnIndex = box.closest("td").index(); // Index der Spalte
         var rowAbove = box.closest("tr").prev(); // Die Zeile über der Job-Liste
 
-        var newPerson = rowAbove.find(".week").text().trim().replace(/[0-9.]/g, ''); // Das td über der Liste (alle Zahlen und Punkte entfernen)
+        var newPersonId = rowAbove.find(".personen_id").text(); // Das td über der Liste
         var newDay = box.closest("table").find("th").eq(columnIndex).find(".date").text();
 
         // Neue Werte setzen
-        box.find(".job_inputs input[name='updatePerson']").val(newPerson);
+        box.find(".job_inputs input[name='updatePerson']").val(newPersonId);
         box.find(".job_inputs input[name='updateDay']").val(newDay);
 
         // Datenbank updaten

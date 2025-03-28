@@ -6,7 +6,7 @@ $deleteid = $_POST["deleteid"];
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
 
-    $query = "DELETE FROM jobs WHERE id = ?";
+    $query = "DELETE FROM jobs WHERE job_id = ?";
     $stmt = $pdo->prepare($query);  // stmt = statement
     $stmt->execute([$deleteid]);
     $rowCount = $stmt->rowCount(); // Anzahl der gelöschten Datensätze abrufen

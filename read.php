@@ -11,7 +11,7 @@ $openUsers = isset($_SESSION['people_list']) ? $_SESSION['people_list'] : []; //
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
 
-    $query = "SELECT id, person, day, job, time, status FROM jobs";
+    $query = "SELECT job_id, personen_id, day, job, time, status FROM jobs";
     $stmt = $pdo->query($query);
     $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
 
@@ -24,7 +24,7 @@ try {
     // Spalte für jede Person
     for ($i = 0; $i < count($people); $i++) : 
         echo '<tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">';
-            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i]['name'] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
+            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i]['name'] .'</span><span class="personen_id">'. $people[$i]['personen_id'] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
 
         // Zellen für jeden Tag
         for ($index = 0; $index <= 4; $index++) : 
@@ -39,9 +39,9 @@ try {
         echo '</tr>';
 
         // Spalte für jeden Tag
-        if ($people[$i]['name'] === $user) : // Wenn angemeldeter User
+        if ($people[$i]['personen_id'] === $userId) : // Wenn angemeldeter User
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch" id="user">';
-        elseif (in_array($people[$i]['name'], $openUsers)) : // Wenn User in Array zuvor geöffneter User enthalten
+        elseif (in_array($people[$i]['personen_id'], $openUsers)) : // Wenn User in Array zuvor geöffneter User enthalten
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
         elseif ($people[$i]['name'] === 'Pool') :
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">';
@@ -62,19 +62,19 @@ try {
                         echo '<div class="job_list h-full min-h-6 pb-6">'; // Job Liste
                             foreach ($jobs as $row) : // Daten abrufen
 
-                                $updateid = $row['id'];
-                                $person = $row['person'];
+                                $updateid = $row['job_id'];
+                                $personen_id = $row['personen_id'];
                                 $job_day = $row['day'];
                                 $job = $row['job'];
                                 $time = $row['time'];
                                 $status = $row['status'];
 
-                                if ($person === $people[$i]['name'] && $weekDates[$day] === $job_day) :
+                                if ($personen_id === $people[$i]['personen_id'] && $weekDates[$day] === $job_day) :
                                     echo '<div draggable="true" class="job_box cursor-grab mt-1 p-2 border border-slate-400" id="' . $updateid . '">
                                         <div class="job_inputs flex flex-row gap-1">
                                             <input id="updateJob" name="updateJob" class="job_name_value border border-slate-200 p-2 w-full" type="text" value="' . $job . '">
                                             <input id="updateTime" name="updateTime" class="job_workload border border-slate-200 p-2 w-full" type="number" min="0" max="24" value="' . $time . '">
-                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $person . '" hidden>
+                                            <input id="updatePerson" name="updatePerson" type="text" value="' . $personen_id . '" hidden>
                                             <input id="updateDay" name="updateDay" type="text" value="' . $job_day . '" hidden>
                                             <input id="updateStatus" name="updateStatus" type="text" value="' . $status . '" hidden>
                                             <div class="job_safe hidden p-2 w-full flex align-center justify-center">
@@ -100,7 +100,7 @@ try {
                         // Job hinzufügen
                         $status = 'open';
                         echo '<form method="post" class="flex flex-row justify-between items-center gap-2">';
-                            echo '<input id="addPerson" name="addPerson" type="text" value="'. $people[$i]['name'] .'" hidden>';
+                            echo '<input id="addPersonenId" name="addPersonenId" type="text" value="'. $people[$i]['personen_id'] .'" hidden>';
                             echo '<input id="addDay" name="addDay" type="text" value="'. $weekDates[$day] .'" hidden>';
                             echo '<input id="addStatus" name="addStatus" type="text" value="'. $status .'" hidden>';
                             echo '<input id="addJob" name="addJob" class="job_name p-2 border border-slate-200 w-3/6" type="text" placeholder="Neuer Job">';

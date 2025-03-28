@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Eingeloggten Benutzer abrufen
 $user = $_SESSION['user'];
+$userId = $_SESSION['userId'];
 
 // Admin Status abrufen
 $admin = $_SESSION['is_admin'];

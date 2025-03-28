@@ -7,11 +7,6 @@ jQuery(document).ready(function() {
         $url += "#user";
 
         $(this).closest(".job_box").remove();
-        reset();
-        TimeCounter();
-        workplace();
-        workload();
-        jobDone();
 
         // ID des zu löschenden Datensatzes aus dem Datensatz extrahieren
         var id = $(this).closest(".job_box").attr("id");
@@ -30,6 +25,8 @@ jQuery(document).ready(function() {
                 alert("Fehler beim Löschen: " + error); // Zeigt den Fehler an
             }
         });
+
+        location.reload();
     });
     
 });
