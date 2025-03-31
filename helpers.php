@@ -7,8 +7,9 @@ if (session_status() === PHP_SESSION_NONE) {
 $user = $_SESSION['user'];
 $userId = $_SESSION['userId'];
 
-// Admin Status abrufen
+// Admin / Pool Status abrufen
 $admin = $_SESSION['is_admin'];
+$pool = $_SESSION['is_pool'];
 
 // People-Array abrufen
 require_once "user.php";

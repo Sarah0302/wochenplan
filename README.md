@@ -7,6 +7,7 @@ Datenbank:
         name als text
         passwort als text
         is_admin als boolean
+        is_pool als boolean
     tabelle 2: jobs
         job_id als int & primary & auto increase
         personen_id als int & fremdschlüssel
@@ -21,7 +22,7 @@ Admin & Pool
         name -> Admin
         passwort -> Verschlüsseln über https://bcrypt-generator.com/
         is_admin -> 1
-    per Admin Formular Pool anlegen
+    per Admin Formular Pool anlegen & in Datenbank is_pool auf 1 setzen
 
 Datenbank Zugangsdaten Änderungen
     --> in der .env

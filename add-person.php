@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     $newUsername = $_POST['addName'] ?? '';
     $newPassword = $_POST['passwordPerson'] ?? '';
     $is_admin = 0; // Kein Admin Status
+    $is_pool = 0; // Kein Pool
 
     $hash = password_hash($newPassword, PASSWORD_DEFAULT);
 
@@ -23,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         $hash = password_hash($newPassword, PASSWORD_DEFAULT); // Passwort gehased in Datenbank schreiben
 
         // SQL-Query vorbereiten und ausführen
-        $query = "INSERT INTO personen (name, passwort, is_admin) VALUES (?, ?, ?)"; // jobs = Tabelle in welche die Daten geschrieben werden sollen & Werte müssen so heißen wie Spalten
+        $query = "INSERT INTO personen (name, passwort, is_admin, is_pool) VALUES (?, ?, ?, ?)"; // jobs = Tabelle in welche die Daten geschrieben werden sollen & Werte müssen so heißen wie Spalten
         $stmt = $pdo->prepare($query); // stmt = statement
-        $stmt->execute([$newUsername, $hash, $is_admin]);
+        $stmt->execute([$newUsername, $hash, $is_admin, $is_pool]);
 
         // man wird auf die Startseite zurück geleitet
         header("Location: " . $url);

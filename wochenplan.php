@@ -59,7 +59,7 @@ require_once "holiday.php";
         </div>
     </header>
     <main class="p-4">
-        <?php if(intval($person['is_admin']) !== 1) : ?> <!-- Nur für Admin sichtbar -->
+        <?php if(intval($admin) === 1) : ?> <!-- Nur für Admin sichtbar -->
             <div class="flex flex-row justify-evenly items-start gap-4 w-[50vw] m-auto">
                 <div class="border border-slate-400 p-2 mb-10 w-full">
                     <h2 class="text-3xl pb-2 text-center">Person hinzufügen</h2>
@@ -73,7 +73,7 @@ require_once "holiday.php";
                     <?php require_once "user.php"; 
                         // Admin und Pool aus dem Array löschen, da sie nicht gelöscht werden dürfen
                         $filteredPeople = array_filter($people, function($person) {
-                            return intval($person['is_admin']) !== 1 && $person['name'] !== 'Pool';
+                            return intval($person['is_admin']) !== 1 && intval($person['is_pool']) !== 1;
                         });
                         $filteredPeople = array_values($filteredPeople); // Neu indexieren um Lücken zu vermeiden
                     ?>

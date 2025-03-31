@@ -24,7 +24,7 @@ try {
     // Spalte für jede Person
     for ($i = 0; $i < count($people); $i++) : 
         echo '<tr class="saturday-col job_counter bg-zinc-100 border-8 border-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">';
-            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i]['name'] .'</span><span class="personen_id">'. $people[$i]['personen_id'] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
+            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i]['name'] .'</span><span class="personen_id hidden">'. $people[$i]['personen_id'] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
 
         // Zellen für jeden Tag
         for ($index = 0; $index <= 4; $index++) : 
@@ -43,7 +43,7 @@ try {
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch" id="user">';
         elseif (in_array($people[$i]['personen_id'], $openUsers)) : // Wenn User in Array zuvor geöffneter User enthalten
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
-        elseif ($people[$i]['name'] === 'Pool') :
+        elseif (intval($people[$i]['is_pool']) === 1) :
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">';
         else :
             echo '<tr class="saturday-col list-col job_row-list grid grid-cols-[200px_repeat(5,1fr)] items-stretch hidden">';

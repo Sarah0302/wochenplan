@@ -7,7 +7,7 @@ $url .= "#user";
 try {
     require_once "write.php";    // Daten aus write.php werden eingebunden
 
-    $query = "SELECT personen_id, name, passwort, is_admin FROM personen";
+    $query = "SELECT personen_id, name, passwort, is_admin, is_pool FROM personen";
     $stmt = $pdo->query($query);
     $userDB = $stmt->fetchAll(PDO::FETCH_ASSOC); // Alle Datensätze aus der Datenbank einmal abrufen und als Array speichern
 
@@ -16,7 +16,7 @@ try {
     $peopleArray = [];
 
     foreach($userDB as $person) :
-        if ($person['name'] === 'Pool') :
+        if (intval($person['is_pool']) === 1) :
             $poolArray = $person; // Speichert Pool separat
         else :
             $peopleArray[] = $person;  // Alle anderen Nutzer
