@@ -99,7 +99,7 @@ require_once "holiday.php";
                 <img class="object-contain h-7" src="./assets/images/arrow-right.png" alt="arrow-right">
             </button>
         </div>
-        <div class="border border-slate-600 mt-6">
+        <div class="mt-6">
             <table class="w-full mt-1 table-fixed">
                 <!-- Tabellenkopf -->
                 <tr class="saturday-col bg-slate-600 text-white grid grid-cols-[200px_repeat(5,1fr)] items-stretch">
