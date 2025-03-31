@@ -15,17 +15,20 @@ jQuery(document).ready(function() {
         }
 
         window.updateJob($box);
+        location.reload();
     });
 
     $(document).on("click", ".job_safe", function() { // Job Aktualisieren
         $box = $(this).closest(".job_box");
         window.updateJob($box);
+        location.reload();
     });
 
     $(document).on("keydown", ".job_name_value, .job_workload", function(event) { // Job Aktualisieren
         if ( event.type === "keydown" && event.key === "Enter" ) {
             $box = $(this).closest(".job_box");
             window.updateJob($box);
+            location.reload();
         };
     });
 
@@ -59,6 +62,7 @@ jQuery(document).ready(function() {
 
         // Datenbank updaten
         window.updateJob($box);
+        location.reload();
         selected = null; // Reset für nächste Aktion
     });
 

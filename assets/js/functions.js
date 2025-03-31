@@ -93,11 +93,11 @@ jQuery(document).ready(function() {
     
             // Tagesfarbe setzen
             $dayCounter.removeClass('bg-red-700 bg-yellow-700 bg-lime-700');
-            if (newDayVal >= 8) {
+            if (newDayVal >= 7) {
                 $dayCounter.addClass('bg-red-700');
             } else if (newDayVal >= 6) {
                 $dayCounter.addClass('bg-yellow-500');
-            } else if (newDayVal >= 0.1) {
+            } else if (newDayVal >= 1) {
                 $dayCounter.addClass('bg-lime-700');
             } else {
                 $dayCounter.removeClass('bg-red-700 bg-yellow-700 bg-lime-700');
@@ -143,8 +143,6 @@ jQuery(document).ready(function() {
                 newWeekVal += parseFloat($(this).text()) || 0;
             });
             $weekCounter.text(newWeekVal.toFixed(2));
-    
-            workload(); // Aktualisiere Farben für alle Einträge
         });
     }    
 
@@ -246,12 +244,6 @@ jQuery(document).ready(function() {
         let updateJob = $box.find("input[name='updateJob']").val();
         let updateTime = $box.find("input[name='updateTime']").val();
         let updateStatus = $box.find("input[name='updateStatus']").val();
-
-        reset();
-        TimeCounter();
-        workplace();
-        workload();
-        jobDone();
 
         // AJAX-Aufruf durchführen, um update.php mit der ID zu verwenden
         $.ajax({
