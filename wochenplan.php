@@ -18,8 +18,9 @@ require_once "holiday.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./assets/js/jquery-3.7.1.min.js"></script>
-    <script src="./assets/js/main.js"></script>
     <script src="./assets/js/functions.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/get-data.js"></script>
     <script src="./assets/js/add-job.js"></script>
     <script src="./assets/js/update-job.js"></script>
     <script src="./assets/js/delete-job.js"></script>

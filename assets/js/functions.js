@@ -316,11 +316,6 @@ jQuery(document).ready(function() {
             alert("Fehler beim Laden von read.php: " + error);
         });
     }
-    
-    // Jede 10 Sekunden bei allen Nutzern aktualisieren
-    setInterval(function() {
-        window.getData();
-    }, 10000); // Jede Minute (60.000 ms)
 
     // Diese Funktion wird direkt nach dem Laden der Seite ausgeführt
     window.getData();
