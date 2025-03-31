@@ -11,8 +11,8 @@ $userId = $_SESSION['userId'];
 $admin = $_SESSION['is_admin'];
 $pool = $_SESSION['is_pool'];
 
-// People-Array abrufen
-require_once "user.php";
+// Daten aus Datenbank abrufen
+require_once "read.php";
 
 // Aktuelles Datum und Kalenderwoche abrufen
 $today = new DateTime(); // Datum als Objekt

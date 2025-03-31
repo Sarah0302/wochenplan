@@ -70,7 +70,7 @@ require_once "holiday.php";
                     </form>
                 </div>
                 <div class="border border-slate-400 p-2 mb-10 w-full">
-                    <?php require_once "user.php"; 
+                    <?php 
                         // Admin und Pool aus dem Array löschen, da sie nicht gelöscht werden dürfen
                         $filteredPeople = array_filter($people, function($person) {
                             return intval($person['is_admin']) !== 1 && intval($person['is_pool']) !== 1;
@@ -123,7 +123,7 @@ require_once "holiday.php";
                     <?php endforeach; ?>
                 </tr>
                 <!-- Spalte für jede Person -->
-                <?php require_once "read.php"; ?>   <!-- Tabellen Inhalt oder Fehlermeldung wird eingefügt -->
+                <?php require_once "table.php"; ?>   <!-- Tabellen Inhalt oder Fehlermeldung wird eingefügt -->
             </table>
         </div>
     </main>

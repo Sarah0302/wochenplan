@@ -1,26 +1,5 @@
 jQuery(document).ready(function() {
 
-    window.openLists = function() {
-        var openUser = []; // Array für geöffnete Benutzer
-    
-        $(".list-col").not(".show_pool").each(function() {
-            var $container = $(this);
-            var $rowAbove = $container.closest("tr").prev(); // Die Zeile über dem Container
-            var user = $rowAbove.find(".personen_id").text(); // ID extrahieren
-    
-            if (!$container.hasClass("hidden")) {
-                openUser.push(user); // Name zum Array hinzufügen
-            }
-        });
-    
-        // AJAX-Aufruf nach der Schleife
-        $.ajax({
-            url: "open-user.php",
-            method: "POST",
-            data: { openUser: openUser }, // Array wird korrekt gesendet
-        });
-    }
-
     function getISOWeek(date) {
         let tempDate = new Date(date);
         tempDate.setHours(0, 0, 0, 0);
@@ -29,27 +8,7 @@ jQuery(document).ready(function() {
         return 1 + Math.round(((tempDate - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
     }
 
-    window.getWeekFromUrl = function() {
-        var year = new Date().getFullYear();
-        var month = new Date().getMonth();
-        var day = new Date().getDate();
-        var date = new Date(year, month, day); // Aktuelles Datum
-        $thisWeek = getISOWeek(date);
-        $weekURL = parseInt(new URLSearchParams(window.location.search).get("week"));
-        $week = $weekURL || $thisWeek;
-
-        return $week;
-    }
-
-    window.getMaxWeeks = function() {
-        $year = new Date().getFullYear() // Aktuelles Jahr
-        var date = new Date($year, 11, 28); // 28.12. liegt immer in der letzten KW
-
-        $maxWeek = getISOWeek(date);
-        return $maxWeek + 1; // Rückgabewert
-    }
-
-    window.workplace = function() {
+    function workplace() {
         $(".job_container").each(function() {
             var $container = $(this);
             var columnIndex = $container.closest("td").index(); // Index der Spalte
@@ -86,7 +45,7 @@ jQuery(document).ready(function() {
         });
     }
 
-    window.workload = function() {
+    function workload() {
         $(".week_time").each(function() {
             var $dayCounter = $(this);
             var newDayVal = parseFloat($dayCounter.text()) || 0;
@@ -122,7 +81,7 @@ jQuery(document).ready(function() {
         });
     }    
 
-    window.TimeCounter = function() {
+    function timeCounter() {
         $(".job_container").each(function() {
             var $container = $(this);
             var columnIndex = $container.closest("td").index(); // Spalten-Index
@@ -146,13 +105,13 @@ jQuery(document).ready(function() {
         });
     }    
 
-    window.reset = function() {
+    function reset() {
         $(".job_name").val('');
         $(".job_time").val('');
         $(".job_safe").addClass("hidden");
     }
 
-    window.jobDone = function() {
+    function jobDone() {
         $(".job_box").each(function() {
             let $box = $(this);
             let $inputs = $box.find(".job_name_value, .job_workload");
@@ -166,7 +125,48 @@ jQuery(document).ready(function() {
                 $inputs.prop("disabled", false);
             }
         });
-    };    
+    }; 
+
+    window.getWeekFromUrl = function() {
+        var year = new Date().getFullYear();
+        var month = new Date().getMonth();
+        var day = new Date().getDate();
+        var date = new Date(year, month, day); // Aktuelles Datum
+        $thisWeek = getISOWeek(date);
+        $weekURL = parseInt(new URLSearchParams(window.location.search).get("week"));
+        $week = $weekURL || $thisWeek;
+
+        return $week;
+    }
+
+    window.getMaxWeeks = function() {
+        $year = new Date().getFullYear() // Aktuelles Jahr
+        var date = new Date($year, 11, 28); // 28.12. liegt immer in der letzten KW
+
+        $maxWeek = getISOWeek(date);
+        return $maxWeek + 1; // Rückgabewert
+    }
+
+    window.openLists = function() {
+        var openUser = []; // Array für geöffnete Benutzer
+    
+        $(".list-col").not(".show_pool").each(function() {
+            var $container = $(this);
+            var $rowAbove = $container.closest("tr").prev(); // Die Zeile über dem Container
+            var user = $rowAbove.find(".personen_id").text(); // ID extrahieren
+    
+            if (!$container.hasClass("hidden")) {
+                openUser.push(user); // Name zum Array hinzufügen
+            }
+        });
+    
+        // AJAX-Aufruf nach der Schleife
+        $.ajax({
+            url: "open-user.php",
+            method: "POST",
+            data: { openUser: openUser }, // Array wird korrekt gesendet
+        });
+    }
     
     window.addJob = function($container) {
         var jobName = $container.find(".job_name").val();
@@ -268,15 +268,60 @@ jQuery(document).ready(function() {
         });
     }
 
-    setInterval(function() {
-        $week = window.getWeekFromUrl();
-        window.location.href = $url;
-    }, 60000); // Jede Minute (60.000 ms)
+    window.updateAll = function() {
+        reset();
+        timeCounter();
+        workplace();
+        workload();
+        jobDone();
+    }
 
-    // Diese Funktionen werden direkt nach dem Laden der Seite ausgeführt
-    reset();
-    TimeCounter();
-    workplace();
-    workload();
-    jobDone();
+    window.getData = function() {
+        $week = window.getWeekFromUrl();
+        $url = "?week=";
+        $url += $week;
+        $url += "#user";
+
+        // AJAX-Aufruf durchführen, um Daten aus der Datenbank aktualisiert abzurufen (verkettet)
+        $.ajax({ url: "read.php" + $url, method: "POST" }).done(function() {
+            console.log("read.php geladen");
+    
+            $.ajax({ url: "helpers.php" + $url, method: "POST" }).done(function() {
+                console.log("helpers.php geladen");
+    
+                $.ajax({
+                    url: "table.php" + $url,
+                    method: "POST",
+                    success: function(response) {
+                        $('table').find('tr:gt(0)').remove();
+                        $('table').append(response);
+
+                        console.log("Tabelle aktualisiert");
+
+                        window.updateAll();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Fehler beim Laden von table.php:", error);
+                        alert("Fehler beim Laden von table.php: " + error);
+                    }
+                });
+    
+            }).fail(function(xhr, status, error) {
+                console.error("Fehler beim Laden von helpers.php:", error);
+                alert("Fehler beim Laden von helpers.php: " + error);
+            });
+    
+        }).fail(function(xhr, status, error) {
+            console.error("Fehler beim Laden von read.php:", error);
+            alert("Fehler beim Laden von read.php: " + error);
+        });
+    }
+    
+    // Jede 10 Sekunden bei allen Nutzern aktualisieren
+    setInterval(function() {
+        window.getData();
+    }, 10000); // Jede Minute (60.000 ms)
+
+    // Diese Funktion wird direkt nach dem Laden der Seite ausgeführt
+    window.getData();
 });

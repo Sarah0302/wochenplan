@@ -1,11 +1,10 @@
 jQuery(document).ready(function() {
-
-    $(".job_add").click(function(event) { // Job hinzufügen
+    
+    $(document).on("click", ".job_add", function(event) { // Job hinzufügen
         event.preventDefault(); // Standard-Formularverhalten verhindern
-
         var $container = $(this).closest(".job_container");
         window.addJob($container); // Greift auf die globale Funktion aus functions.js zu
-        location.reload();
+        window.getData();
     });
 
     $(document).on("keydown", ".job_name, .job_time", function(event) { // Job hinzufügen
@@ -13,7 +12,7 @@ jQuery(document).ready(function() {
             event.preventDefault(); // Standard-Formularverhalten verhindern
             var $container = $(this).closest(".job_container");
             window.addJob($container);
-            location.reload();
+            window.getData();
         }
     });
 
@@ -27,7 +26,7 @@ jQuery(document).ready(function() {
         var jobStatus = 'open';
 
         window.duplicateJob(jobName, jobTime, jobPerson, jobDay, jobStatus);
-        location.reload();
+        window.getData();
     }); 
     
 });
