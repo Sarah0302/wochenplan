@@ -12,12 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['persons'])) :
 
         $pdo->beginTransaction(); // Transaktion starten (damit beide DELETE-Operationen sicher ausgeführt werden)
 
-        // // Personen aus jobs löschen
-        // $queryJobs = "DELETE FROM jobs WHERE personen_id IN ($placeholders)";
-        // $stmtJobs = $pdo->prepare($queryJobs);
-        // $stmtJobs->execute($personIds);
-
-        // Personen aus personen löschen
+        // Personen aus personen löschen & automatisch aus jobs löschen, durch Fremdschlüssel
         $queryPersons = "DELETE FROM personen WHERE personen_id IN ($placeholders)";
         $stmtPersons = $pdo->prepare($queryPersons);
         $stmtPersons->execute($personIds);
