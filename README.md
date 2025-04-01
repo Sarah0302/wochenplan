@@ -1,6 +1,11 @@
 # wochenplan
 
-Datenbank:
+1. env anlegen (zur Verwendung der Datenbank) (Wenn nicht lokal, dann anpassen!)
+    DB_DSN="mysql:host=localhost;dbname=wochenplan"
+    DB_USERNAME="root"
+    DB_PASSWORD="root"
+
+2. Datenbank Tabellen anlegen:
     name: wochenplan
     tabelle 1: personen
         personen_id als int & primary & auto increase
@@ -16,7 +21,7 @@ Datenbank:
         time als text
         status als text
 
-Admin & Pool
+3. Admin & Pool anlegen
     in Datenbank Admin anlegen
         id -> egal
         name -> Admin
@@ -24,14 +29,12 @@ Admin & Pool
         is_admin -> 1
     per Admin Formular Pool anlegen & in Datenbank is_pool auf 1 setzen
 
-Datenbank Zugangsdaten Änderungen
-    --> in der .env
+4. Nutzung:
+    Person hinzufügen / löschen
+        Formular Admin
 
-Person hinzufügen / löschen
-    Formular Admin
+    .env Nutzung
+        -> Composer installieren
 
-.env Nutzung
-    -> Composer installieren
-
-Feiertage anpassen
-    --> holiday.php line 24 / 25
+    Feiertage anpassen
+        --> holiday.php line 24 / 25
