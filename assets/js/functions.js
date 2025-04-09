@@ -146,9 +146,17 @@ jQuery(document).ready(function() {
         $maxWeek = getISOWeek(date);
         return $maxWeek + 1; // Rückgabewert
     }
-
+    
     window.openLists = function() {
         var openUser = []; // Array für geöffnete Benutzer
+
+        var $box = $("#user");
+        var $boxUnder = $box.closest("tr").next(); // Die Zeile unter der Box
+        var activeUser = $boxUnder.find(".personen_id").text(); // ID extrahieren
+
+        if (!$box.hasClass("hidden")) {
+            openUser.push(activeUser); // angemeldeten User zum Array hinzufügen
+        }
     
         $(".list-col").not(".show_pool").each(function() {
             var $container = $(this);
@@ -161,13 +169,32 @@ jQuery(document).ready(function() {
         });
     
         // AJAX-Aufruf nach der Schleife
-        $.ajax({
+        $.ajax({ 
             url: "open-user.php",
             method: "POST",
             data: { openUser: openUser },
+        }).done(function() {
+            $.ajax({
+                url: "table.php" + $url,
+                method: "POST",
+                success: function(response) {
+                    $('table').find('tr:gt(0)').remove();
+                    $('table').append(response);
+
+                    window.updateAll();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Fehler beim Laden von table.php:", error);
+                    alert("Fehler beim Laden von table.php: " + error);
+                }
+            });
+
+        }).fail(function(xhr, status, error) {
+            console.error("Fehler beim Laden von open-user.php:", error);
+            alert("Fehler beim Laden von open-user.php: " + error);
         });
     }
-    
+
     window.addJob = function($container) {
         var jobName = $container.find(".job_name").val();
 

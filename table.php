@@ -37,9 +37,7 @@ $people = array_values($people); // Neu indexieren um Lücken zu vermeiden
         echo '</tr>';
 
         // Spalte für jeden Tag
-        if ($people[$i]['personen_id'] === $userId) : // Wenn angemeldeter User
-            echo '<tr class="saturday-col list-col job_row-list mt-2 grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
-        elseif (in_array($people[$i]['personen_id'], $openUsers)) : // Wenn User in Array zuvor geöffneter User enthalten
+        if (in_array($people[$i]['personen_id'], $openUsers)) : // Wenn User in Array zuvor geöffneter User enthalten
             echo '<tr class="saturday-col list-col job_row-list mt-2 grid grid-cols-[200px_repeat(5,1fr)] items-stretch">';
         elseif (intval($people[$i]['is_pool']) === 1) :
             echo '<tr class="saturday-col list-col job_row-list mt-2 grid grid-cols-[200px_repeat(5,1fr)] items-stretch show_pool">';
