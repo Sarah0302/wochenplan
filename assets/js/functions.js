@@ -164,7 +164,7 @@ jQuery(document).ready(function() {
         $.ajax({
             url: "open-user.php",
             method: "POST",
-            data: { openUser: openUser }, // Array wird korrekt gesendet
+            data: { openUser: openUser },
         });
     }
     
@@ -284,19 +284,13 @@ jQuery(document).ready(function() {
 
         // AJAX-Aufruf durchführen, um Daten aus der Datenbank aktualisiert abzurufen (verkettet)
         $.ajax({ url: "read.php" + $url, method: "POST" }).done(function() {
-            console.log("read.php geladen");
-    
             $.ajax({ url: "helpers.php" + $url, method: "POST" }).done(function() {
-                console.log("helpers.php geladen");
-    
                 $.ajax({
                     url: "table.php" + $url,
                     method: "POST",
                     success: function(response) {
                         $('table').find('tr:gt(0)').remove();
                         $('table').append(response);
-
-                        console.log("Tabelle aktualisiert");
 
                         window.updateAll();
                     },

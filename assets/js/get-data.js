@@ -45,9 +45,6 @@ jQuery(document).ready(function() {
     setInterval(function() {
         if (!userIsActive && !hasUnsavedInput()) {
             window.getData();
-            console.log('wird aktualisiert');
-        } else {
-            console.log('bestehende user eingabe');
         }
     }, 60000); // Jede Minute (60.000 ms)
 

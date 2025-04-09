@@ -22,7 +22,7 @@ $people = array_values($people); // Neu indexieren um Lücken zu vermeiden
             echo '<tr class="saturday-col job_counter bg-zinc-100 mt-4 grid grid-cols-[200px_repeat(5,1fr)] items-stretch cursor-pointer">';
         endif;
 
-            echo '<td class="week cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i]['name'] .'</span><span class="personen_id hidden">'. $people[$i]['personen_id'] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
+            echo '<td class="cursor-pointer p-2 flex flex-row justify-between items-center gap-2"><span class="person_name">'. $people[$i]['name'] .'</span><span class="personen_id hidden">'. $people[$i]['personen_id'] .'</span><div class="personal_week p-2 shadow-md shadow-gray-400/50">0</div></td>';
 
         // Zellen für jeden Tag
         for ($index = 0; $index <= 4; $index++) : 
